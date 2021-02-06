@@ -1,4 +1,5 @@
 import { BrowserRouter, Route } from "react-router-dom";
+import Cart from "./components/pages/Cart";
 import Home from "./components/pages/Home";
 import ProductDetail from "./components/pages/ProductDetail";
 
@@ -18,6 +19,7 @@ function App() {
           </div>
         </header>
         <main>
+          <Route path="/cart/:id?" component={Cart} />
           <Route path="/" exact component={Home} />
           <Route path="/product/:id" component={ProductDetail} />
         </main>
