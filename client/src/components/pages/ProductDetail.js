@@ -1,6 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { data } from "../../data";
 import Rating from "../Rating";
+
+import "./ProductDetail.css";
 
 function ProductDetail(props) {
   const product = data.products.find((p) => p._id === props.match.params.id);
@@ -9,6 +12,7 @@ function ProductDetail(props) {
   }
   return (
     <div>
+      <Link to="/">Go Back</Link>
       <div className="row top">
         <div className="col-2">
           <img className="large" src={product.image} alt={product.name}></img>
@@ -47,7 +51,7 @@ function ProductDetail(props) {
                 </div>
               </li>
               <li>
-                <button className="primary block">Add to Cart</button>
+                <button>Add to Cart</button>
               </li>
             </ul>
           </div>
