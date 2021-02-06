@@ -8,6 +8,7 @@ export const data = {
       price: 120,
       brand: "Nike",
       rating: 5,
+      numReviews: 122,
       description: "Lebron James No.23",
     },
     {
@@ -18,6 +19,7 @@ export const data = {
       price: 120,
       brand: "Nike",
       rating: 5,
+      numReviews: 122,
       description: "Lebron James No.23",
     },
     {
@@ -28,6 +30,7 @@ export const data = {
       price: 120,
       brand: "Nike",
       rating: 5,
+      numReviews: 122,
       description: "Lebron James No.23",
     },
     {
@@ -38,6 +41,7 @@ export const data = {
       price: 120,
       brand: "Nike",
       rating: 5,
+      numReviews: 122,
       description: "Lebron James No.23",
     },
   ],
