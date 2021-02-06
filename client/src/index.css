@@ -55,7 +55,7 @@ h1 {
   padding: 1rem 0;
 }
 h2 {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   padding: 1rem 0;
 }
 
@@ -104,9 +104,12 @@ img.medium {
   margin-bottom: 0.5rem;
 }
 .price {
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 .rating span {
   color: #f0c040;
   margin: 0.1rem;
+}
+.rating span:last-child {
+  color: #404040;
 }
