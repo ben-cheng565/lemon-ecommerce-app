@@ -10,6 +10,7 @@ export const data = {
       rating: 5,
       numReviews: 122,
       description: "Lebron James No.23",
+      countInStock: 100,
     },
     {
       _id: "2",
@@ -21,6 +22,7 @@ export const data = {
       rating: 5,
       numReviews: 122,
       description: "Lebron James No.23",
+      countInStock: 0,
     },
     {
       _id: "3",
@@ -32,6 +34,7 @@ export const data = {
       rating: 5,
       numReviews: 122,
       description: "Lebron James No.23",
+      countInStock: 1,
     },
     {
       _id: "4",
@@ -43,6 +46,7 @@ export const data = {
       rating: 5,
       numReviews: 122,
       description: "Lebron James No.23",
+      countInStock: 10,
     },
   ],
 };
