@@ -5,6 +5,8 @@ import { addToCart } from "../../redux/actions/cart";
 import MessageBox from "../common/MessageBox";
 
 import "./Cart.css";
+import CartItem from "./cartItem/CartItem";
+import CartTotal from "./cartTotal/CartTotal";
 
 function Cart(props) {
   const dispatch = useDispatch();
@@ -38,65 +40,17 @@ function Cart(props) {
         ) : (
           <ul>
             {cartItems.map((item) => (
-              <li key={item.id}>
-                <div className="row">
-                  <div>
-                    <img src={item.image} alt={item.name} className="small" />
-                  </div>
-                  <div className="min-30">
-                    <Link to={`/product/${item.id}`}>{item.name}</Link>
-                  </div>
-                  <div>
-                    <select
-                      value={item.qty}
-                      onChange={(e) =>
-                        dispatch(addToCart(item.id, Number(e.target.value)))
-                      }
-                    >
-                      {[...Array(item.countInStock).keys()].map((x) => (
-                        <option key={x + 1} value={x + 1}>
-                          {x + 1}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>${item.price}</div>
-                  <div>
-                    <button
-                      className="delete"
-                      type="button"
-                      onClick={() => removeFromCartHandler(item.id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              </li>
+              <CartItem
+                key={item.id}
+                item={item}
+                removeFromCartHandler={removeFromCartHandler}
+              />
             ))}
           </ul>
         )}
       </div>
       <div className="col-1">
-        <div className="card card-body">
-          <ul>
-            <li>
-              <h2>
-                Subtotal ({cartItems.reduce((accum, c) => accum + c.qty, 0)},
-                items) : ${" "}
-                {cartItems.reduce((accum, c) => accum + c.price * c.qty, 0)}
-              </h2>
-            </li>
-            <li>
-              <button
-                type="button"
-                onClick={checkoutHandler}
-                disabled={cartItems.length === 0}
-              >
-                Check Out
-              </button>
-            </li>
-          </ul>
-        </div>
+        <CartTotal cartItems={cartItems} checkoutHandler={checkoutHandler} />
       </div>
     </div>
   );
