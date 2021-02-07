@@ -1,4 +1,5 @@
 import { BrowserRouter, Link, Route } from "react-router-dom";
+import CartBadge from "./components/CartBadge";
 import Cart from "./components/pages/Cart";
 import Home from "./components/pages/Home";
 import ProductDetail from "./components/pages/ProductDetail";
@@ -14,7 +15,10 @@ function App() {
             </Link>
           </div>
           <div>
-            <Link to="/cart">Cart</Link>
+            <Link to="/cart">
+              Cart
+              <CartBadge />
+            </Link>
             <Link to="/signin">Sign In</Link>
           </div>
         </header>
