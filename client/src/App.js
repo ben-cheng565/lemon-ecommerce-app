@@ -1,8 +1,8 @@
 import { BrowserRouter, Link, Route } from "react-router-dom";
-import CartBadge from "./components/CartBadge";
-import Cart from "./components/pages/Cart";
-import Home from "./components/pages/Home";
-import ProductDetail from "./components/pages/ProductDetail";
+import Cart from "./components/cart/Cart";
+import Home from "./pages/Home";
+import ProductDetail from "./components/product/detail/ProductDetail";
+import CartBadge from "./components/cart/badge/CartBadge";
 
 function App() {
   return (

@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import Product from "../Product";
-import LoadingBox from "../LoadingBox";
-import MessageBox from "../MessageBox";
+import Product from "../components/product/Product";
+import LoadingBox from "../components/common/LoadingBox";
+import MessageBox from "../components/common/MessageBox";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../../redux/actions/product";
+import { fetchProducts } from "../redux/actions/product";
 
 function Home() {
   const dispatch = useDispatch();
