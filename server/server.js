@@ -1,30 +1,29 @@
 import express from "express";
+import mongoose from "mongoose";
 
-import { data } from "./data.js";
+import userRouter from "./routers/users.js";
+import productsRouter from "./routers/products.js";
 
 const app = express();
 
-// fetch the specific product detail
-app.get("/api/products/:id", (req, res) => {
-  const id = req.params.id;
-  const product = data.products.find((p) => p._id === id);
+// connect to mongo db
+mongoose
+  .connect(
+    "mongodb+srv://user1:user1@cluster0.thms6.mongodb.net/ecommerceApp?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
+  .then((result) => {
+    console.log("Mongodb connected successfully!");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
-  if (product) {
-    res.send(product);
-  } else {
-    res.status(404).send({ message: "Product not Found" });
-  }
-});
-
-//fetch all products
-app.get("/api/products", (req, res) => {
-  res.send(data.products);
-});
-
-// test api
-app.get("/", (req, res) => {
-  res.send("Server is ready.");
-});
+app.use("/users", userRouter);
+app.use("/products", productsRouter);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
