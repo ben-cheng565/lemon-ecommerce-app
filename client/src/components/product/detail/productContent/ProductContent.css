@@ -1,0 +1,24 @@
+.col-1 {
+  flex: 1 1 25rem;
+}
+.col-2 {
+  flex: 2 1 50rem;
+}
+
+/* image */
+img {
+  border-radius: 0.5rem;
+}
+img.large {
+  width: 100%;
+}
+
+/* list */
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+li {
+  margin-top: 1rem;
+}
