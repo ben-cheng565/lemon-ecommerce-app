@@ -16,6 +16,7 @@ function CartTotal(props) {
         </li>
         <li>
           <button
+            // className="checkout"
             type="button"
             onClick={checkoutHandler}
             disabled={cartItems.length === 0}
