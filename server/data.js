@@ -17,9 +17,8 @@ export const data = {
   ],
   products: [
     {
-      _id: "1",
       name: "NBA Lakers Jersey",
-      category: "",
+      category: "Shirts",
       image: "/images/p1.png",
       price: 120,
       brand: "Nike",
@@ -29,9 +28,8 @@ export const data = {
       countInStock: 10,
     },
     {
-      _id: "2",
       name: "NBA Lakers Jersey",
-      category: "",
+      category: "Shirts",
       image: "/images/p1.png",
       price: 120,
       brand: "Nike",
@@ -41,9 +39,8 @@ export const data = {
       countInStock: 0,
     },
     {
-      _id: "3",
       name: "NBA Lakers Jersey",
-      category: "",
+      category: "Shirts",
       image: "/images/p1.png",
       price: 120,
       brand: "Nike",
@@ -53,9 +50,8 @@ export const data = {
       countInStock: 1,
     },
     {
-      _id: "4",
       name: "NBA Lakers Jersey",
-      category: "",
+      category: "Shirts",
       image: "/images/p1.png",
       price: 120,
       brand: "Nike",
