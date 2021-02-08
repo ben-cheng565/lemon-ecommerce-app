@@ -10,6 +10,7 @@ export const PRODUCT_DETAIL_FAIL = "PRODUCT_DETAIL_FAIL";
 // cart action types
 export const CART_ADD_ITEM = "CART_ADD_ITEM";
 export const CART_REMOVE_ITEM = "CART_REMOVE_ITEM";
+export const CART_SAVE_SHIPPING_ADDRESS = "CART_SAVE_SHIPPING_ADDRESS";
 
 // user action types
 export const USER_SIGNIN_REQUEST = "USER_SIGNIN_REQUEST";

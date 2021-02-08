@@ -1,0 +1,20 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* horizontally */
+  align-items: center; /* vertically */
+  padding-right: 2rem;
+}
+
+.checkout-steps > div {
+  border-top: 0.3rem #c0c0c0 solid;
+  color: #c0c0c0;
+  flex: 1;
+  padding: 1rem;
+  font-weight: bold;
+}
+.checkout-steps > div.active {
+  border-top: 0.3rem #0271e3 solid;
+  color: #0271e3;
+  /* color: #f08000  */
+}
