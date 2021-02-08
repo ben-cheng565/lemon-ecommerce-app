@@ -38,4 +38,21 @@ router.post("/signin", async (req, res) => {
     token: generateToken(user),
   });
 });
+
+router.post("/signup", async (req, res) => {
+  const user = new User({
+    name: req.body.name,
+    email: req.body.email,
+    password: await bcrypt.hash(req.body.password, 10),
+  });
+
+  const result = await user.save();
+  res.send({
+    _id: result._id,
+    name: result.name,
+    email: result.email,
+    isAdmin: result.isAdmin,
+    token: generateToken(result),
+  });
+});
 export default router;
