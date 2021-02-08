@@ -1,10 +1,17 @@
 import express from "express";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+import bodyParser from "body-parser";
 
 import userRouter from "./routers/users.js";
 import productsRouter from "./routers/products.js";
 
+// read environment parameters from .env
+dotenv.config();
+
 const app = express();
+
+app.use(bodyParser.json());
 
 // connect to mongo db
 mongoose
