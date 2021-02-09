@@ -5,7 +5,7 @@ import bodyParser from "body-parser";
 
 import userRouter from "./routers/users.js";
 import productsRouter from "./routers/products.js";
-import orderRouter from "./routers/order.js";
+import orderRouter from "./routers/orders.js";
 
 // read environment parameters from .env
 dotenv.config();
@@ -32,7 +32,7 @@ mongoose
 
 app.use("/users", userRouter);
 app.use("/products", productsRouter);
-app.use("/order", orderRouter);
+app.use("/orders", orderRouter);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
