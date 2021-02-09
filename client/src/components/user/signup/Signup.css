@@ -12,16 +12,22 @@
 }
 .form label {
   margin: 1rem 0;
-  display: block;
+  /* display: block; */
 }
 
 /* select input */
-input {
+#name,
+#email,
+#password,
+#confirmPassword {
   padding: 1rem;
   border-radius: 0.5rem;
   font-size: 1.6rem;
   font-family: Helvetica, Arial, sans-serif;
 }
-input:hover {
+#name:hover,
+#email:hover,
+#password:hover,
+#confirmPassword:hover {
   cursor: text;
 }
