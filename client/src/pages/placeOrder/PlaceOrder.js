@@ -1,26 +1,42 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CheckOutSteps from "../../components/cart/checkout/CheckOutSteps";
+import LoadingBox from "../../components/common/LoadingBox";
+import MessageBox from "../../components/common/MessageBox";
+import { createOrder } from "../../redux/actions/order";
+import { ORDER_CREATE_RESET } from "../../redux/actionTypes";
 
 function PlaceOrder(props) {
-  const { cartItems, shippingAddress, paymentMethod } = useSelector(
-    (state) => state.cart
-  );
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+  const { cartItems, shippingAddress, paymentMethod } = cart;
 
   if (!paymentMethod) {
     props.history.push("/payment");
   }
 
-  const toPrice = (num) => Number(num.toFixed(2));
-  const itemsPrice = toPrice(
-    cartItems.reduce((a, c) => a + c.qty * c.price, 0)
+  const { order, loading, success, error } = useSelector(
+    (state) => state.order
   );
-  const shippingPrice = itemsPrice > 100 ? 0 : 10;
-  const taxPrice = toPrice(itemsPrice * 0.15);
-  const totalPrice = itemsPrice + shippingPrice + taxPrice;
 
-  const placeOrderHandler = () => {};
+  //   calculate each price
+  const toPrice = (num) => Number(num.toFixed(2));
+  cart.itemsPrice = toPrice(cartItems.reduce((a, c) => a + c.qty * c.price, 0));
+  cart.shippingPrice = cart.itemsPrice > 100 ? 0 : 10;
+  cart.taxPrice = toPrice(cart.itemsPrice * 0.15);
+  cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
+
+  const placeOrderHandler = () => {
+    dispatch(createOrder({ ...cart, orderItems: cartItems }));
+  };
+
+  useEffect(() => {
+    if (success) {
+      props.history.push(`/order/${order._id}`);
+      dispatch({ type: ORDER_CREATE_RESET });
+    }
+  }, [dispatch, order, props.history, success]);
 
   return (
     <div>
@@ -54,7 +70,7 @@ function PlaceOrder(props) {
                 <h2>Order Items</h2>
                 <ul>
                   {cartItems.map((item) => (
-                    <li key={item.id}>
+                    <li key={item.productId}>
                       <div className="row">
                         <div>
                           <img
@@ -87,19 +103,19 @@ function PlaceOrder(props) {
               <li>
                 <div className="row">
                   <div>Items</div>
-                  <div>${itemsPrice.toFixed(2)}</div>
+                  <div>${cart.itemsPrice.toFixed(2)}</div>
                 </div>
               </li>
               <li>
                 <div className="row">
                   <div>Shipping</div>
-                  <div>${shippingPrice.toFixed(2)}</div>
+                  <div>${cart.shippingPrice.toFixed(2)}</div>
                 </div>
               </li>
               <li>
                 <div className="row">
                   <div>Tax</div>
-                  <div>${taxPrice.toFixed(2)}</div>
+                  <div>${cart.taxPrice.toFixed(2)}</div>
                 </div>
               </li>
               <li>
@@ -108,7 +124,7 @@ function PlaceOrder(props) {
                     <strong>Order Total</strong>
                   </div>
                   <div>
-                    <strong>${totalPrice.toFixed(2)}</strong>
+                    <strong>${cart.totalPrice.toFixed(2)}</strong>
                   </div>
                 </div>
               </li>
@@ -121,6 +137,8 @@ function PlaceOrder(props) {
                   Place Order
                 </button>
               </li>
+              {loading && <LoadingBox />}
+              {error && <MessageBox variant="danger" />}
             </ul>
           </div>
         </div>
