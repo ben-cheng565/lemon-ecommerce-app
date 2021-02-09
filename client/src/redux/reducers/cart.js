@@ -1,5 +1,6 @@
 import {
   CART_ADD_ITEM,
+  CART_EMPTY,
   CART_REMOVE_ITEM,
   CART_SAVE_PAYMENT_METHOD,
   CART_SAVE_SHIPPING_ADDRESS,
@@ -9,13 +10,15 @@ const cart = (state = { cartItems: [] }, action) => {
   switch (action.type) {
     case CART_ADD_ITEM:
       const item = action.payload;
-      const existItem = state.cartItems.find((c) => c.id === item.id);
+      const existItem = state.cartItems.find(
+        (c) => c.productId === item.productId
+      );
 
       if (existItem) {
         return {
           ...state,
           cartItems: state.cartItems.map((c) =>
-            c.id === existItem.id ? item : c
+            c.productId === existItem.productId ? item : c
           ),
         };
       } else {
@@ -25,7 +28,9 @@ const cart = (state = { cartItems: [] }, action) => {
     case CART_REMOVE_ITEM:
       return {
         ...state,
-        cartItems: state.cartItems.filter((c) => c.id !== action.payload),
+        cartItems: state.cartItems.filter(
+          (c) => c.productId !== action.payload
+        ),
       };
     case CART_SAVE_SHIPPING_ADDRESS:
       return {
@@ -37,6 +42,9 @@ const cart = (state = { cartItems: [] }, action) => {
         ...state,
         paymentMethod: action.payload,
       };
+
+    case CART_EMPTY:
+      return { ...state, cartItems: [] };
 
     default:
       return state;

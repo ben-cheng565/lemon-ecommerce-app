@@ -10,19 +10,19 @@ function CartItem(props) {
   const { item, removeFromCartHandler } = props;
 
   return (
-    <li key={item.id}>
+    <li key={item.productId}>
       <div className="row">
         <div>
           <img src={item.image} alt={item.name} className="small" />
         </div>
         <div className="min-30">
-          <Link to={`/product/${item.id}`}>{item.name}</Link>
+          <Link to={`/product/${item.productId}`}>{item.name}</Link>
         </div>
         <div>
           <select
             value={item.qty}
             onChange={(e) =>
-              dispatch(addToCart(item.id, Number(e.target.value)))
+              dispatch(addToCart(item.productId, Number(e.target.value)))
             }
           >
             {[...Array(item.countInStock).keys()].map((x) => (
@@ -37,7 +37,7 @@ function CartItem(props) {
           <button
             className="delete"
             type="button"
-            onClick={() => removeFromCartHandler(item.id)}
+            onClick={() => removeFromCartHandler(item.productId)}
           >
             Delete
           </button>

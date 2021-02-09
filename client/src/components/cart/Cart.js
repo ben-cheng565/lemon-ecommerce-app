@@ -43,7 +43,7 @@ function Cart(props) {
           <ul>
             {cartItems.map((item) => (
               <CartItem
-                key={item.id}
+                key={item.productId}
                 item={item}
                 removeFromCartHandler={removeFromCartHandler}
               />
