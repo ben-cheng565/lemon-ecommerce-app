@@ -3,25 +3,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { removeFromCart } from "../../redux/actions/cart";
 import { signout } from "../../redux/actions/user";
+import { CART_EMPTY } from "../../redux/actionTypes";
 import CartBadge from "../cart/badge/CartBadge";
 
 import "./NavBar.css";
 
 function NavBar() {
   const dispatch = useDispatch();
-  const { userInfo } = useSelector((state) => state.userSignin);
+  const { userInfo } = useSelector((state) => state.user);
   const { cartItems } = useSelector((state) => state.cart);
 
   const signoutHandler = () => {
     //   sign out user account
     dispatch(signout());
+    dispatch({ type: CART_EMPTY });
 
     // remove all cart contents
-    if (cartItems) {
+    /* if (cartItems) {
       for (let i = 0; i < cartItems.length; i++) {
         dispatch(removeFromCart(cartItems[i].id));
       }
-    }
+    } */
   };
 
   return (

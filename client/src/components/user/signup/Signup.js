@@ -19,7 +19,7 @@ function Signin(props) {
     ? props.location.search.split("=")[1]
     : "/";
 
-  const { userInfo, loading, error } = useSelector((state) => state.userSignin);
+  const { userInfo, loading, error } = useSelector((state) => state.user);
 
   const submitHandler = (e) => {
     e.preventDefault();

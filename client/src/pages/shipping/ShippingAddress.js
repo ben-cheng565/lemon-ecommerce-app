@@ -5,7 +5,7 @@ import { saveShippingAddress } from "../../redux/actions/cart";
 
 function ShippingAddress(props) {
   // if have not signed in, go to signin page
-  const { userInfo } = useSelector((state) => state.userSignin);
+  const { userInfo } = useSelector((state) => state.user);
   if (!userInfo) {
     props.history.push("/signin");
   }

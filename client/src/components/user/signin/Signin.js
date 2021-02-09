@@ -17,7 +17,7 @@ function Signin(props) {
     ? props.location.search.split("=")[1]
     : "/";
 
-  const { userInfo, loading, error } = useSelector((state) => state.userSignin);
+  const { userInfo, loading, error } = useSelector((state) => state.user);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -66,7 +66,8 @@ function Signin(props) {
         <div>
           <label />
           <div>
-            New customer? <Link to="/register">Create your account</Link>
+            New customer?{" "}
+            <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
           </div>
         </div>
       </form>

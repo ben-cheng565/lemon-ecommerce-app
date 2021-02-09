@@ -3,11 +3,12 @@ import thunk from "redux-thunk";
 import products from "./reducers/products";
 import productDetail from "./reducers/productDetail";
 import cart from "./reducers/cart";
-import { userSignin, userSignup } from "./reducers/user";
+import user from "./reducers/user";
+import order from "./reducers/order";
 
 const initState = {
   // read user signin data from the local storage
-  userSignin: {
+  user: {
     userInfo: localStorage.getItem("userInfo")
       ? JSON.parse(localStorage.getItem("userInfo"))
       : null,
@@ -24,12 +25,13 @@ const initState = {
     paymentMethod: "Paypal",
   },
 };
+
 const reducer = combineReducers({
   products,
   productDetail,
   cart,
-  userSignin,
-  userSignup,
+  user,
+  order,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
