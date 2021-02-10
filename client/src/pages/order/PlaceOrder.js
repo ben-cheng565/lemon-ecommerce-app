@@ -17,7 +17,7 @@ function PlaceOrder(props) {
   }
 
   const { order, loading, success, error } = useSelector(
-    (state) => state.order
+    (state) => state.orderCreate
   );
 
   //   calculate each price
@@ -34,7 +34,7 @@ function PlaceOrder(props) {
   useEffect(() => {
     if (success) {
       props.history.push(`/order/${order._id}`);
-      dispatch({ type: ORDER_CREATE_RESET });
+      // dispatch({ type: ORDER_CREATE_RESET });
     }
   }, [dispatch, order, props.history, success]);
 
