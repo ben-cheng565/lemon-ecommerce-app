@@ -24,4 +24,13 @@ router.post("/", isAuth, async (req, res) => {
   }
 });
 
+router.get("/:id", isAuth, async (req, res) => {
+  const order = await Order.findById(req.params.id);
+  if (order) {
+    res.send(order);
+  } else {
+    res.status(404).send({ message: "Order not Found." });
+  }
+});
+
 export default router;
