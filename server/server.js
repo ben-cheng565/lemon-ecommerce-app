@@ -33,6 +33,10 @@ mongoose
 app.use("/users", userRouter);
 app.use("/products", productsRouter);
 app.use("/orders", orderRouter);
+// fetch paypal client id from env file
+app.get("/config/paypal", (req, res) => {
+  res.send(process.env.PAYPAL_CLIENT_ID || "sb");
+});
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
