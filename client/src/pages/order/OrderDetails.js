@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { PayPalButton } from "react-paypal-button-v2";
 import LoadingBox from "../../components/common/LoadingBox";
 import MessageBox from "../../components/common/MessageBox";
 
@@ -8,12 +10,37 @@ import { getOrderDetails } from "../../redux/actions/order";
 
 function OrderDetails(props) {
   const orderId = props.match.params.id;
+  const [sdkLoaded, setSdkLoaded] = useState(false);
   const { order, loading, error } = useSelector((state) => state.orderDetails);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getOrderDetails(orderId));
-  }, [dispatch, orderId]);
+    // create paypal script
+    const addPayPalScript = async () => {
+      const { data } = await axios.get("/config/paypal");
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;
+      script.async = true;
+      script.onload = () => {
+        setSdkLoaded(true);
+      };
+      document.body.appendChild(script);
+    };
+    if (!order) {
+      dispatch(getOrderDetails(orderId));
+    } else {
+      if (!order.isPaid) {
+        if (!window.paypal) {
+          addPayPalScript();
+        } else {
+          setSdkLoaded(true);
+        }
+      }
+    }
+  }, [dispatch, order, orderId]);
+
+  const successPaymentHandler = () => {};
 
   return loading ? (
     <LoadingBox />
@@ -126,6 +153,18 @@ function OrderDetails(props) {
                   </div>
                 </div>
               </li>
+              {!order.isPaid && (
+                <li>
+                  {!sdkLoaded ? (
+                    <LoadingBox />
+                  ) : (
+                    <PayPalButton
+                      amount={order.totalPrice}
+                      onSuccess={successPaymentHandler}
+                    />
+                  )}
+                </li>
+              )}
             </ul>
           </div>
         </div>
