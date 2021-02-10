@@ -10,7 +10,7 @@ function CartTotal(props) {
       <ul>
         <li>
           <h2>
-            Subtotal ({cartItems.reduce((accum, c) => accum + c.qty, 0)}, items)
+            Subtotal ({cartItems.reduce((accum, c) => accum + c.qty, 0)} items)
             : $ {cartItems.reduce((accum, c) => accum + c.price * c.qty, 0)}
           </h2>
         </li>

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import LoadingBox from "../../common/LoadingBox";
 import MessageBox from "../../common/MessageBox";
-import Rating from "../../common/Rating";
 import { fetchProductDetail } from "../../../redux/actions/product";
 
 import "./ProductDetail.css";

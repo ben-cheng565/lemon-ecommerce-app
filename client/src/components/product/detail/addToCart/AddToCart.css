@@ -66,14 +66,14 @@ button:disabled {
 }
 
 /* select input */
-input,
+
 select {
   padding: 1rem;
   border-radius: 0.5rem;
   font-size: 1.6rem;
   font-family: Helvetica, Arial, sans-serif;
 }
-input:hover,
+
 select:hover {
   cursor: pointer;
 }

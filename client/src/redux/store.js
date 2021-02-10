@@ -4,7 +4,7 @@ import products from "./reducers/products";
 import productDetail from "./reducers/productDetail";
 import cart from "./reducers/cart";
 import user from "./reducers/user";
-import order from "./reducers/order";
+import { orderCreate, orderDetails, orderPay } from "./reducers/order";
 
 const initState = {
   // read user signin data from the local storage
@@ -31,7 +31,9 @@ const reducer = combineReducers({
   productDetail,
   cart,
   user,
-  order,
+  orderCreate,
+  orderDetails,
+  orderPay,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
