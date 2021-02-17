@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 import products from "./reducers/products";
 import productDetail from "./reducers/productDetail";
 import cart from "./reducers/cart";
-import user from "./reducers/user";
+import user, { userDetails, updateProfile } from "./reducers/user";
 import {
   orderCreate,
   orderDetails,
@@ -36,10 +36,12 @@ const reducer = combineReducers({
   productDetail,
   cart,
   user,
+  userDetails,
   orderCreate,
   orderDetails,
   orderPay,
   orderHistory,
+  updateProfile,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

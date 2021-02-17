@@ -10,6 +10,9 @@ import {
   USER_DETAIL_REQUEST,
   USER_DETAIL_FAIL,
   USER_DETAIL_SUCCESS,
+  USER_UPDATE_REQUEST,
+  USER_UPDATE_FAIL,
+  USER_UPDATE_SUCCESS,
 } from "../actionTypes";
 
 export const signIn = (email, password) => async (dispatch) => {
@@ -82,6 +85,33 @@ export const getUserDetail = (userId) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_DETAIL_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const updateUserProfile = (user) => async (dispatch, getState) => {
+  dispatch({ type: USER_UPDATE_REQUEST, payload: user });
+  const {
+    user: { userInfo },
+  } = getState();
+
+  try {
+    const { data } = await axios.put("/users/profile", user, {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    });
+
+    dispatch({ type: USER_UPDATE_SUCCESS, payload: data });
+    dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
+    localStorage.setItem("userInfo", JSON.stringify(data));
+  } catch (error) {
+    dispatch({
+      type: USER_UPDATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
