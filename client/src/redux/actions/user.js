@@ -7,6 +7,9 @@ import {
   USER_SIGNUP_FAIL,
   USER_SIGNUP_REQUEST,
   USER_SIGNUP_SUCCESS,
+  USER_DETAIL_REQUEST,
+  USER_DETAIL_FAIL,
+  USER_DETAIL_SUCCESS,
 } from "../actionTypes";
 
 export const signIn = (email, password) => async (dispatch) => {
@@ -60,4 +63,29 @@ export const signout = () => (dispatch) => {
   localStorage.removeItem("shippingAddress");
 
   dispatch({ type: USER_SIGNOUT });
+};
+
+export const getUserDetail = (userId) => async (dispatch, getState) => {
+  dispatch({ type: USER_DETAIL_REQUEST, payload: userId });
+  const {
+    user: { userInfo },
+  } = getState();
+
+  try {
+    const { data } = await axios.get(`/users/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    });
+
+    dispatch({ type: USER_DETAIL_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: USER_DETAIL_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
 };

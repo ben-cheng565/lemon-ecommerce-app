@@ -1,4 +1,7 @@
 import {
+  USER_DETAIL_FAIL,
+  USER_DETAIL_REQUEST,
+  USER_DETAIL_SUCCESS,
   USER_SIGNIN_FAIL,
   USER_SIGNIN_REQUEST,
   USER_SIGNIN_SUCCESS,
@@ -26,6 +29,19 @@ const user = (state = {}, action) => {
 
     case USER_SIGNOUT:
       return {};
+    default:
+      return state;
+  }
+};
+
+export const userDetails = (state = { loading: true }, action) => {
+  switch (action.type) {
+    case USER_DETAIL_REQUEST:
+      return { loading: true };
+    case USER_DETAIL_SUCCESS:
+      return { loading: false, userDetail: action.payload };
+    case USER_DETAIL_FAIL:
+      return { loading: false, error: action.payload };
     default:
       return state;
   }
