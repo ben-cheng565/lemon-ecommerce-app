@@ -9,6 +9,7 @@ import ShippingAddress from "./pages/shipping/ShippingAddress";
 import PaymentMethod from "./pages/payment/PaymentMethod";
 import PlaceOrder from "./pages/order/PlaceOrder";
 import OrderDetails from "./pages/order/OrderDetails";
+import OrderHistory from "./pages/order/OrderHistory";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/payment" component={PaymentMethod} />
             <Route path="/placeorder" component={PlaceOrder} />
             <Route path="/order/:id" component={OrderDetails} />
+            <Route path="/orderhistory" component={OrderHistory} />
             <Route path="/" exact component={Home} />
           </Switch>
         </main>

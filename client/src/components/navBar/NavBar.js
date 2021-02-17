@@ -44,9 +44,14 @@ function NavBar() {
               {userInfo.name} <i className="fa fa-caret-down"></i>{" "}
             </Link>
             <ul className="dropdown-content">
-              <Link to="/" onClick={signoutHandler}>
-                Sign Out
-              </Link>
+              <li>
+                <Link to="/orderhistory">Order History</Link>
+              </li>
+              <li>
+                <Link to="/" onClick={signoutHandler}>
+                  Sign Out
+                </Link>
+              </li>
             </ul>
           </div>
         ) : (
