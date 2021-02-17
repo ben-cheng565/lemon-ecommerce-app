@@ -11,6 +11,7 @@ import PlaceOrder from "./pages/order/PlaceOrder";
 import OrderDetails from "./pages/order/OrderDetails";
 import OrderHistory from "./pages/order/OrderHistory";
 import Profile from "./pages/Profile";
+import ProductList from "./pages/ProductList";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="/placeorder" component={PlaceOrder} />
             <Route path="/order/:id" component={OrderDetails} />
             <Route path="/orderhistory" component={OrderHistory} />
+            <Route path="/productlist" component={ProductList} />
             <Route path="/" exact component={Home} />
           </Switch>
         </main>
