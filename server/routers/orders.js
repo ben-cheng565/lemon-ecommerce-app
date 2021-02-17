@@ -4,6 +4,11 @@ import { isAuth } from "../util.js";
 
 const router = express.Router();
 
+router.get("/history", isAuth, async (req, res) => {
+  const orders = await Order.find({ userId: req.userInfo._id });
+  res.send(orders);
+});
+
 router.post("/", isAuth, async (req, res) => {
   if (req.body.orderItems.length === 0) {
     res.status(400).send({ message: "Cart is empty." });
