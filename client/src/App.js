@@ -10,6 +10,7 @@ import PaymentMethod from "./pages/payment/PaymentMethod";
 import PlaceOrder from "./pages/order/PlaceOrder";
 import OrderDetails from "./pages/order/OrderDetails";
 import OrderHistory from "./pages/order/OrderHistory";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/cart/:id?" component={Cart} />
             <Route path="/signin" component={Signin} />
             <Route path="/signup" component={Signup} />
+            <Route path="/profile" component={Profile} />
             <Route path="/product/:id" component={ProductDetail} />
             <Route path="/shipping" component={ShippingAddress} />
             <Route path="/payment" component={PaymentMethod} />

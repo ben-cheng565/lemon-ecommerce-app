@@ -45,6 +45,9 @@ function NavBar() {
             </Link>
             <ul className="dropdown-content">
               <li>
+                <Link to="/profile">Profile</Link>
+              </li>
+              <li>
                 <Link to="/orderhistory">Order History</Link>
               </li>
               <li>
