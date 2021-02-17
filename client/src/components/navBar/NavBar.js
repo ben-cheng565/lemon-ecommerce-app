@@ -13,7 +13,6 @@ function NavBar() {
   const { userInfo } = useSelector((state) => state.user);
   const { cartItems } = useSelector((state) => state.cart);
 
-  console.log(userInfo);
   const signoutHandler = () => {
     //   sign out user account
     dispatch(signout());

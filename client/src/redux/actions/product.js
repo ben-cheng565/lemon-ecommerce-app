@@ -9,9 +9,7 @@ import {
 } from "../actionTypes";
 
 export const fetchProducts = () => async (dispatch) => {
-  dispatch({
-    type: PRODUCTS_REQUEST,
-  });
+  dispatch({ type: PRODUCTS_REQUEST });
 
   try {
     const { data } = await axios.get("/products");
