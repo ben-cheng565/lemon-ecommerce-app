@@ -2,22 +2,49 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingBox from "../components/common/LoadingBox";
 import MessageBox from "../components/common/MessageBox";
-import { fetchProducts } from "../redux/actions/product";
+import { createProduct, fetchProducts } from "../redux/actions/product";
+import { PRODUCT_CREATE_RESET } from "../redux/actionTypes";
 
 function ProductList(props) {
   const dispatch = useDispatch();
   const productData = useSelector((state) => state.products);
   const { products, loading, error } = productData;
+  const productCreate = useSelector((state) => state.createProduct);
+  const {
+    loading: loadingCreate,
+    error: errorCreate,
+    success: successCreate,
+    product: createdProduct,
+  } = productCreate;
 
   useEffect(() => {
+    if (successCreate) {
+      dispatch({ type: PRODUCT_CREATE_RESET });
+      props.history.push(`/product/edit/${createdProduct._id}`);
+    }
     dispatch(fetchProducts());
-  }, [dispatch]);
+  }, [dispatch, createdProduct, props.history, successCreate]);
 
   const deleteHandler = (productId) => {};
 
+  const createHandler = () => {
+    dispatch(createProduct());
+  };
+
   return (
     <div>
-      <h1>Products</h1>
+      <div className="row">
+        <h1>Products</h1>
+        <button
+          type="button"
+          onClick={createHandler}
+          style={{ width: "20rem", backgroundColor: "green" }}
+        >
+          Create New Product
+        </button>
+      </div>
+      {loadingCreate && <LoadingBox />}
+      {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>}
       {loading ? (
         <LoadingBox />
       ) : error ? (
@@ -31,7 +58,7 @@ function ProductList(props) {
               <th>Price</th>
               <th>Category</th>
               <th>Brand</th>
-              <th>Actions</th>
+              <th style={{ width: "15%" }}>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -50,6 +77,7 @@ function ProductList(props) {
                   >
                     Edit
                   </button>
+
                   <button
                     type="button"
                     className="small"
