@@ -11,7 +11,8 @@ import PlaceOrder from "./pages/order/PlaceOrder";
 import OrderDetails from "./pages/order/OrderDetails";
 import OrderHistory from "./pages/order/OrderHistory";
 import Profile from "./pages/Profile";
-import ProductList from "./pages/ProductList";
+import ProductList from "./pages/product/ProductList";
+import ProductEdit from "./pages/product/ProductEdit";
 
 function App() {
   return (
@@ -26,7 +27,8 @@ function App() {
             <Route path="/signin" component={Signin} />
             <Route path="/signup" component={Signup} />
             <Route path="/profile" component={Profile} />
-            <Route path="/product/:id" component={ProductDetail} />
+            <Route path="/product/:id" exact component={ProductDetail} />
+            <Route path="/product/edit/:id" component={ProductEdit} />
             <Route path="/shipping" component={ShippingAddress} />
             <Route path="/payment" component={PaymentMethod} />
             <Route path="/placeorder" component={PlaceOrder} />
