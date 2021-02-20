@@ -52,4 +52,23 @@ router.post("/", isAuth, isAdmin, async (req, res) => {
   res.send({ message: "Product created successfully.", product: result });
 });
 
+router.put("/:id", isAuth, isAdmin, async (req, res) => {
+  const product = await Product.findById(req.params.id);
+
+  if (product) {
+    product.name = req.body.name;
+    product.image = req.body.image;
+    product.price = req.body.price;
+    product.category = req.body.category;
+    product.brand = req.body.brand;
+    product.countInStock = req.body.countInStock;
+    product.description = req.body.description;
+
+    const resutl = product.save();
+    res.send({ message: "Product updated successfully", product: resutl });
+  } else {
+    res.status(404).send("Product not Found");
+  }
+});
+
 export default router;
