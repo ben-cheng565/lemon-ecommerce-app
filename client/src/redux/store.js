@@ -15,6 +15,7 @@ import {
   orderHistory,
   orderList,
   orderDelete,
+  orderDeliver,
 } from "./reducers/order";
 
 const initState = {
@@ -52,6 +53,7 @@ const reducer = combineReducers({
   orderHistory,
   orderList,
   orderDelete,
+  orderDeliver,
   updateProfile,
 });
 
