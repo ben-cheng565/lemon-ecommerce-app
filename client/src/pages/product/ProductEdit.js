@@ -1,8 +1,10 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingBox from "../../components/common/LoadingBox";
 import MessageBox from "../../components/common/MessageBox";
-import { fetchProductDetail } from "../../redux/actions/product";
+import { editProduct, fetchProductDetail } from "../../redux/actions/product";
+import { PRODUCT_UPDATE_RESET } from "../../redux/actionTypes";
 
 function ProductEdit(props) {
   const productId = props.match.params.id;
@@ -17,10 +19,20 @@ function ProductEdit(props) {
   const { loading, error, product } = useSelector(
     (state) => state.productDetail
   );
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    success: successUpdate,
+  } = useSelector((state) => state.editProduct);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    if (!product || product._id !== productId) {
+    if (successUpdate) {
+      props.history.push("/productlist");
+    }
+
+    if (!product || product._id !== productId || successUpdate) {
+      dispatch({ type: PRODUCT_UPDATE_RESET });
       dispatch(fetchProductDetail(productId));
     } else {
       setName(product.name);
@@ -31,10 +43,48 @@ function ProductEdit(props) {
       setBrand(product.brand);
       setDescription(product.description);
     }
-  }, [dispatch, productId, product]);
+  }, [dispatch, productId, product, props.history, successUpdate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    dispatch(
+      editProduct({
+        _id: productId,
+        name,
+        price,
+        image,
+        category,
+        brand,
+        description,
+        countInStock,
+      })
+    );
+  };
+
+  const { userInfo } = useSelector((state) => state.user);
+  const [loadingUpload, setLoadingUpload] = useState(false);
+  const [errorUpload, setErrorUpload] = useState("");
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append("image", file);
+    setLoadingUpload(true);
+
+    try {
+      const { data } = await axios.post("/uploads", bodyFormData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      });
+
+      setImage(data);
+      setLoadingUpload(false);
+    } catch (error) {
+      setErrorUpload(error.message);
+      setLoadingUpload(false);
+    }
   };
 
   return (
@@ -43,6 +93,8 @@ function ProductEdit(props) {
         <div>
           <h1>Edit Product - {productId}</h1>
         </div>
+        {loadingUpdate && <LoadingBox />}
+        {errorUpdate && <MessageBox variant="danger">{errorUpdate}</MessageBox>}
         {loading ? (
           <LoadingBox />
         ) : error ? (
@@ -69,7 +121,7 @@ function ProductEdit(props) {
                 onChange={(e) => setPrice(e.target.value)}
               ></input>
             </div>
-            <div>
+            {/* <div>
               <label htmlFor="image">Image</label>
               <input
                 id="image"
@@ -78,6 +130,20 @@ function ProductEdit(props) {
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
               ></input>
+            </div> */}
+            <div>
+              <label htmlFor="imageFile">Image File</label>
+              <input
+                id="imageFile"
+                type="file"
+                accept="image/jpeg"
+                label="Choose image"
+                onChange={uploadFileHandler}
+              ></input>
+              {loadingUpload && <LoadingBox />}
+              {errorUpload && (
+                <MessageBox variant="danger">{errorUpload}</MessageBox>
+              )}
             </div>
             <div>
               <label htmlFor="category">Category</label>
