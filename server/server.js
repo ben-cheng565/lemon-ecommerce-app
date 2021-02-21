@@ -19,7 +19,8 @@ app.use(bodyParser.json());
 // connect to mongo db
 mongoose
   .connect(
-    "mongodb+srv://user1:user1@cluster0.thms6.mongodb.net/ecommerceApp?retryWrites=true&w=majority",
+    process.env.MONGODB_URL ||
+      "mongodb+srv://user1:user1@cluster0.thms6.mongodb.net/ecommerceApp?retryWrites=true&w=majority",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -41,9 +42,8 @@ app.get("/config/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || "sb");
 });
 
-const __dirname = path.resolve().slice(0, -7);
-console.log(path.join(__dirname, "uploads"));
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+const __dirname = path.resolve();
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
