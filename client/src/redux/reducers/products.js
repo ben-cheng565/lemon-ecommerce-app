@@ -48,7 +48,7 @@ export const productDetail = (
   }
 };
 
-export const createProduct = (state = {}, action) => {
+export const productCreate = (state = {}, action) => {
   switch (action.type) {
     case PRODUCT_CREATE_REQUEST:
       return { loading: true };
@@ -63,7 +63,7 @@ export const createProduct = (state = {}, action) => {
   }
 };
 
-export const editProduct = (state = { loading: false }, action) => {
+export const productEdit = (state = { loading: false }, action) => {
   switch (action.type) {
     case PRODUCT_UPDATE_REQUEST:
       return { loading: true };
@@ -78,7 +78,7 @@ export const editProduct = (state = { loading: false }, action) => {
   }
 };
 
-export const deleteProduct = (state = { loading: false }, action) => {
+export const productDelete = (state = { loading: false }, action) => {
   switch (action.type) {
     case PRODUCT_DELETE_REQUEST:
       return { loading: true };

@@ -23,7 +23,7 @@ function ProductEdit(props) {
     loading: loadingUpdate,
     error: errorUpdate,
     success: successUpdate,
-  } = useSelector((state) => state.editProduct);
+  } = useSelector((state) => state.productEdit);
 
   const dispatch = useDispatch();
   useEffect(() => {

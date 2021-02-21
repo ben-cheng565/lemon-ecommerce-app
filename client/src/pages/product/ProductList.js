@@ -16,7 +16,7 @@ function ProductList(props) {
   const dispatch = useDispatch();
   const productData = useSelector((state) => state.products);
   const { products, loading, error } = productData;
-  const productCreate = useSelector((state) => state.createProduct);
+  const productCreate = useSelector((state) => state.productCreate);
   const {
     loading: loadingCreate,
     error: errorCreate,
@@ -27,7 +27,7 @@ function ProductList(props) {
     loading: loadingDelete,
     error: errorDelete,
     success: successDelete,
-  } = useSelector((state) => state.deleteProduct);
+  } = useSelector((state) => state.productDelete);
 
   useEffect(() => {
     if (successCreate) {
@@ -42,7 +42,9 @@ function ProductList(props) {
   }, [dispatch, createdProduct, props.history, successCreate, successDelete]);
 
   const deleteHandler = (productId) => {
-    dispatch(deleteProduct(productId));
+    if (window.confirm("Are you sure to delete?")) {
+      dispatch(deleteProduct(productId));
+    }
   };
 
   const createHandler = () => {
