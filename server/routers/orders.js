@@ -45,7 +45,7 @@ router.get("/:id", isAuth, async (req, res) => {
   }
 });
 
-router.put("/:id/pay", isAuth, async (req, res) => {
+router.put("/pay/:id", isAuth, async (req, res) => {
   const order = await Order.findById(req.params.id);
   if (order) {
     order.isPaid = true;
@@ -71,6 +71,19 @@ router.delete("/:id", isAuth, isAdmin, async (req, res) => {
     res.send({ message: "Order deleted successfully", order: result });
   } else {
     res.status(404).send("Order not Found");
+  }
+});
+
+router.put("/deliver/:id", isAuth, isAdmin, async (req, res) => {
+  const order = await Order.findById(req.params.id);
+  if (order) {
+    order.isDelivered = true;
+    order.deliveredAt = new Date();
+
+    const result = await order.save();
+    res.send({ message: "Order Deliverd", order: result });
+  } else {
+    res.status(404).send({ message: "Order not Found" });
   }
 });
 
