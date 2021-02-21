@@ -71,4 +71,16 @@ router.put("/:id", isAuth, isAdmin, async (req, res) => {
   }
 });
 
+router.delete("/:id", isAuth, async (req, res) => {
+  const id = req.params.id;
+  const product = await Product.findById(id);
+
+  if (product) {
+    const result = await product.remove();
+    res.send({ message: "Product deleted successfully", product: result });
+  } else {
+    res.status(404).send("Product not Found");
+  }
+});
+
 export default router;
