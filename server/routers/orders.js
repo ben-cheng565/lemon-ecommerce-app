@@ -63,4 +63,15 @@ router.put("/:id/pay", isAuth, async (req, res) => {
   }
 });
 
+router.delete("/:id", isAuth, isAdmin, async (req, res) => {
+  const order = await Order.findById(req.params.id);
+  if (order) {
+    const result = await order.remove();
+
+    res.send({ message: "Order deleted successfully", order: result });
+  } else {
+    res.status(404).send("Order not Found");
+  }
+});
+
 export default router;
