@@ -6,19 +6,32 @@ import { PayPalButton } from "react-paypal-button-v2";
 import LoadingBox from "../../components/common/LoadingBox";
 import MessageBox from "../../components/common/MessageBox";
 
-import { getOrderDetails, payOrder } from "../../redux/actions/order";
-import { ORDER_PAY_RESET } from "../../redux/actionTypes";
+import {
+  deliverOrder,
+  getOrderDetails,
+  payOrder,
+} from "../../redux/actions/order";
+import {
+  ORDER_DELIVER_REQUEST,
+  ORDER_DELIVER_RESET,
+  ORDER_PAY_RESET,
+} from "../../redux/actionTypes";
 
 function OrderDetails(props) {
   const orderId = props.match.params.id;
   const [sdkLoaded, setSdkLoaded] = useState(false);
+  const { userInfo } = useSelector((state) => state.user);
   const { order, loading, error } = useSelector((state) => state.orderDetails);
-  const orderPay = useSelector((state) => state.orderPay);
   const {
     error: errorPay,
     success: successPay,
     loading: loadingPay,
-  } = orderPay;
+  } = useSelector((state) => state.orderPay);
+  const {
+    error: errorDeliver,
+    success: successDeliver,
+    loading: loadingDeliver,
+  } = useSelector((state) => state.orderDeliver);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,8 +47,14 @@ function OrderDetails(props) {
       };
       document.body.appendChild(script);
     };
-    if (!order || successPay || (order && order._id !== orderId)) {
+    if (
+      !order ||
+      successPay ||
+      successDeliver ||
+      (order && order._id !== orderId)
+    ) {
       dispatch({ type: ORDER_PAY_RESET });
+      dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(orderId));
     } else {
       if (!order.isPaid) {
@@ -46,10 +65,14 @@ function OrderDetails(props) {
         }
       }
     }
-  }, [dispatch, order, orderId, successPay]);
+  }, [dispatch, order, orderId, successPay, successDeliver]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(order, paymentResult));
+  };
+
+  const deliverHandler = (orderId) => {
+    dispatch(deliverOrder(orderId));
   };
 
   return loading ? (
@@ -78,9 +101,7 @@ function OrderDetails(props) {
                     Delivered at {order.deliveredAt}
                   </MessageBox>
                 ) : (
-                  <MessageBox variant="danger">
-                    Have not delivered yet.
-                  </MessageBox>
+                  <MessageBox variant="danger">Not Delivered</MessageBox>
                 )}
               </div>
             </li>
@@ -96,7 +117,7 @@ function OrderDetails(props) {
                     Paid at {order.paidAt}
                   </MessageBox>
                 ) : (
-                  <MessageBox variant="danger">Have not paid yet.</MessageBox>
+                  <MessageBox variant="danger">Not Paid</MessageBox>
                 )}
               </div>
             </li>
@@ -179,6 +200,16 @@ function OrderDetails(props) {
                       />
                     </>
                   )}
+                </li>
+              )}
+              {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => deliverHandler(order._id)}
+                  >
+                    Deliver Order
+                  </button>
                 </li>
               )}
             </ul>
