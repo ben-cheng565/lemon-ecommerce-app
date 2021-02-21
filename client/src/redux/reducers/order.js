@@ -13,6 +13,9 @@ import {
   ORDER_HISTORY_REQUEST,
   ORDER_HISTORY_SUCCESS,
   ORDER_HISTORY_FAIL,
+  ORDER_LIST_REQUEST,
+  ORDER_LIST_SUCCESS,
+  ORDER_LIST_FAIL,
 } from "../actionTypes";
 
 export const orderCreate = (state = {}, action) => {
@@ -68,6 +71,20 @@ export const orderHistory = (state = { orders: [] }, action) => {
     case ORDER_HISTORY_SUCCESS:
       return { loading: false, orders: action.payload };
     case ORDER_HISTORY_FAIL:
+      return { loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};
+
+export const orderList = (state = { orders: [] }, action) => {
+  switch (action.type) {
+    case ORDER_LIST_REQUEST:
+      return { loading: true };
+    case ORDER_LIST_SUCCESS:
+      return { loading: false, orders: action.payload };
+    case ORDER_LIST_FAIL:
       return { loading: false, error: action.payload };
 
     default:

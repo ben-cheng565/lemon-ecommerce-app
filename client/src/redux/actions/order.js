@@ -13,6 +13,9 @@ import {
   ORDER_HISTORY_REQUEST,
   ORDER_HISTORY_FAIL,
   ORDER_HISTORY_SUCCESS,
+  ORDER_LIST_REQUEST,
+  ORDER_LIST_SUCCESS,
+  ORDER_LIST_FAIL,
 } from "../actionTypes";
 
 export const createOrder = (order) => async (dispatch, getState) => {
@@ -112,6 +115,29 @@ export const getOrderHistory = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ORDER_HISTORY_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getOrderList = () => async (dispatch, getState) => {
+  dispatch({ type: ORDER_LIST_REQUEST });
+  const {
+    user: { userInfo },
+  } = getState();
+
+  try {
+    const { data } = await axios.get("/orders/list", {
+      headers: { Authorization: `Bearer ${userInfo.token}` },
+    });
+
+    dispatch({ type: ORDER_LIST_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: ORDER_LIST_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

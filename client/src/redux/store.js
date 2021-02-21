@@ -4,6 +4,7 @@ import products, {
   productDetail,
   createProduct,
   editProduct,
+  deleteProduct,
 } from "./reducers/products";
 import cart from "./reducers/cart";
 import user, { userDetails, updateProfile } from "./reducers/user";
@@ -12,6 +13,7 @@ import {
   orderDetails,
   orderPay,
   orderHistory,
+  orderList,
 } from "./reducers/order";
 
 const initState = {
@@ -39,6 +41,7 @@ const reducer = combineReducers({
   productDetail,
   createProduct,
   editProduct,
+  deleteProduct,
   cart,
   user,
   userDetails,
@@ -46,6 +49,7 @@ const reducer = combineReducers({
   orderDetails,
   orderPay,
   orderHistory,
+  orderList,
   updateProfile,
 });
 
