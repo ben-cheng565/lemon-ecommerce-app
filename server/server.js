@@ -2,10 +2,12 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
+import path from "path";
 
 import userRouter from "./routers/users.js";
 import productsRouter from "./routers/products.js";
 import orderRouter from "./routers/orders.js";
+import uploadRouter from "./routers/uploads.js";
 
 // read environment parameters from .env
 dotenv.config();
@@ -33,10 +35,15 @@ mongoose
 app.use("/users", userRouter);
 app.use("/products", productsRouter);
 app.use("/orders", orderRouter);
+app.use("/uploads", uploadRouter);
 // fetch paypal client id from env file
 app.get("/config/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || "sb");
 });
+
+const __dirname = path.resolve().slice(0, -7);
+console.log(path.join(__dirname, "uploads"));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
