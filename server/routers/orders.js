@@ -1,9 +1,16 @@
 import express from "express";
 import Order from "../models/orders.js";
-import { isAuth } from "../util.js";
+import { isAdmin, isAuth } from "../util.js";
 
 const router = express.Router();
 
+// fetch all orders
+router.get("/list", isAuth, isAdmin, async (req, res) => {
+  const orderList = await Order.find({}).populate("userId", "name");
+  res.send(orderList);
+});
+
+// fetch all orders of an user
 router.get("/history", isAuth, async (req, res) => {
   const orders = await Order.find({ userId: req.userInfo._id });
   res.send(orders);
