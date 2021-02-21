@@ -12,6 +12,9 @@ import {
   PRODUCT_UPDATE_REQUEST,
   PRODUCT_UPDATE_FAIL,
   PRODUCT_UPDATE_SUCCESS,
+  PRODUCT_DELETE_REQUEST,
+  PRODUCT_DELETE_FAIL,
+  PRODUCT_DELETE_SUCCESS,
 } from "../actionTypes";
 
 export const fetchProducts = () => async (dispatch) => {
@@ -86,6 +89,29 @@ export const editProduct = (product) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const deleteProduct = (productId) => async (dispatch, getState) => {
+  dispatch({ type: PRODUCT_DELETE_REQUEST, payload: productId });
+  const {
+    user: { userInfo },
+  } = getState();
+
+  try {
+    const result = await axios.delete(`/products/${productId}`, {
+      headers: { Authorization: `Bearer ${userInfo.token}` },
+    });
+
+    dispatch({ type: PRODUCT_DELETE_SUCCESS, payload: result });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_DELETE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
