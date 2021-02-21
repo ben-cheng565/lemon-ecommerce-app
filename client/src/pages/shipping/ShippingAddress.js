@@ -52,7 +52,7 @@ function ShippingAddress(props) {
             type="text"
             id="fullName"
             placeholder="Enter full name"
-            value={fullName}
+            value={fullName || ""}
             onChange={(e) => setFullName(e.target.value)}
             required
           ></input>
@@ -63,7 +63,7 @@ function ShippingAddress(props) {
             type="text"
             id="address"
             placeholder="Enter address"
-            value={address}
+            value={address || ""}
             onChange={(e) => setAddress(e.target.value)}
             required
           ></input>
@@ -74,7 +74,7 @@ function ShippingAddress(props) {
             type="text"
             id="city"
             placeholder="Enter city"
-            value={city}
+            value={city || ""}
             onChange={(e) => setCity(e.target.value)}
             required
           ></input>
@@ -85,7 +85,7 @@ function ShippingAddress(props) {
             type="text"
             id="country"
             placeholder="Enter country"
-            value={country}
+            value={country || ""}
             onChange={(e) => setCountry(e.target.value)}
             required
           ></input>
@@ -96,7 +96,7 @@ function ShippingAddress(props) {
             type="text"
             id="postalCode"
             placeholder="Enter postal code"
-            value={postalCode}
+            value={postalCode || ""}
             onChange={(e) => setPostalCode(e.target.value)}
             required
           ></input>
