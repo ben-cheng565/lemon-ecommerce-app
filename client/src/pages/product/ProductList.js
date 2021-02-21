@@ -2,8 +2,15 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingBox from "../../components/common/LoadingBox";
 import MessageBox from "../../components/common/MessageBox";
-import { createProduct, fetchProducts } from "../../redux/actions/product";
-import { PRODUCT_CREATE_RESET } from "../../redux/actionTypes";
+import {
+  createProduct,
+  deleteProduct,
+  fetchProducts,
+} from "../../redux/actions/product";
+import {
+  PRODUCT_CREATE_RESET,
+  PRODUCT_DELETE_RESET,
+} from "../../redux/actionTypes";
 
 function ProductList(props) {
   const dispatch = useDispatch();
@@ -16,16 +23,27 @@ function ProductList(props) {
     success: successCreate,
     product: createdProduct,
   } = productCreate;
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = useSelector((state) => state.deleteProduct);
 
   useEffect(() => {
     if (successCreate) {
       dispatch({ type: PRODUCT_CREATE_RESET });
       props.history.push(`/product/edit/${createdProduct._id}`);
     }
-    dispatch(fetchProducts());
-  }, [dispatch, createdProduct, props.history, successCreate]);
 
-  const deleteHandler = (productId) => {};
+    if (successDelete) {
+      dispatch({ type: PRODUCT_DELETE_RESET });
+    }
+    dispatch(fetchProducts());
+  }, [dispatch, createdProduct, props.history, successCreate, successDelete]);
+
+  const deleteHandler = (productId) => {
+    dispatch(deleteProduct(productId));
+  };
 
   const createHandler = () => {
     dispatch(createProduct());
@@ -45,6 +63,8 @@ function ProductList(props) {
       </div>
       {loadingCreate && <LoadingBox />}
       {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>}
+      {loadingDelete && <LoadingBox />}
+      {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
       {loading ? (
         <LoadingBox />
       ) : error ? (
