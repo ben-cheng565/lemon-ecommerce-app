@@ -7,7 +7,7 @@ import products, {
   productDelete,
 } from "./reducers/products";
 import cart from "./reducers/cart";
-import user, { userDetails, updateProfile } from "./reducers/user";
+import user, { userDetails, updateProfile, userList } from "./reducers/user";
 import {
   orderCreate,
   orderDetails,
@@ -47,6 +47,7 @@ const reducer = combineReducers({
   cart,
   user,
   userDetails,
+  userList,
   orderCreate,
   orderDetails,
   orderPay,

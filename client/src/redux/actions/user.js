@@ -13,6 +13,9 @@ import {
   USER_UPDATE_REQUEST,
   USER_UPDATE_FAIL,
   USER_UPDATE_SUCCESS,
+  USER_LIST_REQUEST,
+  USER_LIST_FAIL,
+  USER_LIST_SUCCESS,
 } from "../actionTypes";
 
 export const signIn = (email, password) => async (dispatch) => {
@@ -112,6 +115,29 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getUserList = () => async (dispatch, getState) => {
+  dispatch({ type: USER_LIST_REQUEST });
+  const {
+    user: { userInfo },
+  } = getState();
+
+  try {
+    const { data } = await axios.get("/users", {
+      headers: { Authorization: `Bearer ${userInfo.token}` },
+    });
+
+    dispatch({ type: USER_LIST_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: USER_LIST_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
