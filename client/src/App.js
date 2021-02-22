@@ -14,6 +14,7 @@ import Profile from "./pages/Profile";
 import ProductList from "./pages/product/ProductList";
 import ProductEdit from "./pages/product/ProductEdit";
 import OrderList from "./pages/order/OrderList";
+import UserList from "./pages/user/UserList";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route path="/order/:id" component={OrderDetails} />
             <Route path="/orderhistory" component={OrderHistory} />
             <Route path="/orderlist" component={OrderList} />
+            <Route path="/userlist" component={UserList} />
             <Route path="/productlist" component={ProductList} />
             <Route path="/" exact component={Home} />
           </Switch>
