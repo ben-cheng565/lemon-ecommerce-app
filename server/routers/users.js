@@ -1,6 +1,6 @@
 import express from "express";
 import bcrypt from "bcryptjs";
-import { data } from "../data.js";
+// import { data } from "../data.js";
 import User from "../models/users.js";
 import { generateToken, isAuth } from "../util.js";
 

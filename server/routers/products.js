@@ -1,7 +1,7 @@
 import express from "express";
 import Product from "../models/products.js";
 
-import { data } from "../data.js";
+// import { data } from "../data.js";
 import Products from "../models/products.js";
 import { isAdmin, isAuth } from "../util.js";
 
