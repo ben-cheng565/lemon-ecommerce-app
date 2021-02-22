@@ -7,7 +7,12 @@ import products, {
   productDelete,
 } from "./reducers/products";
 import cart from "./reducers/cart";
-import user, { userDetails, updateProfile, userList } from "./reducers/user";
+import user, {
+  userDetails,
+  updateProfile,
+  userList,
+  userDelete,
+} from "./reducers/user";
 import {
   orderCreate,
   orderDetails,
@@ -48,6 +53,7 @@ const reducer = combineReducers({
   user,
   userDetails,
   userList,
+  userDelete,
   orderCreate,
   orderDetails,
   orderPay,
