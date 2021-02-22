@@ -2,23 +2,37 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingBox from "../../components/common/LoadingBox";
 import MessageBox from "../../components/common/MessageBox";
-import { getUserList } from "../../redux/actions/user";
+import { deleteUser, getUserList } from "../../redux/actions/user";
 
 function UserList() {
   const dispatch = useDispatch();
   const { loading, error, users } = useSelector((state) => state.userList);
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = useSelector((state) => state.userDelete);
 
   useEffect(() => {
     dispatch(getUserList());
-  }, [dispatch]);
+  }, [dispatch, successDelete]);
 
   const editHandler = (userId) => {};
 
-  const deleteHandler = (userId) => {};
+  const deleteHandler = (userId) => {
+    if (window.confirm("Are you sure to delete?")) {
+      dispatch(deleteUser(userId));
+    }
+  };
 
   return (
     <div>
       <h1>Users</h1>
+      {loadingDelete && <LoadingBox />}
+      {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
+      {successDelete && (
+        <MessageBox variant="success">User deleted successfully</MessageBox>
+      )}
       {loading ? (
         <LoadingBox />
       ) : error ? (

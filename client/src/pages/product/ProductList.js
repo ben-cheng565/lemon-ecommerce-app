@@ -29,16 +29,18 @@ function ProductList(props) {
     success: successDelete,
   } = useSelector((state) => state.productDelete);
 
+  console.log(successDelete);
   useEffect(() => {
     if (successCreate) {
       dispatch({ type: PRODUCT_CREATE_RESET });
       props.history.push(`/product/edit/${createdProduct._id}`);
     }
 
+    dispatch(fetchProducts());
+
     if (successDelete) {
       dispatch({ type: PRODUCT_DELETE_RESET });
     }
-    dispatch(fetchProducts());
   }, [dispatch, createdProduct, props.history, successCreate, successDelete]);
 
   const deleteHandler = (productId) => {
@@ -55,6 +57,20 @@ function ProductList(props) {
     <div>
       <div className="row">
         <h1>Products</h1>
+        {loadingCreate && <LoadingBox />}
+        {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>}
+        {successCreate && (
+          <MessageBox variant="success">
+            Product created successfully
+          </MessageBox>
+        )}
+        {loadingDelete && <LoadingBox />}
+        {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
+        {successDelete ? (
+          <MessageBox variant="success">
+            Product deleted successfully
+          </MessageBox>
+        ) : null}
         <button
           type="button"
           onClick={createHandler}
@@ -63,10 +79,7 @@ function ProductList(props) {
           Create New Product
         </button>
       </div>
-      {loadingCreate && <LoadingBox />}
-      {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>}
-      {loadingDelete && <LoadingBox />}
-      {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
+
       {loading ? (
         <LoadingBox />
       ) : error ? (
