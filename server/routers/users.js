@@ -2,7 +2,7 @@ import express from "express";
 import bcrypt from "bcryptjs";
 // import { data } from "../data.js";
 import User from "../models/users.js";
-import { generateToken, isAuth } from "../util.js";
+import { generateToken, isAdmin, isAuth } from "../util.js";
 
 const router = express.Router();
 
@@ -83,6 +83,12 @@ router.put("/profile", isAuth, async (req, res) => {
       token: generateToken(result),
     });
   }
+});
+
+router.get("/", isAuth, isAdmin, async (req, res) => {
+  const users = await User.find({});
+
+  res.send(users);
 });
 
 export default router;
