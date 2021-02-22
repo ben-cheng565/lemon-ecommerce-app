@@ -91,4 +91,19 @@ router.get("/", isAuth, isAdmin, async (req, res) => {
   res.send(users);
 });
 
+router.delete("/:id", isAuth, isAdmin, async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (user) {
+    if (user.isAdmin) {
+      res.status(400).send({ message: "Can not delete admin user" });
+      return;
+    }
+    const result = await user.remove();
+
+    res.send({ message: "User deleted successfully", user: result });
+  } else {
+    res.status(404).send("User not Found");
+  }
+});
+
 export default router;
