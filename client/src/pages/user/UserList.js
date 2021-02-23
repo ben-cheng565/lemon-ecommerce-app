@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import LoadingBox from "../../components/common/LoadingBox";
 import MessageBox from "../../components/common/MessageBox";
 import { deleteUser, getUserList } from "../../redux/actions/user";
+import { USER_DETAIL_RESET } from "../../redux/actionTypes";
 
-function UserList() {
+function UserList(props) {
   const dispatch = useDispatch();
   const { loading, error, users } = useSelector((state) => state.userList);
   const {
@@ -15,9 +16,12 @@ function UserList() {
 
   useEffect(() => {
     dispatch(getUserList());
+    dispatch({ type: USER_DETAIL_RESET });
   }, [dispatch, successDelete]);
 
-  const editHandler = (userId) => {};
+  const editHandler = (userId) => {
+    props.history.push(`/user/edit/${userId}`);
+  };
 
   const deleteHandler = (userId) => {
     if (window.confirm("Are you sure to delete?")) {
