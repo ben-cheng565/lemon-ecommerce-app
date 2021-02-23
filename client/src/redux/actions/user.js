@@ -19,6 +19,9 @@ import {
   USER_DELETE_REQUEST,
   USER_DELETE_FAIL,
   USER_DELETE_SUCCESS,
+  USER_EDIT_REQUEST,
+  USER_EDIT_SUCCESS,
+  USER_EDIT_FAIL,
 } from "../actionTypes";
 
 export const signIn = (email, password) => async (dispatch) => {
@@ -163,6 +166,29 @@ export const deleteUser = (userId) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const editUser = (user) => async (dispatch, getState) => {
+  dispatch({ type: USER_EDIT_REQUEST, payload: user });
+  const {
+    user: { userInfo },
+  } = getState();
+
+  try {
+    const { data } = await axios.put(`/users/${user._id}`, user, {
+      headers: { Authorization: `Bearer ${userInfo.token}` },
+    });
+
+    dispatch({ type: USER_EDIT_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: USER_EDIT_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
