@@ -9,8 +9,8 @@ import "./Signin.css";
 
 function Signin(props) {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("user@gmail.com");
+  const [password, setPassword] = useState("123");
 
   //   extract redirect page from url
   const redirect = props.location.search
@@ -40,12 +40,13 @@ function Signin(props) {
         {loading && <LoadingBox />}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         <div>
-          <label htmlFor="email">Email Adress</label>
+          <label htmlFor="email">Email Address</label>
           <input
             type="email"
             id="email"
             placeholder="Enter email"
             required
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           ></input>
         </div>
@@ -56,6 +57,7 @@ function Signin(props) {
             id="password"
             placeholder="Enter password"
             required
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           ></input>
         </div>
