@@ -6,18 +6,19 @@ import { generateToken, isAdmin, isAuth } from "../util.js";
 
 const router = express.Router();
 
+const decodedPassword = await bcrypt.hash("123", 10);
 const dummyData = {
   users: [
     {
       name: "Admin",
       email: "admin@gmail.com",
-      password: await bcrypt.hash("123", 10),
+      password: decodedPassword,
       isAdmin: true,
     },
     {
       name: "user",
       email: "user@gmail.com",
-      password: await bcrypt.hash("123", 10),
+      password: decodedPassword,
       isAdmin: false,
     },
   ],
