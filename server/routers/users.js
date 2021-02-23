@@ -6,11 +6,28 @@ import { generateToken, isAdmin, isAuth } from "../util.js";
 
 const router = express.Router();
 
+const dummyData = {
+  users: [
+    {
+      name: "Admin",
+      email: "admin@gmail.com",
+      password: await bcrypt.hash("123", 10),
+      isAdmin: true,
+    },
+    {
+      name: "user",
+      email: "user@gmail.com",
+      password: await bcrypt.hash("123", 10),
+      isAdmin: false,
+    },
+  ],
+};
+
 router.get("/init", async (req, res) => {
   // before initializing data, delete all user data in db
   await User.remove({});
 
-  const createdUsers = await User.insertMany(data.users);
+  const createdUsers = await User.insertMany(dummyData.users);
 
   res.send({ createdUsers });
 });
@@ -101,6 +118,23 @@ router.delete("/:id", isAuth, isAdmin, async (req, res) => {
     const result = await user.remove();
 
     res.send({ message: "User deleted successfully", user: result });
+  } else {
+    res.status(404).send("User not Found");
+  }
+});
+
+router.put("/:id", isAuth, isAdmin, async (req, res) => {
+  const id = req.params.id;
+  const user = await User.findById(id);
+
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.isSeller = req.body.isSeller || user.isSeller;
+    user.isAdmin = req.body.isAdmin || user.isAdmin;
+
+    const result = await user.save();
+    res.send({ message: "User edited successfully", user: result });
   } else {
     res.status(404).send("User not Found");
   }

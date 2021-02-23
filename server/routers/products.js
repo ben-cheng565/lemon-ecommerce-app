@@ -7,12 +7,61 @@ import { isAdmin, isAuth } from "../util.js";
 
 const router = express.Router();
 
+export const dummyData = {
+  products: [
+    {
+      name: "NBA Lakers Jersey",
+      category: "Shirts",
+      image: "/images/p1.png",
+      price: 120,
+      brand: "Nike",
+      rating: 5,
+      numReviews: 122,
+      description: "Lebron James No.23",
+      countInStock: 10,
+    },
+    {
+      name: "NBA Lakers Bag",
+      category: "Bag",
+      image: "uploads/1613871107031.jpg",
+      price: 150,
+      brand: "Nike",
+      rating: 5,
+      numReviews: 12,
+      description: "45cm * 31cm * 15cm",
+      countInStock: 0,
+    },
+    {
+      name: "NBA Lakers Sweatshirt",
+      category: "Sweatshirt",
+      image: "uploads/1613871471036.jpg",
+      price: 120,
+      brand: "Nike",
+      rating: 5,
+      numReviews: 5,
+      description: "Pullover fleece sweatshirt hoodie",
+      countInStock: 1,
+    },
+    {
+      name: "NBA Lakers Dri-Fit",
+      category: "Shirt",
+      image: "uploads/1613870905165.jpgg",
+      price: 100,
+      brand: "Nike",
+      rating: 5,
+      numReviews: 10,
+      description: "Lakers, AT1001-010",
+      countInStock: 5,
+    },
+  ],
+};
+
 // init products data
 router.get("/init", async (req, res) => {
   // before initializing data, delete all product data in db
   await Product.remove({});
 
-  const createdProducts = await Product.insertMany(data.products);
+  const createdProducts = await Product.insertMany(dummyData.products);
 
   res.send({ createdProducts });
 });
