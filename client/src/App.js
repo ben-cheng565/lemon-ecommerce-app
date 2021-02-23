@@ -15,6 +15,7 @@ import ProductList from "./pages/product/ProductList";
 import ProductEdit from "./pages/product/ProductEdit";
 import OrderList from "./pages/order/OrderList";
 import UserList from "./pages/user/UserList";
+import UserEdit from "./pages/user/UserEdit";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             <Route path="/orderhistory" component={OrderHistory} />
             <Route path="/orderlist" component={OrderList} />
             <Route path="/userlist" component={UserList} />
+            <Route path="/user/edit/:id" component={UserEdit} />
             <Route path="/productlist" component={ProductList} />
             <Route path="/" exact component={Home} />
           </Switch>
