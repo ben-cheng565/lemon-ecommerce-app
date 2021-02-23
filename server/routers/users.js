@@ -6,7 +6,7 @@ import { generateToken, isAdmin, isAuth } from "../util.js";
 
 const router = express.Router();
 
-const decodedPassword = await bcrypt.hash("123", 10);
+const decodedPassword = bcrypt.hash("123", 10);
 const dummyData = {
   users: [
     {
