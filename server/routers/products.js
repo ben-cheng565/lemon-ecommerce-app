@@ -23,7 +23,7 @@ export const dummyData = {
     {
       name: "NBA Lakers Bag",
       category: "Bag",
-      image: "uploads/1613871107031.jpg",
+      image: "../uploads/1613871107031.jpg",
       price: 150,
       brand: "Nike",
       rating: 5,
@@ -34,7 +34,7 @@ export const dummyData = {
     {
       name: "NBA Lakers Sweatshirt",
       category: "Sweatshirt",
-      image: "uploads/1613871471036.jpg",
+      image: "../uploads/1613871471036.jpg",
       price: 120,
       brand: "Nike",
       rating: 5,
@@ -45,7 +45,7 @@ export const dummyData = {
     {
       name: "NBA Lakers Dri-Fit",
       category: "Shirt",
-      image: "uploads/1613870905165.jpgg",
+      image: "../uploads/1613870905165.jpgg",
       price: 100,
       brand: "Nike",
       rating: 5,

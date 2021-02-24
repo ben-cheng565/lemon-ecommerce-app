@@ -29,7 +29,6 @@ function ProductList(props) {
     success: successDelete,
   } = useSelector((state) => state.productDelete);
 
-  console.log(successDelete);
   useEffect(() => {
     if (successCreate) {
       dispatch({ type: PRODUCT_CREATE_RESET });

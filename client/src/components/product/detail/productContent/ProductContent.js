@@ -5,11 +5,12 @@ import "./ProductContent.css";
 
 function ProductContent(props) {
   const { product } = props;
-
+  const hostName = window.location.protocol + "//" + window.location.host;
+  const imgUrl = /* hostName +  */ "../" + product.image;
   return (
     <>
       <div className="col-2">
-        <img className="large" src={product.image} alt={product.name}></img>
+        <img className="large" src={imgUrl} alt={product.name}></img>
       </div>
       <div className="col-1">
         <ul>
