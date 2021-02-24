@@ -13,7 +13,7 @@ function CartItem(props) {
     <li key={item.productId}>
       <div className="row">
         <div>
-          <img src={item.image} alt={item.name} className="small" />
+          <img src={`../${item.image}`} alt={item.name} className="small" />
         </div>
         <div className="min-30">
           <Link to={`/product/${item.productId}`}>{item.name}</Link>
