@@ -15,16 +15,34 @@ import {
   PRODUCT_DELETE_REQUEST,
   PRODUCT_DELETE_FAIL,
   PRODUCT_DELETE_SUCCESS,
+  PRODUCT_CATEGORY_REQUEST,
+  PRODUCT_CATEGORY_SUCCESS,
+  PRODUCT_CATEGORY_FAIL,
 } from "../actionTypes";
 
-export const fetchProducts = () => async (dispatch) => {
+export const fetchProducts = ({ name = "", category = "" }) => async (
+  dispatch
+) => {
   dispatch({ type: PRODUCTS_REQUEST });
 
   try {
-    const { data } = await axios.get("/products");
+    const { data } = await axios.get(
+      `/products?name=${name}&category=${category}`
+    );
     dispatch({ type: PRODUCTS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCTS_FAIL, payload: error.message });
+  }
+};
+
+export const getProductCategories = () => async (dispatch) => {
+  dispatch({ type: PRODUCT_CATEGORY_REQUEST });
+
+  try {
+    const { data } = await axios.get(`/products/categories`);
+    dispatch({ type: PRODUCT_CATEGORY_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: PRODUCT_CATEGORY_FAIL, payload: error.message });
   }
 };
 

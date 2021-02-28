@@ -5,6 +5,7 @@ import products, {
   productCreate,
   productEdit,
   productDelete,
+  categoryList,
 } from "./reducers/products";
 import cart from "./reducers/cart";
 import user, {
@@ -50,6 +51,7 @@ const reducer = combineReducers({
   productCreate,
   productEdit,
   productDelete,
+  categoryList,
   cart,
   user,
   userDetails,
