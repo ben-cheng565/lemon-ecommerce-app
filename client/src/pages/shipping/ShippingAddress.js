@@ -10,6 +10,10 @@ function ShippingAddress(props) {
     props.history.push("/signin");
   }
 
+  //   get previous shipping address data
+  const { shippingAddress } = useSelector((state) => state.cart);
+  const { address: mapAddress } = useSelector((state) => state.userMapAddress);
+
   let prevInfo = {
     fullName: "",
     address: "",
@@ -17,11 +21,20 @@ function ShippingAddress(props) {
     country: "",
     postalCode: "",
   };
-  //   get previous shipping address data
-  const { shippingAddress } = useSelector((state) => state.cart);
+
   if (shippingAddress) {
     prevInfo = shippingAddress;
   }
+  if (mapAddress) {
+    prevInfo.address = mapAddress.address;
+    prevInfo.city = mapAddress.city;
+    prevInfo.country = mapAddress.country;
+    prevInfo.postalCode = mapAddress.postalCode;
+  }
+
+  const [lat, setLat] = useState(shippingAddress.lat);
+  const [lng, setLng] = useState(shippingAddress.lng);
+
   const dispatch = useDispatch();
   const [fullName, setFullName] = useState(prevInfo.fullName);
   const [address, setAddress] = useState(prevInfo.address);
@@ -32,11 +45,55 @@ function ShippingAddress(props) {
   const submitHandler = (e) => {
     e.preventDefault();
 
+    const newLat = mapAddress ? mapAddress.lat : lat;
+    const newLng = mapAddress ? mapAddress.lng : lng;
+    if (mapAddress) {
+      // setLat(mapAddress.lat);
+      // setLng(mapAddress.lng);
+      setAddress(mapAddress.address);
+      setCity(mapAddress.city);
+      setCountry(mapAddress.country);
+      setPostalCode(mapAddress.postalCode);
+    }
+
+    let moveOn = true;
+    if (!newLat || !newLng) {
+      moveOn = window.confirm(
+        "You did not set your location on map. Continue?"
+      );
+    }
+
+    if (moveOn) {
+      dispatch(
+        saveShippingAddress({
+          fullName,
+          address,
+          city,
+          country,
+          postalCode,
+          lat: newLat,
+          lng: newLng,
+        })
+      );
+
+      props.history.push("/payment");
+    }
+  };
+
+  const chooseOnMap = () => {
     dispatch(
-      saveShippingAddress({ fullName, address, city, country, postalCode })
+      saveShippingAddress({
+        fullName,
+        address,
+        city,
+        country,
+        postalCode,
+        lat,
+        lng,
+      })
     );
 
-    props.history.push("/payment");
+    props.history.push("/map");
   };
 
   return (
@@ -100,6 +157,12 @@ function ShippingAddress(props) {
             onChange={(e) => setPostalCode(e.target.value)}
             required
           ></input>
+        </div>
+        <div>
+          <label />
+          <button type="button" onClick={chooseOnMap}>
+            Choose on Map
+          </button>
         </div>
         <div>
           <label />

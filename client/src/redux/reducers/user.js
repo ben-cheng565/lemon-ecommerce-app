@@ -14,6 +14,7 @@ import {
   USER_LIST_FAIL,
   USER_LIST_REQUEST,
   USER_LIST_SUCCESS,
+  USER_MAP_ADDRESS,
   USER_SIGNIN_FAIL,
   USER_SIGNIN_REQUEST,
   USER_SIGNIN_SUCCESS,
@@ -118,6 +119,15 @@ export const userEdit = (state = {}, action) => {
       return { loading: false, error: action.payload };
     case USER_EDIT_RESET:
       return {};
+    default:
+      return state;
+  }
+};
+
+export const userMapAddress = (state = {}, action) => {
+  switch (action.type) {
+    case USER_MAP_ADDRESS:
+      return { address: action.payload };
     default:
       return state;
   }

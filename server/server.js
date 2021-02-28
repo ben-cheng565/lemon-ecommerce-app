@@ -37,9 +37,15 @@ app.use("/users", userRouter);
 app.use("/products", productsRouter);
 app.use("/orders", orderRouter);
 app.use("/uploads", uploadRouter);
+
 // fetch paypal client id from env file
 app.get("/config/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || "sb");
+});
+
+// fetch google map api key from env file
+app.get("/config/google", (req, res) => {
+  res.send(process.env.GOOGLE_API_KEY || "");
 });
 
 const __dirname = path.resolve();

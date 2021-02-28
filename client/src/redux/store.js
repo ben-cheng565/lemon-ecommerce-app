@@ -14,6 +14,7 @@ import user, {
   userList,
   userDelete,
   userEdit,
+  userMapAddress,
 } from "./reducers/user";
 import {
   orderCreate,
@@ -66,6 +67,7 @@ const reducer = combineReducers({
   orderDelete,
   orderDeliver,
   updateProfile,
+  userMapAddress,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
