@@ -17,7 +17,7 @@ function CategoryList(props) {
 
   return (
     <div className="col-1" style={{ backgroundColor: "#f4f4f4" }}>
-      <h3>Category</h3>
+      <h4>Category</h4>
       {loading ? (
         <LoadingBox />
       ) : error ? (

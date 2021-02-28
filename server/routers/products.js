@@ -85,9 +85,21 @@ router.get("/:id", async (req, res) => {
 router.get("/", async (req, res) => {
   const name = req.query.name || "";
   const category = req.query.category || "";
+  const sort = req.query.sort || "";
   const nameFilter = name ? { name: { $regex: name, $options: "i" } } : {};
   const categoryFilter = category ? { category } : {};
-  const products = await Product.find({ ...nameFilter, ...categoryFilter });
+  const sortOrder =
+    sort === "priceAsc"
+      ? { price: 1 }
+      : sort === "priceDesc"
+      ? { price: -1 }
+      : { _id: -1 };
+
+  const products = await Product.find({
+    ...nameFilter,
+    ...categoryFilter,
+  }).sort(sortOrder);
+
   res.send(products);
 });
 

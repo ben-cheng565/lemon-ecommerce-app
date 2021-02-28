@@ -13,6 +13,7 @@ function Search(props) {
   let search = props.location.search;
   const name = getKeyWord(search, "name");
   const category = getKeyWord(search, "category");
+  const sort = getKeyWord(search, "sort");
   //   const { name = "all" } = useParams();
   const { loading, error, products } = useSelector((state) => state.products);
 
@@ -21,19 +22,21 @@ function Search(props) {
       fetchProducts({
         name: name !== "all" ? name : "",
         category: category !== "all" ? category : "",
+        sort,
       })
     );
-  }, [dispatch, name, category]);
+  }, [dispatch, name, category, sort]);
 
   const getFilterUrl = (filter) => {
     const filterCategory = filter.category || category;
     const filterName = filter.name || name;
-    return `/search?name=${filterName}&category=${filterCategory}`;
+    const sortOrder = filter.sort || sort;
+    return `/search?name=${filterName}&category=${filterCategory}&sort=${sortOrder}`;
   };
 
   return (
     <div>
-      <div className="row center">
+      <div className="row">
         {loading ? (
           <LoadingBox />
         ) : error ? (
@@ -43,6 +46,19 @@ function Search(props) {
             <h1>Found {products.length} Results</h1>
           </div>
         )}
+        <div>
+          {/* Sort by{" "} */}
+          <select
+            value={sort}
+            onChange={(e) =>
+              props.history.push(getFilterUrl({ sort: e.target.value }))
+            }
+          >
+            <option value="none">Sort By</option>
+            <option value="priceAsc">Price: Low to High</option>
+            <option value="priceDesc">Price: High to Low</option>
+          </select>
+        </div>
       </div>
       <div className="row top">
         <div className="col-1">

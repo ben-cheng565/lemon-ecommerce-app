@@ -20,14 +20,16 @@ import {
   PRODUCT_CATEGORY_FAIL,
 } from "../actionTypes";
 
-export const fetchProducts = ({ name = "", category = "" }) => async (
-  dispatch
-) => {
+export const fetchProducts = ({
+  name = "",
+  category = "",
+  sort = "",
+}) => async (dispatch) => {
   dispatch({ type: PRODUCTS_REQUEST });
 
   try {
     const { data } = await axios.get(
-      `/products?name=${name}&category=${category}`
+      `/products?name=${name}&category=${category}&sort=${sort}`
     );
     dispatch({ type: PRODUCTS_SUCCESS, payload: data });
   } catch (error) {
