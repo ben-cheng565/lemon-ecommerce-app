@@ -11,6 +11,9 @@
 .col-2 {
   flex: 2 1 50rem;
 }
+.col-3 {
+  flex: 50 1 100rem;
+}
 
 /* card */
 .card {

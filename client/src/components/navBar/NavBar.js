@@ -1,10 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { removeFromCart } from "../../redux/actions/cart";
 import { signout } from "../../redux/actions/user";
 import { CART_EMPTY } from "../../redux/actionTypes";
 import CartBadge from "../cart/badge/CartBadge";
+import SearchBox from "../search/SearchBox";
 
 import "./NavBar.css";
 
@@ -32,6 +34,11 @@ function NavBar() {
         <Link className="brand" to="/">
           Dandelion
         </Link>
+      </div>
+      <div>
+        <Route
+          render={({ history }) => <SearchBox history={history}></SearchBox>}
+        ></Route>
       </div>
       <div>
         <Link to="/cart">

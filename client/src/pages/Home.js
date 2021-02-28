@@ -11,7 +11,7 @@ function Home() {
   const { products, loading, error } = productData;
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchProducts({}));
   }, [dispatch]);
 
   return (

@@ -1,8 +1,8 @@
 .col-1 {
-  flex: 1 1 25rem;
+  flex: 1 1 50rem;
 }
 .col-2 {
-  flex: 2 1 50rem;
+  flex: 2 1 70rem;
 }
 
 /* image */
@@ -10,7 +10,8 @@ img {
   border-radius: 0.5rem;
 }
 img.large {
-  width: 100%;
+  margin-top: 2rem;
+  width: 90%;
 }
 
 /* list */

@@ -114,3 +114,7 @@ img.medium {
 .rating span:last-child {
   color: #404040;
 }
+
+.active {
+  font-weight: bold;
+}

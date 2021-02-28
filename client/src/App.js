@@ -16,6 +16,7 @@ import ProductEdit from "./pages/product/ProductEdit";
 import OrderList from "./pages/order/OrderList";
 import UserList from "./pages/user/UserList";
 import UserEdit from "./pages/user/UserEdit";
+import Search from "./pages/search/Search";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
             <Route path="/userlist" component={UserList} />
             <Route path="/user/edit/:id" component={UserEdit} />
             <Route path="/productlist" component={ProductList} />
+            <Route path="/search" component={Search} />
             <Route path="/" exact component={Home} />
           </Switch>
         </main>
