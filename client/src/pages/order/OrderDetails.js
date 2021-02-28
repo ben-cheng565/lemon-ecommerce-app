@@ -136,7 +136,9 @@ function OrderDetails(props) {
                           />
                         </div>
                         <div className="min-30">
-                          <Link to={`/product/${item.id}`}>{item.name}</Link>
+                          <Link to={`/product/${item.productId}`}>
+                            {item.name}
+                          </Link>
                         </div>
 
                         <div>

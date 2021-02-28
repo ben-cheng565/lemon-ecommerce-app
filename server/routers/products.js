@@ -132,8 +132,8 @@ router.put("/:id", isAuth, isAdmin, async (req, res) => {
     product.countInStock = req.body.countInStock;
     product.description = req.body.description;
 
-    const resutl = product.save();
-    res.send({ message: "Product updated successfully", product: resutl });
+    const result = await product.save();
+    res.send({ message: "Product updated successfully", product: result });
   } else {
     res.status(404).send("Product not Found");
   }
@@ -146,6 +146,32 @@ router.delete("/:id", isAuth, async (req, res) => {
   if (product) {
     const result = await product.remove();
     res.send({ message: "Product deleted successfully", product: result });
+  } else {
+    res.status(404).send("Product not Found");
+  }
+});
+
+router.post("/reviews/:id", isAuth, async (req, res) => {
+  const product = await Product.findById(req.params.id);
+
+  if (product) {
+    const review = {
+      userId: req.body.userId,
+      rating: Number(req.body.rating),
+      comment: req.body.comment,
+    };
+
+    product.reviews.push(review);
+    product.numReviews = product.reviews.length;
+    product.rating =
+      product.reviews.reduce((accum, cur) => cur.rating + accum, 0) /
+      product.reviews.length;
+
+    const result = await product.save();
+    res.send({
+      message: "Review created successfully",
+      review: result.reviews[product.reviews.length - 1],
+    });
   } else {
     res.status(404).send("Product not Found");
   }

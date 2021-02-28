@@ -18,6 +18,9 @@ import {
   PRODUCT_CATEGORY_REQUEST,
   PRODUCT_CATEGORY_SUCCESS,
   PRODUCT_CATEGORY_FAIL,
+  REVIEW_CREATE_FAIL,
+  REVIEW_CREATE_SUCCESS,
+  REVIEW_CREATE_REQUEST,
 } from "../actionTypes";
 
 export const fetchProducts = ({
@@ -132,6 +135,36 @@ export const deleteProduct = (productId) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const createReview = (productId, review) => async (
+  dispatch,
+  getState
+) => {
+  dispatch({ type: REVIEW_CREATE_REQUEST });
+
+  const {
+    user: { userInfo },
+  } = getState();
+
+  try {
+    const { data } = await axios.post(
+      `/products/reviews/${productId}`,
+      review,
+      {
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      }
+    );
+    dispatch({ type: REVIEW_CREATE_SUCCESS, payload: data.review });
+  } catch (error) {
+    dispatch({
+      type: REVIEW_CREATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
