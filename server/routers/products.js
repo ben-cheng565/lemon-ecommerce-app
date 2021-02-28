@@ -1,8 +1,5 @@
 import express from "express";
 import Product from "../models/products.js";
-
-// import { data } from "../data.js";
-import Products from "../models/products.js";
 import { isAdmin, isAuth } from "../util.js";
 
 const router = express.Router();
@@ -66,10 +63,16 @@ router.get("/init", async (req, res) => {
   res.send({ createdProducts });
 });
 
+//fetch product categories
+router.get("/categories", async (req, res) => {
+  const categories = await Product.find().distinct("category");
+  res.send(categories);
+});
+
 // fetch the specific product detail
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
-  const product = await Products.findById(id);
+  const product = await Product.findById(id);
 
   if (product) {
     res.send(product);
@@ -80,7 +83,11 @@ router.get("/:id", async (req, res) => {
 
 //fetch all products
 router.get("/", async (req, res) => {
-  const products = await Products.find({});
+  const name = req.query.name || "";
+  const category = req.query.category || "";
+  const nameFilter = name ? { name: { $regex: name, $options: "i" } } : {};
+  const categoryFilter = category ? { category } : {};
+  const products = await Product.find({ ...nameFilter, ...categoryFilter });
   res.send(products);
 });
 
