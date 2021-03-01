@@ -25,12 +25,6 @@ function ShippingAddress(props) {
   if (shippingAddress) {
     prevInfo = shippingAddress;
   }
-  if (mapAddress) {
-    prevInfo.address = mapAddress.address;
-    prevInfo.city = mapAddress.city;
-    prevInfo.country = mapAddress.country;
-    prevInfo.postalCode = mapAddress.postalCode;
-  }
 
   const [lat, setLat] = useState(shippingAddress.lat);
   const [lng, setLng] = useState(shippingAddress.lng);
@@ -50,10 +44,10 @@ function ShippingAddress(props) {
     if (mapAddress) {
       // setLat(mapAddress.lat);
       // setLng(mapAddress.lng);
-      setAddress(mapAddress.address);
-      setCity(mapAddress.city);
-      setCountry(mapAddress.country);
-      setPostalCode(mapAddress.postalCode);
+      // setAddress(mapAddress.address);
+      // setCity(mapAddress.city);
+      // setCountry(mapAddress.country);
+      // setPostalCode(mapAddress.postalCode);
     }
 
     let moveOn = true;

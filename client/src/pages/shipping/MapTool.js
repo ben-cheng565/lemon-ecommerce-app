@@ -62,23 +62,15 @@ function MapTool(props) {
 
   const onConfirm = () => {
     const places = placeRef.current.getPlaces();
-    console.log(places);
+
     if (places && places.length === 1) {
       dispatch({
         type: USER_MAP_ADDRESS,
         payload: {
           lat: location.lat,
           lng: location.lng,
-          address:
-            places[0].address_components[0].short_name +
-            " " +
-            places[0].address_components[1].short_name +
-            ", " +
-            places[0].address_components[2].short_name,
+          address: places[0].formatted_address,
           name: places[0].name,
-          city: places[0].address_components[3].short_name,
-          country: places[0].address_components[5].short_name,
-          postalCode: places[0].address_components[6].short_name,
           googleAddressId: places[0].id,
         },
       });
