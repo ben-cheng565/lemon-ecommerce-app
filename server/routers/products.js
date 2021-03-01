@@ -111,7 +111,7 @@ router.get("/", async (req, res) => {
     .skip(pageSize * (page - 1))
     .limit(pageSize);
 
-  res.send({ products, page, pages: Math.ceil(count / pageSize) });
+  res.send({ products, count, page, pages: Math.ceil(count / pageSize) });
 });
 
 router.post("/", isAuth, isAdmin, async (req, res) => {

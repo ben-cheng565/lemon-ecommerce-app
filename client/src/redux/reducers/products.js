@@ -36,6 +36,7 @@ const products = (state = { products: [] }, action) => {
         products: action.payload.products,
         page: action.payload.page,
         pages: action.payload.pages,
+        count: action.payload.count,
       };
     case PRODUCTS_FAIL:
       return { loading: false, error: action.payload };

@@ -16,7 +16,7 @@ function Search(props) {
   const sort = getKeyWord(search, "sort");
   const currPage = getKeyWord(search, "currPage");
   //   const { name = "all" } = useParams();
-  const { loading, error, products, page, pages } = useSelector(
+  const { loading, error, products, page, pages, count } = useSelector(
     (state) => state.products
   );
 
@@ -48,7 +48,7 @@ function Search(props) {
           <MessageBox variant="danger">{error}</MessageBox>
         ) : (
           <div>
-            <h1>Found {products.length} Results</h1>
+            <h1>Found {count} Results</h1>
           </div>
         )}
         <div>
