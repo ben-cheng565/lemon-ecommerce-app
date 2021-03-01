@@ -45,6 +45,7 @@ function App() {
             <Route path="/productlist" component={ProductList} />
             <Route path="/search" component={Search} />
             <Route path="/map" component={MapTool} />
+            <Route path="/home" component={Home} />
             <Route path="/" exact component={Home} />
           </Switch>
         </main>

@@ -83,6 +83,9 @@ router.get("/:id", async (req, res) => {
 
 //fetch all products
 router.get("/", async (req, res) => {
+  const pageSize = 3;
+  const page = Number(req.query.currPage) || 1;
+
   const name = req.query.name || "";
   const category = req.query.category || "";
   const sort = req.query.sort || "";
@@ -95,12 +98,20 @@ router.get("/", async (req, res) => {
       ? { price: -1 }
       : { _id: -1 };
 
+  const count = await Product.count({
+    ...nameFilter,
+    ...categoryFilter,
+  });
+
   const products = await Product.find({
     ...nameFilter,
     ...categoryFilter,
-  }).sort(sortOrder);
+  })
+    .sort(sortOrder)
+    .skip(pageSize * (page - 1))
+    .limit(pageSize);
 
-  res.send(products);
+  res.send({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
 router.post("/", isAuth, isAdmin, async (req, res) => {

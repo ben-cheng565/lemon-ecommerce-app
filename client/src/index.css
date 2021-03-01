@@ -5,7 +5,7 @@ html {
 
 body {
   margin: 0;
-  /* height: 100vh; */
+  height: 100vh;
   font-size: 1.6rem;
   font-family: Helvetica, Arial, sans-serif;
 
@@ -116,5 +116,17 @@ img.medium {
 }
 
 .active {
+  font-weight: bold;
+}
+
+/* pagination */
+.pagination a {
+  padding: 1rem;
+  margin: 0.2rem;
+  border-radius: 0.5rem;
+  border: 0.1rem #a4a4a4 solid;
+  font-size: 1.6rem;
+}
+.pagination a.active {
   font-weight: bold;
 }

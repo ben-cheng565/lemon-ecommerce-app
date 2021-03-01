@@ -31,7 +31,12 @@ const products = (state = { products: [] }, action) => {
     case PRODUCTS_REQUEST:
       return { loading: true };
     case PRODUCTS_SUCCESS:
-      return { loading: false, products: action.payload };
+      return {
+        loading: false,
+        products: action.payload.products,
+        page: action.payload.page,
+        pages: action.payload.pages,
+      };
     case PRODUCTS_FAIL:
       return { loading: false, error: action.payload };
     default:

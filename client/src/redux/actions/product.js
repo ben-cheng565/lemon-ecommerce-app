@@ -24,6 +24,7 @@ import {
 } from "../actionTypes";
 
 export const fetchProducts = ({
+  currPage = 1,
   name = "",
   category = "",
   sort = "",
@@ -32,7 +33,7 @@ export const fetchProducts = ({
 
   try {
     const { data } = await axios.get(
-      `/products?name=${name}&category=${category}&sort=${sort}`
+      `/products?name=${name}&category=${category}&sort=${sort}&currPage=${currPage}`
     );
     dispatch({ type: PRODUCTS_SUCCESS, payload: data });
   } catch (error) {

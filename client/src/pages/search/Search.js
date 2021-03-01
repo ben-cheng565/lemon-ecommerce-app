@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import LoadingBox from "../../components/common/LoadingBox";
 import MessageBox from "../../components/common/MessageBox";
 import Product from "../../components/product/Product";
@@ -14,24 +14,29 @@ function Search(props) {
   const name = getKeyWord(search, "name");
   const category = getKeyWord(search, "category");
   const sort = getKeyWord(search, "sort");
+  const currPage = getKeyWord(search, "currPage");
   //   const { name = "all" } = useParams();
-  const { loading, error, products } = useSelector((state) => state.products);
+  const { loading, error, products, page, pages } = useSelector(
+    (state) => state.products
+  );
 
   useEffect(() => {
     dispatch(
       fetchProducts({
+        currPage,
         name: name !== "all" ? name : "",
         category: category !== "all" ? category : "",
         sort,
       })
     );
-  }, [dispatch, name, category, sort]);
+  }, [dispatch, name, category, sort, currPage]);
 
   const getFilterUrl = (filter) => {
+    const filterPage = filter.page || currPage;
     const filterCategory = filter.category || category;
     const filterName = filter.name || name;
     const sortOrder = filter.sort || sort;
-    return `/search?name=${filterName}&category=${filterCategory}&sort=${sortOrder}`;
+    return `/search?name=${filterName}&category=${filterCategory}&sort=${sortOrder}&currPage=${filterPage}`;
   };
 
   return (
@@ -70,11 +75,23 @@ function Search(props) {
           ) : error ? (
             <MessageBox variant="danger">{error}</MessageBox>
           ) : (
-            <div className="row center">
-              {products.map((product) => (
-                <Product key={product._id} product={product} />
-              ))}
-            </div>
+            <>
+              <div className="row center">
+                {products.map((product) => (
+                  <Product key={product._id} product={product} />
+                ))}
+              </div>
+              <div className="row center pagination">
+                {[...Array(pages).keys()].map((p) => (
+                  <Link
+                    className={p + 1 === page ? "active" : ""}
+                    to={getFilterUrl({ page: p + 1 })}
+                  >
+                    {p + 1}
+                  </Link>
+                ))}
+              </div>
+            </>
           )}
         </div>
       </div>
