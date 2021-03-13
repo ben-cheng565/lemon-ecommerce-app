@@ -31,7 +31,7 @@ function NavBar() {
     <>
       <div>
         <Link className="brand" to="/">
-          Dandelion
+          Dandelion e-shop
         </Link>
       </div>
       <div>
