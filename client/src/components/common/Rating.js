@@ -9,10 +9,10 @@ function Rating(props) {
         <i
           className={
             rating >= 1
-              ? "fa fa-star"
+              ? "fas fa-star"
               : rating >= 0.5
-              ? "fa fa-star-half-o"
-              : "fa fa-star-o"
+              ? "fas fa-star-half-alt"
+              : "far fa-star"
           }
         ></i>
       </span>
@@ -20,10 +20,10 @@ function Rating(props) {
         <i
           className={
             rating >= 2
-              ? "fa fa-star"
+              ? "fas fa-star"
               : rating >= 1.5
-              ? "fa fa-star-half-o"
-              : "fa fa-star-o"
+              ? "fas fa-star-half-alt"
+              : "far fa-star"
           }
         ></i>
       </span>
@@ -31,10 +31,10 @@ function Rating(props) {
         <i
           className={
             rating >= 3
-              ? "fa fa-star"
+              ? "fas fa-star"
               : rating >= 2.5
-              ? "fa fa-star-half-o"
-              : "fa fa-star-o"
+              ? "fas fa-star-half-alt"
+              : "far fa-star"
           }
         ></i>
       </span>
@@ -42,10 +42,10 @@ function Rating(props) {
         <i
           className={
             rating >= 4
-              ? "fa fa-star"
+              ? "fas fa-star"
               : rating >= 3.5
-              ? "fa fa-star-half-o"
-              : "fa fa-star-o"
+              ? "fas fa-star-half-alt"
+              : "far fa-star"
           }
         ></i>
       </span>
@@ -53,17 +53,17 @@ function Rating(props) {
         <i
           className={
             rating >= 5
-              ? "fa fa-star"
+              ? "fas fa-star"
               : rating >= 4.5
-              ? "fa fa-star-half-o"
-              : "fa fa-star-o"
+              ? "fas fa-star-half-alt"
+              : "far fa-star"
           }
         ></i>
       </span>
       {caption ? (
         <span>{caption}</span>
       ) : (
-        <span>{numReviews + " reviews"}</span>
+        <span style={{ color: "#1a7c8f" }}>{numReviews + " reviews"}</span>
       )}
     </div>
   );

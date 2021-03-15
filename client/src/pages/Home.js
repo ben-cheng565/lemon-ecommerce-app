@@ -26,20 +26,47 @@ function Home(props) {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          <div className="row center">
-            {products.map((product) => (
-              <Product key={product._id} product={product} />
-            ))}
+          <div className="row pt-5 m-auto" style={{ width: "50%" }}>
+            <form className="d-flex justify-content-center">
+              <input
+                className="form-control me-2 col-9"
+                type="search"
+                placeholder="Search"
+              />
+              <button className="btn btn-outline-success col-3" type="submit">
+                Search
+              </button>
+            </form>
           </div>
-          <div className="row center pagination">
-            {[...Array(pages).keys()].map((p) => (
-              <Link
-                className={p + 1 === page ? "active" : ""}
-                to={`/home?currPage=${p + 1}`}
-              >
-                {p + 1}
-              </Link>
-            ))}
+          <div className="container p-3">
+            <div className="row center">
+              {products.map((product) => (
+                <Product key={product._id} product={product} />
+              ))}
+            </div>
+
+            <nav className="row float-end">
+              <ul class="pagination">
+                <li class="page-item">
+                  <a class="page-link" href="#">
+                    <span>&laquo;</span>
+                  </a>
+                </li>
+                {[...Array(pages).keys()].map((p) => (
+                  <li class="page-item">
+                    <Link className="page-link" to={`/home?currPage=${p + 1}`}>
+                      {p + 1}
+                    </Link>
+                  </li>
+                ))}
+
+                <li class="page-item">
+                  <a class="page-link" href="#">
+                    <span>&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
           </div>
         </>
       )}

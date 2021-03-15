@@ -83,7 +83,7 @@ router.get("/:id", async (req, res) => {
 
 //fetch all products
 router.get("/", async (req, res) => {
-  const pageSize = 3;
+  const pageSize = 4;
   const page = Number(req.query.currPage) || 1;
 
   const name = req.query.name || "";

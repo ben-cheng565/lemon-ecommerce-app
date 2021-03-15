@@ -8,7 +8,7 @@ import {
   fetchProductDetail,
 } from "../../../redux/actions/product";
 
-import "./ProductDetail.css";
+// import "./ProductDetail.css";
 import ProductContent from "./productContent/ProductContent";
 import AddToCart from "./addToCart/AddToCart";
 import Rating from "../../common/Rating";
@@ -66,42 +66,58 @@ function ProductDetail(props) {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <div>
-          <Link to="/">Go Back</Link>
-          <div className="row top">
-            <ProductContent product={product} />
-
-            <AddToCart
-              product={product}
-              qty={qty}
-              setQty={setQty}
-              addToCartHandler={addToCartHandler}
-            />
+          <div className="m-3">
+            <Link to="/">
+              <i class="fas fa-chevron-circle-left"></i> Go Back
+            </Link>
           </div>
-          <div>
-            <h2 id="reviews">Reviews</h2>
-            {product.reviews.length === 0 && (
-              <MessageBox>There is no review.</MessageBox>
-            )}
+          <div className="row">
+            <div className="col-9">
+              <ProductContent product={product} />
+            </div>
+            <div className="col-3 mb-auto">
+              <AddToCart
+                product={product}
+                qty={qty}
+                setQty={setQty}
+                addToCartHandler={addToCartHandler}
+              />
+            </div>
+            <div className="row m-4">
+              <hr />
+            </div>
+          </div>
 
-            <ul>
-              {product.reviews.map((review) => (
-                <li key={review._id}>
-                  <strong>{review.name}</strong>
-                  <Rating rating={review.rating} caption=" "></Rating>
-                  <p>{review.createdAt.substring(0, 10)}</p>
-                  <p>{review.comment}</p>
-                </li>
-              ))}
-              <li>
+          <div className="container">
+            <div className="row">
+              <div className="col-7 mb-auto">
+                <div className="fs-3">Reviews</div>
+                {product.reviews.length === 0 && (
+                  <MessageBox>There is no review.</MessageBox>
+                )}
+
+                <ul>
+                  {product.reviews.map((review) => (
+                    <li key={review._id}>
+                      <strong>{review.name}</strong>
+                      <Rating rating={review.rating} caption=" "></Rating>
+                      <p>{review.createdAt.substring(0, 10)}</p>
+                      <p>{review.comment}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="col-4 mb-auto">
                 {userInfo ? (
-                  <form className="form" onSubmit={submitHandler}>
-                    <div>
-                      <h2>Write a product review</h2>
-                    </div>
-                    <div>
-                      <label htmlFor="rating">Rating</label>
+                  <form onSubmit={submitHandler}>
+                    <div className="fs-4">Write a product review</div>
+                    <div className="form-group mt-3">
+                      <label for="rating">Rating</label>
                       <select
+                        className="form-control mt-2"
                         id="rating"
+                        // style={{ width: "80%" }}
                         value={rating}
                         onChange={(e) => setRating(e.target.value)}
                       >
@@ -113,18 +129,25 @@ function ProductDetail(props) {
                         <option value="5">5 - Excenllent</option>
                       </select>
                     </div>
-                    <div>
-                      <label htmlFor="comment">Comment</label>
+                    <div class="form-group mt-3">
+                      <label for="comment">Comment</label>
                       <textarea
+                        className="form-control mt-2"
                         id="comment"
+                        // style={{ width: "80%" }}
                         value={comment}
-                        rows="3"
+                        rows="4"
                         onChange={(e) => setComment(e.target.value)}
                       ></textarea>
                     </div>
-                    <div>
-                      <label></label>
-                      <button type="submit">Submit</button>
+                    <div className="form-group mt-4">
+                      <button
+                        className="btn btn-outline-primary"
+                        type="submit"
+                        // style={{ width: "80%" }}
+                      >
+                        Submit
+                      </button>
                       {loadingReviewCreate && <LoadingBox />}
                       {errorReviewCreate && (
                         <MessageBox variant="danger">
@@ -143,8 +166,8 @@ function ProductDetail(props) {
                     Please <Link to="/signin">Sign In</Link> to write a review.
                   </MessageBox>
                 )}
-              </li>
-            </ul>
+              </div>
+            </div>
           </div>
         </div>
       )}

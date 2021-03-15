@@ -7,7 +7,7 @@ import { CART_EMPTY } from "../../redux/actionTypes";
 import CartBadge from "../cart/badge/CartBadge";
 import SearchBox from "../search/SearchBox";
 
-import "./NavBar.css";
+// import "./NavBar.css";
 
 function NavBar() {
   const dispatch = useDispatch();
@@ -29,65 +29,45 @@ function NavBar() {
 
   return (
     <>
-      <div>
-        <Link className="brand" to="/">
-          Dandelion e-shop
-        </Link>
-      </div>
-      <div>
-        <Route
-          render={({ history }) => <SearchBox history={history}></SearchBox>}
-        ></Route>
-      </div>
-      <div>
-        <Link to="/cart">
-          Cart
-          <CartBadge cartItems={cartItems} />
-        </Link>
-        {userInfo ? (
-          <div className="dropdown">
-            <Link to="#">
-              {userInfo.name} <i className="fa fa-caret-down"></i>{" "}
-            </Link>
-            <ul className="dropdown-content">
-              <li>
-                <Link to="/profile">Profile</Link>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div className="container-fluid">
+          <a className="navbar-brand" href="#">
+            Navbar scroll
+          </a>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarScroll"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarScroll">
+            <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
+              <li className="nav-item">
+                <a className="nav-link active" href="#">
+                  Home
+                </a>
               </li>
-              <li>
-                <Link to="/orderhistory">Order History</Link>
-              </li>
-              <li>
-                <Link to="/" onClick={signoutHandler}>
-                  Sign Out
-                </Link>
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  Link
+                </a>
               </li>
             </ul>
+            <form className="d-flex">
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+              />
+              <button className="btn btn-outline-light" type="submit">
+                Search
+              </button>
+            </form>
           </div>
-        ) : (
-          <Link to="/signin">Sign In</Link>
-        )}
-        {userInfo && userInfo.isAdmin && (
-          <div className="dropdown">
-            <Link to="#Admin">
-              Admin <i className="fa fa-caret-down"></i>
-            </Link>
-            <ul className="dropdown-content">
-              <li>
-                <Link to="/dashboard">Dashboard</Link>
-              </li>
-              <li>
-                <Link to="/productlist">Products</Link>
-              </li>
-              <li>
-                <Link to="/orderlist">Orders</Link>
-              </li>
-              <li>
-                <Link to="/userlist">Users</Link>
-              </li>
-            </ul>
-          </div>
-        )}
-      </div>
+        </div>
+      </nav>
     </>
   );
 }

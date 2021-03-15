@@ -6,16 +6,29 @@ function Product(props) {
   const { product } = props;
 
   return (
-    <div className="card" key={product._id}>
+    <div className="card p-0" key={product._id} style={{ width: "18rem" }}>
       <Link to={`/product/${product._id}`}>
-        <img className="medium" src={product.image} alt={product.name} />
+        <img src={product.image} alt={product.name} className="card-img-top" />
       </Link>
       <div className="card-body" key={product._id}>
-        <Link to={`/product/${product._id}`}>
-          <h2>{product.name}</h2>
+        <Link
+          to={`/product/${product._id}`}
+          className="text-decoration-none text-reset fs-6"
+        >
+          {product.name}
         </Link>
         <Rating rating={product.rating} numReviews={product.numReviews} />
-        <div className="price">${product.price}</div>
+
+        <div className="row p-0">
+          <div className="col-6">
+            <div className="card-text fs-5">${product.price}</div>
+          </div>
+          <div className="col-6 text-align-end">
+            <a href="#" className="btn btn-primary btn-sm">
+              Add to Cart
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );

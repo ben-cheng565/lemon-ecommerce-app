@@ -26,7 +26,7 @@ function App() {
         <header className="row">
           <NavBar />
         </header>
-        <main>
+        <main className="pb-5">
           <Switch>
             <Route path="/cart/:id?" component={Cart} />
             <Route path="/signin" component={Signin} />
@@ -49,7 +49,7 @@ function App() {
             <Route path="/" exact component={Home} />
           </Switch>
         </main>
-        <footer className="row center">All right reserved</footer>
+        <div className="row" style={{ height: "60px" }}></div>
       </div>
     </BrowserRouter>
   );
