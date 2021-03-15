@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./CartTotal.css";
+// import "./CartTotal.css";
 
 function CartTotal(props) {
   const { cartItems, checkoutHandler } = props;

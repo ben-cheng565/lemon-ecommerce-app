@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { addToCart, removeFromCart } from "../../redux/actions/cart";
 import MessageBox from "../common/MessageBox";
 
-import "./Cart.css";
+// import "./Cart.css";
 import CartItem from "./cartItem/CartItem";
 import CartTotal from "./cartTotal/CartTotal";
 

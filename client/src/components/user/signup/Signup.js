@@ -5,7 +5,7 @@ import { signIn, signUp } from "../../../redux/actions/user";
 import LoadingBox from "../../common/LoadingBox";
 import MessageBox from "../../common/MessageBox";
 
-import "./Signup.css";
+// import "./Signup.css";
 
 function Signin(props) {
   const dispatch = useDispatch();

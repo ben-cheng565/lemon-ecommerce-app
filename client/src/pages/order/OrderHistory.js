@@ -4,7 +4,7 @@ import LoadingBox from "../../components/common/LoadingBox";
 import MessageBox from "../../components/common/MessageBox";
 import { getOrderHistory } from "../../redux/actions/order";
 
-import "./OrderHistory.css";
+// import "./OrderHistory.css";
 
 function OrderHistory(props) {
   const { orders, loading, error } = useSelector((state) => state.orderHistory);

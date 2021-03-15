@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./CartBadge.css";
+// import "./CartBadge.css";
 
 function CartBadge(props) {
   const { cartItems } = props;

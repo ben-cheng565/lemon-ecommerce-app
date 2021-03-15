@@ -32,8 +32,12 @@ function Home(props) {
                 className="form-control me-2 col-9"
                 type="search"
                 placeholder="Search"
+                style={{ cursor: "text" }}
               />
-              <button className="btn btn-outline-success col-3" type="submit">
+              <button
+                className="btn btn-outline-success col-3 ms-2"
+                type="submit"
+              >
                 Search
               </button>
             </form>

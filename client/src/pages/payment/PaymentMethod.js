@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CheckOutSteps from "../../components/cart/checkout/CheckOutSteps";
 import { savePaymentMethod } from "../../redux/actions/cart";
 
-import "./PaymentMethod.css";
+// import "./PaymentMethod.css";
 
 function PaymentMethod(props) {
   const { shippingAddress } = useSelector((state) => state.cart);

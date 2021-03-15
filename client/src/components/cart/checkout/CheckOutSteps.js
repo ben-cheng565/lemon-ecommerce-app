@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./CheckOutSteps.css";
+// import "./CheckOutSteps.css";
 
 function CheckOutSteps(props) {
   return (
