@@ -1,1 +1,1 @@
-web: node --experimental-modules server/server.js
+web: node server/server.js
