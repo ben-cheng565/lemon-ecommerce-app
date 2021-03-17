@@ -1,12 +1,14 @@
 import express from "express";
 import bcrypt from "bcryptjs";
-// import { data } from "../data.js";
+import { data } from "../data.js";
 import User from "../models/users.js";
 import { generateToken, isAdmin, isAuth } from "../util.js";
 
 const router = express.Router();
 
+// Create the default password for dummy data
 const decodedPassword = bcrypt.hash("123", 10);
+// Init some dummy user data for db
 const dummyData = {
   users: [
     {
@@ -24,6 +26,7 @@ const dummyData = {
   ],
 };
 
+// Init user table in db using dummy data
 router.get("/init", async (req, res) => {
   // before initializing data, delete all user data in db
   await User.remove({});
@@ -57,6 +60,7 @@ router.post("/signin", async (req, res) => {
   });
 });
 
+// Sign up api
 router.post("/signup", async (req, res) => {
   const user = new User({
     name: req.body.name,
@@ -74,6 +78,7 @@ router.post("/signup", async (req, res) => {
   });
 });
 
+// Get a specific user info
 router.get("/:id", async (req, res) => {
   const user = await User.findById(req.params.id);
   if (user) {
@@ -83,6 +88,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Update user profile info
 router.put("/profile", isAuth, async (req, res) => {
   const user = await User.findById(req.userInfo._id);
   if (user) {
@@ -103,12 +109,14 @@ router.put("/profile", isAuth, async (req, res) => {
   }
 });
 
+// Get all users
 router.get("/", isAuth, isAdmin, async (req, res) => {
   const users = await User.find({});
 
   res.send(users);
 });
 
+// Delete a specific user
 router.delete("/:id", isAuth, isAdmin, async (req, res) => {
   const user = await User.findById(req.params.id);
   if (user) {
@@ -124,6 +132,7 @@ router.delete("/:id", isAuth, isAdmin, async (req, res) => {
   }
 });
 
+// Update a specific user info
 router.put("/:id", isAuth, isAdmin, async (req, res) => {
   const id = req.params.id;
   const user = await User.findById(id);

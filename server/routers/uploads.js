@@ -4,6 +4,7 @@ import { isAuth } from "../util.js";
 
 const router = express.Router();
 
+// Configure the storage for uploading images
 const storage = multer.diskStorage({
   destination(req, file, cb) {
     cb(null, "./uploads/");
@@ -15,6 +16,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage }).single("image");
 
+// Excute image uploading api
 router.post("/", isAuth, upload, (req, res) => {
   try {
     res.send(`${req.file.path}`);

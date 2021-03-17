@@ -16,6 +16,7 @@ router.get("/history", isAuth, async (req, res) => {
   res.send(orders);
 });
 
+// Create order api
 router.post("/", isAuth, async (req, res) => {
   if (req.body.orderItems.length === 0) {
     res.status(400).send({ message: "Cart is empty." });
@@ -36,6 +37,7 @@ router.post("/", isAuth, async (req, res) => {
   }
 });
 
+// Get a specific order
 router.get("/:id", isAuth, async (req, res) => {
   const order = await Order.findById(req.params.id);
   if (order) {
@@ -45,6 +47,7 @@ router.get("/:id", isAuth, async (req, res) => {
   }
 });
 
+// Update the payment info of a product
 router.put("/pay/:id", isAuth, async (req, res) => {
   const order = await Order.findById(req.params.id);
   if (order) {
@@ -63,6 +66,7 @@ router.put("/pay/:id", isAuth, async (req, res) => {
   }
 });
 
+// Delete a product api
 router.delete("/:id", isAuth, isAdmin, async (req, res) => {
   const order = await Order.findById(req.params.id);
   if (order) {
@@ -74,6 +78,7 @@ router.delete("/:id", isAuth, isAdmin, async (req, res) => {
   }
 });
 
+// Update the delivery info of a product
 router.put("/deliver/:id", isAuth, isAdmin, async (req, res) => {
   const order = await Order.findById(req.params.id);
   if (order) {

@@ -1,9 +1,10 @@
 import express from "express";
 import Product from "../models/products.js";
+
 import { isAdmin, isAuth } from "../util.js";
 
 const router = express.Router();
-
+// Create dummy data for products
 export const dummyData = {
   products: [
     {
@@ -83,7 +84,7 @@ router.get("/:id", async (req, res) => {
 
 //fetch all products
 router.get("/", async (req, res) => {
-  const pageSize = 4;
+  const pageSize = 4; // Number of products each page
   const page = Number(req.query.currPage) || 1;
 
   const name = req.query.name || "";
@@ -114,6 +115,7 @@ router.get("/", async (req, res) => {
   res.send({ products, count, page, pages: Math.ceil(count / pageSize) });
 });
 
+// Create product api
 router.post("/", isAuth, isAdmin, async (req, res) => {
   const product = new Product({
     name: "sample",
@@ -131,6 +133,7 @@ router.post("/", isAuth, isAdmin, async (req, res) => {
   res.send({ message: "Product created successfully.", product: result });
 });
 
+// Update product api
 router.put("/:id", isAuth, isAdmin, async (req, res) => {
   const product = await Product.findById(req.params.id);
 
@@ -150,6 +153,7 @@ router.put("/:id", isAuth, isAdmin, async (req, res) => {
   }
 });
 
+// Delete product api
 router.delete("/:id", isAuth, async (req, res) => {
   const id = req.params.id;
   const product = await Product.findById(id);
@@ -162,6 +166,7 @@ router.delete("/:id", isAuth, async (req, res) => {
   }
 });
 
+// Update reviews of a product
 router.post("/reviews/:id", isAuth, async (req, res) => {
   const product = await Product.findById(req.params.id);
 
