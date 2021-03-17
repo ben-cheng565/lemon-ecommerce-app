@@ -6,6 +6,7 @@ import {
   CART_SAVE_SHIPPING_ADDRESS,
 } from "../actionTypes";
 
+// Reducer for cart state
 const cart = (state = { cartItems: [] }, action) => {
   switch (action.type) {
     case CART_ADD_ITEM:

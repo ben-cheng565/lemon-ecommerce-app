@@ -1,3 +1,6 @@
+// Common functions for front end
+
+// Get the value of keywords in the search box
 export const getKeyWord = (search, field) => {
   if (search) {
     let params = new URLSearchParams(search);

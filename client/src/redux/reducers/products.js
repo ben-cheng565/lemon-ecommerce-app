@@ -26,6 +26,7 @@ import {
   REVIEW_CREATE_RESET,
 } from "../actionTypes";
 
+// reducer for getting all products
 const products = (state = { products: [] }, action) => {
   switch (action.type) {
     case PRODUCTS_REQUEST:
@@ -45,6 +46,7 @@ const products = (state = { products: [] }, action) => {
   }
 };
 
+// reducer for getting all categories list
 export const categoryList = (state = { categories: [] }, action) => {
   switch (action.type) {
     case PRODUCT_CATEGORY_REQUEST:
@@ -58,6 +60,7 @@ export const categoryList = (state = { categories: [] }, action) => {
   }
 };
 
+// reducer for get the details of a product
 export const productDetail = (
   state = { product: {}, loading: true },
   action
@@ -74,6 +77,7 @@ export const productDetail = (
   }
 };
 
+// reducer for creating a product
 export const productCreate = (state = {}, action) => {
   switch (action.type) {
     case PRODUCT_CREATE_REQUEST:
@@ -89,6 +93,7 @@ export const productCreate = (state = {}, action) => {
   }
 };
 
+// reducer for editting a product
 export const productEdit = (state = { loading: false }, action) => {
   switch (action.type) {
     case PRODUCT_UPDATE_REQUEST:
@@ -104,6 +109,7 @@ export const productEdit = (state = { loading: false }, action) => {
   }
 };
 
+// reducer for deleting a product
 export const productDelete = (state = { loading: false }, action) => {
   switch (action.type) {
     case PRODUCT_DELETE_REQUEST:
@@ -119,6 +125,7 @@ export const productDelete = (state = { loading: false }, action) => {
   }
 };
 
+// reducer for creating the review of a product
 export const reviewCreate = (state = {}, action) => {
   switch (action.type) {
     case REVIEW_CREATE_REQUEST:

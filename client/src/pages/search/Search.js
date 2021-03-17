@@ -31,6 +31,7 @@ function Search(props) {
     );
   }, [dispatch, name, category, sort, currPage]);
 
+  // generate url according to filter params
   const getFilterUrl = (filter) => {
     const filterPage = filter.page || currPage;
     const filterCategory = filter.category || category;

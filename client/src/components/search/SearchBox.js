@@ -3,6 +3,7 @@ import React, { useState } from "react";
 // import "./SearchBox.css";
 
 function SearchBox(props) {
+  // the default keyword is "all"
   const [name, setName] = useState("all");
 
   const submitHandler = (e) => {

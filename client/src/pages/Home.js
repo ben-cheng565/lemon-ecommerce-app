@@ -27,6 +27,7 @@ function Home(props) {
       ) : (
         <>
           <div className="row pt-5 m-auto" style={{ width: "50%" }}>
+            {/* It is more reasonable to move the search box from navbar to home page */}
             <form className="d-flex justify-content-center">
               <input
                 className="form-control me-2 col-9"
@@ -42,6 +43,7 @@ function Home(props) {
               </button>
             </form>
           </div>
+          {/* Display products list */}
           <div className="container p-3">
             <div className="row center">
               {products.map((product) => (
@@ -49,6 +51,7 @@ function Home(props) {
               ))}
             </div>
 
+            {/* pagination for products list */}
             <nav className="row float-end">
               <ul class="pagination">
                 <li class="page-item">

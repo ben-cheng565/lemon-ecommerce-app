@@ -24,6 +24,7 @@ import {
   ORDER_DELIVER_FAIL,
 } from "../actionTypes";
 
+// action for creating order
 export const createOrder = (order) => async (dispatch, getState) => {
   dispatch({ type: ORDER_CREATE_REQUEST, payload: order });
   try {
@@ -31,6 +32,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
       user: { userInfo },
     } = getState();
 
+    // fetch api using axios
     const { data } = await axios.post("/orders", order, {
       headers: {
         Authorization: `Bearer ${userInfo.token}`,
@@ -39,6 +41,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
     dispatch({ type: ORDER_CREATE_SUCCESS, payload: data.order });
     dispatch({ type: CART_EMPTY });
 
+    // remove cart info from local storage
     localStorage.removeItem("cartItems");
   } catch (error) {
     dispatch({
@@ -51,6 +54,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
   }
 };
 
+// action for getting order details
 export const getOrderDetails = (orderId) => async (dispatch, getState) => {
   dispatch({ type: ORDER_DETAILS_REQUEST, payload: orderId });
   const {
@@ -76,6 +80,7 @@ export const getOrderDetails = (orderId) => async (dispatch, getState) => {
   }
 };
 
+// action for paying order
 export const payOrder = (order, paymentResult) => async (
   dispatch,
   getState
@@ -104,6 +109,7 @@ export const payOrder = (order, paymentResult) => async (
   }
 };
 
+// action for getting history orders of a user
 export const getOrderHistory = () => async (dispatch, getState) => {
   dispatch({ type: ORDER_HISTORY_REQUEST });
   const {
@@ -129,6 +135,7 @@ export const getOrderHistory = () => async (dispatch, getState) => {
   }
 };
 
+// action for getting all users' orders list
 export const getOrderList = () => async (dispatch, getState) => {
   dispatch({ type: ORDER_LIST_REQUEST });
   const {
@@ -152,6 +159,7 @@ export const getOrderList = () => async (dispatch, getState) => {
   }
 };
 
+// action for deleting order
 export const deleteOrder = (orderId) => async (dispatch, getState) => {
   dispatch({ type: ORDER_DELETE_REQUEST, payload: orderId });
   const {
@@ -175,6 +183,7 @@ export const deleteOrder = (orderId) => async (dispatch, getState) => {
   }
 };
 
+// action for delivering order
 export const deliverOrder = (orderId) => async (dispatch, getState) => {
   dispatch({ type: ORDER_DELIVER_REQUEST, payload: orderId });
   const {

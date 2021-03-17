@@ -23,6 +23,7 @@ import {
   REVIEW_CREATE_REQUEST,
 } from "../actionTypes";
 
+// action for getting all products
 export const fetchProducts = ({
   currPage = 1,
   name = "",
@@ -32,6 +33,7 @@ export const fetchProducts = ({
   dispatch({ type: PRODUCTS_REQUEST });
 
   try {
+    // fetch api with search filters
     const { data } = await axios.get(
       `/products?name=${name}&category=${category}&sort=${sort}&currPage=${currPage}`
     );
@@ -41,6 +43,7 @@ export const fetchProducts = ({
   }
 };
 
+// action for getting categories list
 export const getProductCategories = () => async (dispatch) => {
   dispatch({ type: PRODUCT_CATEGORY_REQUEST });
 
@@ -52,6 +55,7 @@ export const getProductCategories = () => async (dispatch) => {
   }
 };
 
+// action for getting product detail
 export const fetchProductDetail = (productId) => async (dispatch) => {
   dispatch({
     type: PRODUCT_DETAIL_REQUEST,
@@ -71,6 +75,7 @@ export const fetchProductDetail = (productId) => async (dispatch) => {
   }
 };
 
+// action for creating product
 export const createProduct = () => async (dispatch, getState) => {
   dispatch({ type: PRODUCT_CREATE_REQUEST });
 
@@ -98,6 +103,7 @@ export const createProduct = () => async (dispatch, getState) => {
   }
 };
 
+// action for editting product
 export const editProduct = (product) => async (dispatch, getState) => {
   dispatch({ type: PRODUCT_UPDATE_REQUEST, payload: product });
   const {
@@ -121,6 +127,7 @@ export const editProduct = (product) => async (dispatch, getState) => {
   }
 };
 
+// action for deleting product
 export const deleteProduct = (productId) => async (dispatch, getState) => {
   dispatch({ type: PRODUCT_DELETE_REQUEST, payload: productId });
   const {
@@ -144,6 +151,7 @@ export const deleteProduct = (productId) => async (dispatch, getState) => {
   }
 };
 
+// action for creating review of a product
 export const createReview = (productId, review) => async (
   dispatch,
   getState

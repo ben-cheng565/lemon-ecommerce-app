@@ -24,6 +24,7 @@ import {
   USER_EDIT_FAIL,
 } from "../actionTypes";
 
+// action for user sign in
 export const signIn = (email, password) => async (dispatch) => {
   dispatch({ type: USER_SIGNIN_REQUEST, payload: { email, password } });
 
@@ -44,6 +45,7 @@ export const signIn = (email, password) => async (dispatch) => {
   }
 };
 
+// action for user sign up
 export const signUp = (name, email, password) => async (dispatch) => {
   dispatch({ type: USER_SIGNUP_REQUEST, payload: { name, email, password } });
 
@@ -69,6 +71,7 @@ export const signUp = (name, email, password) => async (dispatch) => {
   }
 };
 
+// action for user sign out
 export const signout = () => (dispatch) => {
   localStorage.removeItem("userInfo");
   localStorage.removeItem("cartItems");
@@ -77,6 +80,7 @@ export const signout = () => (dispatch) => {
   dispatch({ type: USER_SIGNOUT });
 };
 
+// action for getting user details
 export const getUserDetail = (userId) => async (dispatch, getState) => {
   dispatch({ type: USER_DETAIL_REQUEST, payload: userId });
   const {
@@ -102,6 +106,7 @@ export const getUserDetail = (userId) => async (dispatch, getState) => {
   }
 };
 
+// action for updating user profile
 export const updateUserProfile = (user) => async (dispatch, getState) => {
   dispatch({ type: USER_UPDATE_REQUEST, payload: user });
   const {
@@ -129,6 +134,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
   }
 };
 
+// action for getting all users list
 export const getUserList = () => async (dispatch, getState) => {
   dispatch({ type: USER_LIST_REQUEST });
   const {
@@ -151,6 +157,8 @@ export const getUserList = () => async (dispatch, getState) => {
     });
   }
 };
+
+// action for deleting a specific user
 export const deleteUser = (userId) => async (dispatch, getState) => {
   dispatch({ type: USER_DELETE_REQUEST, payload: userId });
   const {
@@ -174,6 +182,7 @@ export const deleteUser = (userId) => async (dispatch, getState) => {
   }
 };
 
+// action for editting user info
 export const editUser = (user) => async (dispatch, getState) => {
   dispatch({ type: USER_EDIT_REQUEST, payload: user });
   const {

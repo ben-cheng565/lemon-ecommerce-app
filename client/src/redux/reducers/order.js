@@ -26,6 +26,7 @@ import {
   ORDER_DELIVER_RESET,
 } from "../actionTypes";
 
+// reducer for creating an order
 export const orderCreate = (state = {}, action) => {
   switch (action.type) {
     case ORDER_CREATE_REQUEST:
@@ -42,6 +43,7 @@ export const orderCreate = (state = {}, action) => {
   }
 };
 
+// reducer for getting order details
 export const orderDetails = (state = { loading: true }, action) => {
   switch (action.type) {
     case ORDER_DETAILS_REQUEST:
@@ -56,6 +58,7 @@ export const orderDetails = (state = { loading: true }, action) => {
   }
 };
 
+// reducer for paying an order
 export const orderPay = (state = {}, action) => {
   switch (action.type) {
     case ORDER_PAY_REQUEST:
@@ -72,6 +75,7 @@ export const orderPay = (state = {}, action) => {
   }
 };
 
+// reducer for getting history orders of a user
 export const orderHistory = (state = { orders: [] }, action) => {
   switch (action.type) {
     case ORDER_HISTORY_REQUEST:
@@ -86,6 +90,7 @@ export const orderHistory = (state = { orders: [] }, action) => {
   }
 };
 
+// reducer for getting all users' orders list
 export const orderList = (state = { orders: [] }, action) => {
   switch (action.type) {
     case ORDER_LIST_REQUEST:
@@ -100,6 +105,7 @@ export const orderList = (state = { orders: [] }, action) => {
   }
 };
 
+// reducer for deleting an order
 export const orderDelete = (state = { loading: false }, action) => {
   switch (action.type) {
     case ORDER_DELETE_REQUEST:
@@ -115,6 +121,7 @@ export const orderDelete = (state = { loading: false }, action) => {
   }
 };
 
+// reducer for delivering order
 export const orderDeliver = (state = {}, action) => {
   switch (action.type) {
     case ORDER_DELIVER_REQUEST:

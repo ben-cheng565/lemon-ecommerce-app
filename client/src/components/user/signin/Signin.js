@@ -9,6 +9,7 @@ import MessageBox from "../../common/MessageBox";
 
 function Signin(props) {
   const dispatch = useDispatch();
+  // create states and set default values
   const [email, setEmail] = useState("user@gmail.com");
   const [password, setPassword] = useState("123");
 

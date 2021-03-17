@@ -30,6 +30,7 @@ import {
 
 const user = (state = {}, action) => {
   switch (action.type) {
+    // reducer for user sign in
     case USER_SIGNIN_REQUEST:
       return { loading: true };
     case USER_SIGNIN_SUCCESS:
@@ -37,6 +38,7 @@ const user = (state = {}, action) => {
     case USER_SIGNIN_FAIL:
       return { loading: false, error: action.payload };
 
+    // reducer for user sign up
     case USER_SIGNUP_REQUEST:
       return { loading: true };
     case USER_SIGNUP_SUCCESS:
@@ -44,6 +46,7 @@ const user = (state = {}, action) => {
     case USER_SIGNUP_FAIL:
       return { loading: false, error: action.payload };
 
+    // reducer for user sign out
     case USER_SIGNOUT:
       return {};
     default:
@@ -51,6 +54,7 @@ const user = (state = {}, action) => {
   }
 };
 
+// reducer for getting user details
 export const userDetails = (state = { loading: true }, action) => {
   switch (action.type) {
     case USER_DETAIL_REQUEST:
@@ -66,6 +70,7 @@ export const userDetails = (state = { loading: true }, action) => {
   }
 };
 
+// reducer for updating user profile
 export const updateProfile = (state = {}, action) => {
   switch (action.type) {
     case USER_UPDATE_REQUEST:
@@ -81,6 +86,7 @@ export const updateProfile = (state = {}, action) => {
   }
 };
 
+// reducer for getting all users list
 export const userList = (state = { loading: true }, action) => {
   switch (action.type) {
     case USER_LIST_REQUEST:
@@ -94,6 +100,7 @@ export const userList = (state = { loading: true }, action) => {
   }
 };
 
+// reducer for deleting a user
 export const userDelete = (state = { loading: false }, action) => {
   switch (action.type) {
     case USER_DELETE_REQUEST:
@@ -109,6 +116,7 @@ export const userDelete = (state = { loading: false }, action) => {
   }
 };
 
+// reducer for editting a user
 export const userEdit = (state = {}, action) => {
   switch (action.type) {
     case USER_EDIT_REQUEST:
@@ -124,6 +132,7 @@ export const userEdit = (state = {}, action) => {
   }
 };
 
+// reducer for displaying user address on map
 export const userMapAddress = (state = {}, action) => {
   switch (action.type) {
     case USER_MAP_ADDRESS:

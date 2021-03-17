@@ -47,6 +47,7 @@ const initState = {
   },
 };
 
+//  Combine all reducers to a root reducers
 const reducer = combineReducers({
   products,
   productDetail,
