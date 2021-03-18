@@ -26,7 +26,7 @@ function Home(props) {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          <div className="row pt-5 m-auto" style={{ width: "50%" }}>
+          <div className="row py-5 m-auto" style={{ width: "50%" }}>
             {/* It is more reasonable to move the search box from navbar to home page */}
             <form className="d-flex justify-content-center">
               <input
@@ -44,36 +44,41 @@ function Home(props) {
             </form>
           </div>
           {/* Display products list */}
-          <div className="container p-3">
-            <div className="row center">
+          <div className="container ">
+            <div className="row justify-content-around px-3">
               {products.map((product) => (
                 <Product key={product._id} product={product} />
               ))}
             </div>
 
             {/* pagination for products list */}
-            <nav className="row float-end">
-              <ul class="pagination">
-                <li class="page-item">
-                  <a class="page-link" href="#">
-                    <span>&laquo;</span>
-                  </a>
-                </li>
-                {[...Array(pages).keys()].map((p) => (
+            <div className="row mt-3 justify-content-end pe-3">
+              <div className="col-auto">
+                <ul class="pagination">
                   <li class="page-item">
-                    <Link className="page-link" to={`/home?currPage=${p + 1}`}>
-                      {p + 1}
-                    </Link>
+                    <a class="page-link" href="#">
+                      <span>&laquo;</span>
+                    </a>
                   </li>
-                ))}
+                  {[...Array(pages).keys()].map((p) => (
+                    <li class="page-item">
+                      <Link
+                        className="page-link"
+                        to={`/home?currPage=${p + 1}`}
+                      >
+                        {p + 1}
+                      </Link>
+                    </li>
+                  ))}
 
-                <li class="page-item">
-                  <a class="page-link" href="#">
-                    <span>&raquo;</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+                  <li class="page-item">
+                    <a class="page-link" href="#">
+                      <span>&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </>
       )}

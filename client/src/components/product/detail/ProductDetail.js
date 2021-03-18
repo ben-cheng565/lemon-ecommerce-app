@@ -140,7 +140,7 @@ function ProductDetail(props) {
                         onChange={(e) => setComment(e.target.value)}
                       ></textarea>
                     </div>
-                    <div className="form-group mt-4">
+                    <div className="form-group mt-4 float-end">
                       <button
                         className="btn btn-outline-primary"
                         type="submit"
@@ -148,6 +148,7 @@ function ProductDetail(props) {
                       >
                         Submit
                       </button>
+
                       {loadingReviewCreate && <LoadingBox />}
                       {errorReviewCreate && (
                         <MessageBox variant="danger">

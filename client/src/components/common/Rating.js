@@ -4,7 +4,7 @@ function Rating(props) {
   const { rating, numReviews, caption } = props;
 
   return (
-    <div className="rating">
+    <div style={{ color: "#f0c040" }}>
       <span>
         <i
           className={
@@ -63,7 +63,7 @@ function Rating(props) {
       {caption ? (
         <span>{caption}</span>
       ) : (
-        <span style={{ color: "#1a7c8f" }}>{numReviews + " reviews"}</span>
+        <span style={{ color: "#1a7c8f" }}> {numReviews + " reviews"}</span>
       )}
     </div>
   );

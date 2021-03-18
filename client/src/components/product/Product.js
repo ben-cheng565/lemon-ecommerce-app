@@ -6,7 +6,7 @@ function Product(props) {
   const { product } = props;
 
   return (
-    <div className="card p-0" key={product._id} style={{ width: "18rem" }}>
+    <div className="card p-0 m-2" key={product._id} style={{ width: "18rem" }}>
       <Link to={`/product/${product._id}`}>
         <img src={product.image} alt={product.name} className="card-img-top" />
       </Link>
@@ -20,10 +20,10 @@ function Product(props) {
         <Rating rating={product.rating} numReviews={product.numReviews} />
 
         <div className="row p-0">
-          <div className="col-6">
+          <div className="col-auto me-auto">
             <div className="card-text fs-5">${product.price}</div>
           </div>
-          <div className="col-6 text-align-end">
+          <div className="col-auto">
             <a href="#" className="btn btn-primary btn-sm">
               Add to Cart
             </a>
