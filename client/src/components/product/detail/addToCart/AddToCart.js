@@ -6,15 +6,15 @@ function AddToCart(props) {
   const { product, qty, setQty, addToCartHandler } = props;
 
   return (
-    <div className="card card-body">
-      <div className="row ms-2">
+    <div className="card card-body shadow-sm" style={{ width: "90%" }}>
+      <div className="row px-1 mb-2">
         <div className="col-6">Price</div>
         <div className="col-6 text-end" style={{ color: "#b22b09" }}>
           ${product.price}
         </div>
       </div>
 
-      <div className="row ms-2">
+      <div className="row px-1 mb-2">
         <div className="col-6">Status</div>
         <div className="col-6 text-end">
           {product.countInStock > 0 ? (
@@ -25,7 +25,7 @@ function AddToCart(props) {
         </div>
       </div>
 
-      <div className="row ms-2">
+      <div className="row px-1">
         <div className="col-6">Qty</div>
         <div className="col-6 d-flex justify-content-end">
           <select
@@ -44,7 +44,7 @@ function AddToCart(props) {
         </div>
       </div>
 
-      <div className="row ps-4 mt-3">
+      <div className="row px-3 mt-3">
         <button
           className="btn btn-primary"
           onClick={addToCartHandler}

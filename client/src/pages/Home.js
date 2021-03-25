@@ -44,7 +44,7 @@ function Home(props) {
             </form>
           </div>
           {/* Display products list */}
-          <div className="container ">
+          <div className="container">
             <div className="row justify-content-around px-3">
               {products.map((product) => (
                 <Product key={product._id} product={product} />

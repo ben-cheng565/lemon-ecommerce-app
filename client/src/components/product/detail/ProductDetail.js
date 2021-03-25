@@ -66,7 +66,7 @@ function ProductDetail(props) {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <div>
-          <div className="m-3">
+          <div className="ps-4 my-3">
             <Link to="/">
               <i class="fas fa-chevron-circle-left"></i> Go Back
             </Link>
@@ -83,7 +83,8 @@ function ProductDetail(props) {
                 addToCartHandler={addToCartHandler}
               />
             </div>
-            <div className="row m-4">
+
+            <div className="divider my-4">
               <hr />
             </div>
           </div>
@@ -91,7 +92,7 @@ function ProductDetail(props) {
           <div className="container">
             <div className="row">
               <div className="col-7 mb-auto">
-                <div className="fs-3">Reviews</div>
+                <div className="fs-4 mb-3">Reviews</div>
                 {product.reviews.length === 0 && (
                   <MessageBox>There is no review.</MessageBox>
                 )}
@@ -102,7 +103,7 @@ function ProductDetail(props) {
                       <strong>{review.name}</strong>
                       <Rating rating={review.rating} caption=" "></Rating>
                       <p>{review.createdAt.substring(0, 10)}</p>
-                      <p>{review.comment}</p>
+                      <p className="pe-5">{review.comment}</p>
                     </li>
                   ))}
                 </ul>

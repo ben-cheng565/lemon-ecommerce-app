@@ -10,9 +10,9 @@ function ProductContent(props) {
   const imgUrl = /* hostName +  */ "../" + product.image;
   return (
     <>
-      <div className="container m-3">
+      <div className="container">
         <div className="row">
-          <div className="col-6 mr-2">
+          <div className="col-6">
             <img
               className="img-thumbnail"
               src={imgUrl}
@@ -20,19 +20,22 @@ function ProductContent(props) {
             ></img>
           </div>
           <div className="col-6 mb-auto">
-            <ul>
-              <li className="fs-4">{product.name}</li>
-              <li>
+            <ul className="list-group list-group-flush">
+              <li className="list-group-item fs-4">{product.name}</li>
+              <li className="list-group-item">
                 <Rating
                   rating={product.rating}
                   numReviews={product.numReviews}
                 />
               </li>
 
-              <li className="fs-5" style={{ color: "#b22b09" }}>
+              <li className="list-group-item fs-5" style={{ color: "#b22b09" }}>
                 Price: ${product.price}
               </li>
-              <li>Description: {product.description}</li>
+              <li className="list-group-item">
+                <span className="fs-5">Description: </span>
+                <p>{product.description}</p>
+              </li>
             </ul>
           </div>
         </div>

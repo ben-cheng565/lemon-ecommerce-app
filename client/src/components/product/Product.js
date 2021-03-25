@@ -19,7 +19,7 @@ function Product(props) {
         </Link>
         <Rating rating={product.rating} numReviews={product.numReviews} />
 
-        <div className="row p-0">
+        <div className="row p-0 mt-2">
           <div className="col-auto me-auto">
             <div className="card-text fs-5">${product.price}</div>
           </div>
