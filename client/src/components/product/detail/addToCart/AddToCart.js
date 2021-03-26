@@ -30,7 +30,7 @@ function AddToCart(props) {
         <div className="col-6 d-flex justify-content-end">
           <select
             className="form-select"
-            style={{ width: "auto" }}
+            style={{ width: "auto", cursor: "pointer" }}
             value={qty}
             onChange={(e) => setQty(e.target.value)}
             disabled={product.countInStock === 0}
@@ -44,7 +44,7 @@ function AddToCart(props) {
         </div>
       </div>
 
-      <div className="row px-3 mt-3">
+      <div className="d-grid gap-2 col-9 mx-auto my-3">
         <button
           className="btn btn-primary"
           onClick={addToCartHandler}

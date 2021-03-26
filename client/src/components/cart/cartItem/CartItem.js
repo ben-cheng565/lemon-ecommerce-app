@@ -10,16 +10,31 @@ function CartItem(props) {
   const { item, removeFromCartHandler } = props;
 
   return (
-    <li key={item.productId}>
-      <div className="row">
-        <div>
-          <img src={`../${item.image}`} alt={item.name} className="small" />
+    <li key={item.productId} className="list-group-item">
+      <div className="row d-flex align-items-center">
+        <div className="col-2">
+          <img
+            src={`../${item.image}`}
+            alt={item.name}
+            className="img-fluid"
+            style={{ width: "4rem" }}
+          />
         </div>
-        <div className="min-30">
-          <Link to={`/product/${item.productId}`}>{item.name}</Link>
+        <div className="col-6">
+          <Link
+            className="text-decoration-none fs-6"
+            to={`/product/${item.productId}`}
+          >
+            Name: {item.name}
+          </Link>
+          <p style={{ fontSize: ".8rem", color: "#b22b09" }}>
+            Price: ${item.price}
+          </p>
         </div>
-        <div>
+        <div className="col-2">
           <select
+            className="form-select"
+            style={{ width: "auto", cursor: "pointer" }}
             value={item.qty}
             onChange={(e) =>
               dispatch(addToCart(item.productId, Number(e.target.value)))
@@ -32,10 +47,10 @@ function CartItem(props) {
             ))}
           </select>
         </div>
-        <div>${item.price}</div>
-        <div>
+
+        <div className="col-2">
           <button
-            className="delete"
+            className="btn btn-outline-danger"
             type="button"
             onClick={() => removeFromCartHandler(item.productId)}
           >

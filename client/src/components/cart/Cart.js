@@ -32,27 +32,29 @@ function Cart(props) {
   };
 
   return (
-    <div className="row top">
-      <div className="col-2">
-        <h1>Shopping Cart</h1>
-        {cartItems.length === 0 ? (
-          <MessageBox>
-            Cart is empty. <Link to="/">Go Shopping</Link>
-          </MessageBox>
-        ) : (
-          <ul>
-            {cartItems.map((item) => (
-              <CartItem
-                key={item.productId}
-                item={item}
-                removeFromCartHandler={removeFromCartHandler}
-              />
-            ))}
-          </ul>
-        )}
-      </div>
-      <div className="col-1">
-        <CartTotal cartItems={cartItems} checkoutHandler={checkoutHandler} />
+    <div className="container">
+      <div className="row">
+        <div className="col-8 m-3">
+          <p className="fs-4">Shopping Cart</p>
+          {cartItems.length === 0 ? (
+            <MessageBox>
+              Cart is empty. <Link to="/">Go Shopping</Link>
+            </MessageBox>
+          ) : (
+            <ul className="list-group list-group-flush">
+              {cartItems.map((item) => (
+                <CartItem
+                  key={item.productId}
+                  item={item}
+                  removeFromCartHandler={removeFromCartHandler}
+                />
+              ))}
+            </ul>
+          )}
+        </div>
+        <div className="col-3 mt-5">
+          <CartTotal cartItems={cartItems} checkoutHandler={checkoutHandler} />
+        </div>
       </div>
     </div>
   );
