@@ -93,76 +93,89 @@ function ShippingAddress(props) {
   return (
     <div>
       <CheckOutSteps step1 step2></CheckOutSteps>
-      <form className="form" onSubmit={submitHandler}>
-        <div>
-          <h1>Shipping Address</h1>
+      <div className="m-auto mt-5" style={{ width: "50%" }}>
+        <div className="card card-body shadow p-3">
+          <form className="px-5" onSubmit={submitHandler}>
+            <div className="fs-4 mb-3 text-center">Shipping Address</div>
+            <div className="mb-3">
+              <label htmlFor="fullName">Full Name</label>
+              <input
+                className="form-control"
+                type="text"
+                id="fullName"
+                placeholder="Enter full name"
+                value={fullName || ""}
+                onChange={(e) => setFullName(e.target.value)}
+                required
+              ></input>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="address">Address</label>
+              <input
+                className="form-control"
+                type="text"
+                id="address"
+                placeholder="Enter address"
+                value={address || ""}
+                onChange={(e) => setAddress(e.target.value)}
+                required
+              ></input>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="city">City</label>
+              <input
+                className="form-control"
+                type="text"
+                id="city"
+                placeholder="Enter city"
+                value={city || ""}
+                onChange={(e) => setCity(e.target.value)}
+                required
+              ></input>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="country">Country</label>
+              <input
+                className="form-control"
+                type="text"
+                id="country"
+                placeholder="Enter country"
+                value={country || ""}
+                onChange={(e) => setCountry(e.target.value)}
+                required
+              ></input>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="postalCode">Postal Code</label>
+              <input
+                className="form-control"
+                type="text"
+                id="postalCode"
+                placeholder="Enter postal code"
+                value={postalCode || ""}
+                onChange={(e) => setPostalCode(e.target.value)}
+                required
+              ></input>
+            </div>
+            {/* <div>
+              <label />
+              <button
+                className="btn btn-primary"
+                type="button"
+                onClick={chooseOnMap}
+              >
+                Choose on Map
+              </button>
+            </div> */}
+            <div className="mb-3 d-flex justify-content-end">
+              <label />
+              <button className="btn btn-primary" type="submit">
+                Continue
+              </button>
+            </div>
+          </form>
         </div>
-        <div>
-          <label htmlFor="fullName">Full Name</label>
-          <input
-            type="text"
-            id="fullName"
-            placeholder="Enter full name"
-            value={fullName || ""}
-            onChange={(e) => setFullName(e.target.value)}
-            required
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="address">Address</label>
-          <input
-            type="text"
-            id="address"
-            placeholder="Enter address"
-            value={address || ""}
-            onChange={(e) => setAddress(e.target.value)}
-            required
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="city">City</label>
-          <input
-            type="text"
-            id="city"
-            placeholder="Enter city"
-            value={city || ""}
-            onChange={(e) => setCity(e.target.value)}
-            required
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="country">Country</label>
-          <input
-            type="text"
-            id="country"
-            placeholder="Enter country"
-            value={country || ""}
-            onChange={(e) => setCountry(e.target.value)}
-            required
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="postalCode">Postal Code</label>
-          <input
-            type="text"
-            id="postalCode"
-            placeholder="Enter postal code"
-            value={postalCode || ""}
-            onChange={(e) => setPostalCode(e.target.value)}
-            required
-          ></input>
-        </div>
-        <div>
-          <label />
-          <button type="button" onClick={chooseOnMap}>
-            Choose on Map
-          </button>
-        </div>
-        <div>
-          <label />
-          <button type="submit">Continue</button>
-        </div>
-      </form>
+      </div>
     </div>
   );
 }

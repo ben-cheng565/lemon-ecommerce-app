@@ -1,10 +1,10 @@
 import React from "react";
 
-// import "./CheckOutSteps.css";
+import "./CheckOutSteps.css";
 
 function CheckOutSteps(props) {
   return (
-    <div className="row checkout-steps">
+    <div className="row d-flex justify-content-between m-3 checkout-steps">
       <div className={props.step1 ? "active" : ""}>Sign-In</div>
       <div className={props.step2 ? "active" : ""}>Shipping</div>
       <div className={props.step3 ? "active" : ""}>Payment</div>
