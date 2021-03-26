@@ -29,7 +29,7 @@ function PaymentMethod(props) {
         <div className="card card-body shadow p-3">
           <form className="px-5" onSubmit={submitHandler}>
             <div className="fs-4 mb-3 text-center">Payment Method</div>
-            <div className="form-check">
+            <div className="form-check pt-3">
               <input
                 className="form-check-input"
                 type="radio"
@@ -43,24 +43,32 @@ function PaymentMethod(props) {
               <label className="form-check-label" htmlFor="paypal">
                 <img
                   className="img-fluid"
-                  style={{ width: "5rem" }}
+                  style={{ width: "7rem" }}
                   src="/images/PayPal.png"
                   alt="PayPal"
-                ></img>{" "}
+                ></img>
               </label>
             </div>
 
-            {/* <div>
+            <div className="form-check mt-3">
               <input
+                className="form-check-input"
                 type="radio"
-                id="stripe"
-                value="Stripe"
+                id="alipay"
+                value="alipay"
                 name="paymentMethod"
-                required
                 onChange={(e) => setPaymentMethod(e.target.value)}
               ></input>
-              <label htmlFor="stripe">Stripe</label>
-            </div> */}
+              <label className="form-check-label" htmlFor="alipay">
+                <img
+                  className="img-fluid"
+                  style={{ width: "7rem" }}
+                  src="/images/alipay.png"
+                  alt="alipay"
+                ></img>
+              </label>
+            </div>
+
             <div className="my-3 d-flex justify-content-end">
               <button className="btn btn-primary" type="submit">
                 Continue
