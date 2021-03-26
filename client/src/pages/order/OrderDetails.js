@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { PayPalButton } from "react-paypal-button-v2";
 import LoadingBox from "../../components/common/LoadingBox";
 import MessageBox from "../../components/common/MessageBox";
+import SummaryCard from "../../components/order/SummaryCard";
 
 import {
   deliverOrder,
@@ -16,6 +17,9 @@ import {
   ORDER_DELIVER_RESET,
   ORDER_PAY_RESET,
 } from "../../redux/actionTypes";
+import ShippingCard from "../../components/order/ShippingCard";
+import ItemsCard from "../../components/order/ItemsCard";
+import PaymentCard from "../../components/order/PaymentCard";
 
 function OrderDetails(props) {
   const orderId = props.match.params.id;
@@ -80,142 +84,36 @@ function OrderDetails(props) {
   ) : error ? (
     <MessageBox variant="danger" />
   ) : (
-    <div>
-      <h1>Order: {order._id}</h1>
-      <div className="row top">
-        <div className="col-2">
-          <ul>
-            <li>
-              <div className="card card-body">
-                <h2>Shipping</h2>
-                <p>
-                  <strong>Name: </strong>
-                  {order.shippingAddress.fullName} <br />
-                  <strong>Address: </strong>
-                  {order.shippingAddress.address}, {order.shippingAddress.city},
-                  {order.shippingAddress.country},{" "}
-                  {order.shippingAddress.postalCode}
-                </p>
-                {order.isDelivered ? (
-                  <MessageBox variant="success">
-                    Delivered at {order.deliveredAt}
-                  </MessageBox>
-                ) : (
-                  <MessageBox variant="danger">Not Delivered</MessageBox>
-                )}
-              </div>
-            </li>
-            <li>
-              <div className="card card-body">
-                <h2>Payment</h2>
-                <p>
-                  <strong>Method: </strong>
-                  {order.paymentMethod}
-                </p>
-                {order.isPaid ? (
-                  <MessageBox variant="success">
-                    Paid at {order.paidAt}
-                  </MessageBox>
-                ) : (
-                  <MessageBox variant="danger">Not Paid</MessageBox>
-                )}
-              </div>
-            </li>
-            <li>
-              <div className="card card-body">
-                <h2>Order Items</h2>
-                <ul>
-                  {order.orderItems.map((item) => (
-                    <li key={item.productId}>
-                      <div className="row">
-                        <div>
-                          <img
-                            src={`../${item.image}`}
-                            alt={item.name}
-                            className="small"
-                          />
-                        </div>
-                        <div className="min-30">
-                          <Link to={`/product/${item.productId}`}>
-                            {item.name}
-                          </Link>
-                        </div>
+    <div className="container mt-3">
+      <span className="fs-3">Order: {order._id}</span>
+      <div className="row">
+        <div className="col-8">
+          <ShippingCard
+            shippingAddress={order.shippingAddress}
+            order={order}
+            isDeliver="true"
+          />
 
-                        <div>
-                          {item.qty} x ${item.price} = ${item.qty * item.price}
-                        </div>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </li>
-          </ul>
+          <PaymentCard
+            paymentMethod={order.paymentMethod}
+            order={order}
+            isDeliver="true"
+          />
+
+          <ItemsCard orderItems={order.orderItems} />
         </div>
-        <div className="col-1">
-          <div className="card card-body">
-            <ul>
-              <li>
-                <h2>Order Summary</h2>
-              </li>
-              <li>
-                <div className="row">
-                  <div>Items</div>
-                  <div>${order.itemsPrice.toFixed(2)}</div>
-                </div>
-              </li>
-              <li>
-                <div className="row">
-                  <div>Shipping</div>
-                  <div>${order.shippingPrice.toFixed(2)}</div>
-                </div>
-              </li>
-              <li>
-                <div className="row">
-                  <div>Tax</div>
-                  <div>${order.taxPrice.toFixed(2)}</div>
-                </div>
-              </li>
-              <li>
-                <div className="row">
-                  <div>
-                    <strong>Order Total</strong>
-                  </div>
-                  <div>
-                    <strong>${order.totalPrice.toFixed(2)}</strong>
-                  </div>
-                </div>
-              </li>
-              {!order.isPaid && (
-                <li>
-                  {!sdkLoaded ? (
-                    <LoadingBox />
-                  ) : (
-                    <>
-                      {errorPay && (
-                        <MessageBox variant="danger">{errorPay}</MessageBox>
-                      )}
-                      {loadingPay && <LoadingBox />}
-                      <PayPalButton
-                        amount={order.totalPrice}
-                        onSuccess={successPaymentHandler}
-                      />
-                    </>
-                  )}
-                </li>
-              )}
-              {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => deliverHandler(order._id)}
-                  >
-                    Deliver Order
-                  </button>
-                </li>
-              )}
-            </ul>
-          </div>
+
+        <div className="col-4 mt-3">
+          <SummaryCard
+            order={order}
+            userInfo={userInfo}
+            sdkLoaded={sdkLoaded}
+            errorPay={errorPay}
+            loadingPay={loadingPay}
+            isDeliver="true"
+            deliverHandler={deliverHandler}
+            successPaymentHandler={successPaymentHandler}
+          />
         </div>
       </div>
     </div>

@@ -6,6 +6,10 @@ import LoadingBox from "../../components/common/LoadingBox";
 import MessageBox from "../../components/common/MessageBox";
 import { createOrder } from "../../redux/actions/order";
 import { ORDER_CREATE_RESET } from "../../redux/actionTypes";
+import SummaryCard from "../../components/order/SummaryCard";
+import ShippingCard from "../../components/order/ShippingCard";
+import ItemsCard from "../../components/order/ItemsCard";
+import PaymentCard from "../../components/order/PaymentCard";
 
 function PlaceOrder(props) {
   const dispatch = useDispatch();
@@ -29,6 +33,8 @@ function PlaceOrder(props) {
 
   const placeOrderHandler = () => {
     dispatch(createOrder({ ...cart, orderItems: cartItems }));
+
+    dispatch({ type: ORDER_CREATE_RESET });
   };
 
   useEffect(() => {
@@ -44,105 +50,21 @@ function PlaceOrder(props) {
       <div className="container">
         <div className="row">
           <div className="col-8 ">
-            <div className="card card-body mt-3 shadow-sm px-4">
-              <span className="fs-4 mb-2">Shipping</span>
-              <p>
-                <strong>Name: </strong>
-                {shippingAddress.fullName} <br />
-                <strong>Address: </strong>
-                {shippingAddress.address}, {shippingAddress.city},
-                {shippingAddress.country}, {shippingAddress.postalCode}
-              </p>
-            </div>
+            <ShippingCard shippingAddress={shippingAddress} />
 
-            <div className="card card-body mt-2 shadow-sm px-4">
-              <span className="fs-4 mb-2">Payment</span>
-              <p>
-                <strong>Method: </strong>
-                {paymentMethod}
-              </p>
-            </div>
+            <PaymentCard paymentMethod={paymentMethod} />
 
-            <div className="card card-body mt-2 shadow-sm px-4">
-              <span className="fs-4 mb-2">Order Items</span>
-              <ul className="list-unstyled ms-3 my-1">
-                {cartItems.map((item) => (
-                  <li key={item.productId}>
-                    <div className="row d-flex align-items-center">
-                      <div className="col-2">
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="img-fluid"
-                          style={{ width: "3rem" }}
-                        />
-                      </div>
-                      <div className="col-7">
-                        <Link
-                          className="text-decoration-none fs-6"
-                          to={`/product/${item.id}`}
-                        >
-                          {item.name}
-                        </Link>
-                      </div>
-
-                      <div className="col-3">
-                        {item.qty} x ${item.price} = ${item.qty * item.price}
-                      </div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <ItemsCard orderItems={cartItems} />
           </div>
           <div className="col-4 mt-3">
-            <div className="card card-body shadow px-4">
-              <span className="fs-4 mb-2">Order Summary</span>
-
-              <div className="row mb-1">
-                <div className="col-6">Items Fee</div>
-                <div className="col-6 d-flex justify-content-end">
-                  ${cart.itemsPrice.toFixed(2)}
-                </div>
-              </div>
-
-              <div className="row mb-1">
-                <div className="col-6">Shipping Fee</div>
-                <div className="col-6 d-flex justify-content-end">
-                  ${cart.shippingPrice.toFixed(2)}
-                </div>
-              </div>
-
-              <div className="row mb-1">
-                <div className="col-6">Tax Fee</div>
-                <div className="col-6 d-flex justify-content-end">
-                  ${cart.taxPrice.toFixed(2)}
-                </div>
-              </div>
-
-              <div className="row mb-1">
-                <div className="col-6">
-                  <strong>Order Total</strong>
-                </div>
-                <div className="col-6 d-flex justify-content-end">
-                  <strong>${cart.totalPrice.toFixed(2)}</strong>
-                </div>
-              </div>
-
-              <div className="d-grid gap-2 col-9 mx-auto pt-3 my-2">
-                <button
-                  className="btn btn-primary"
-                  type="button"
-                  onClick={placeOrderHandler}
-                  disabled={cartItems.length === 0}
-                >
-                  Place Order
-                </button>
-              </div>
-
-              {loading && <LoadingBox />}
-              {error && <MessageBox variant="danger" />}
-            </div>
+            <SummaryCard
+              order={cart}
+              orderItems={cartItems}
+              loading={loading}
+              error={error}
+              isPlace="true"
+              placeOrderHandler={placeOrderHandler}
+            />
           </div>
         </div>
       </div>
