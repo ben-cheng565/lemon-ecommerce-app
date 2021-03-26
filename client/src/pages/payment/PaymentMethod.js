@@ -25,41 +25,50 @@ function PaymentMethod(props) {
   return (
     <div>
       <CheckOutSteps step1 step2 step3 />
-      <form className="form" onSubmit={submitHandler}>
-        <div>
-          <h1>Payment Method</h1>
+      <div className="m-auto mt-5" style={{ width: "50%" }}>
+        <div className="card card-body shadow p-3">
+          <form className="px-5" onSubmit={submitHandler}>
+            <div className="fs-4 mb-3 text-center">Payment Method</div>
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="radio"
+                id="paypal"
+                value="Paypal"
+                name="paymentMethod"
+                required
+                checked
+                onChange={(e) => setPaymentMethod(e.target.value)}
+              ></input>
+              <label className="form-check-label" htmlFor="paypal">
+                <img
+                  className="img-fluid"
+                  style={{ width: "5rem" }}
+                  src="/images/PayPal.png"
+                  alt="PayPal"
+                ></img>{" "}
+              </label>
+            </div>
+
+            {/* <div>
+              <input
+                type="radio"
+                id="stripe"
+                value="Stripe"
+                name="paymentMethod"
+                required
+                onChange={(e) => setPaymentMethod(e.target.value)}
+              ></input>
+              <label htmlFor="stripe">Stripe</label>
+            </div> */}
+            <div className="my-3 d-flex justify-content-end">
+              <button className="btn btn-primary" type="submit">
+                Continue
+              </button>
+            </div>
+          </form>
         </div>
-        <div>
-          <div>
-            <input
-              type="radio"
-              id="paypal"
-              value="Paypal"
-              name="paymentMethod"
-              required
-              checked
-              onChange={(e) => setPaymentMethod(e.target.value)}
-            ></input>
-            <label htmlFor="paypal">Paypal</label>
-          </div>
-        </div>
-        <div>
-          <div>
-            <input
-              type="radio"
-              id="stripe"
-              value="Stripe"
-              name="paymentMethod"
-              required
-              onChange={(e) => setPaymentMethod(e.target.value)}
-            ></input>
-            <label htmlFor="stripe">Stripe</label>
-          </div>
-        </div>
-        <div>
-          <button type="submit">Continue</button>
-        </div>
-      </form>
+      </div>
     </div>
   );
 }
