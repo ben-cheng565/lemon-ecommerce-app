@@ -8,7 +8,7 @@ function CartBadge(props) {
   return (
     <>
       {cartItems.length > 0 && (
-        <span className="badge">{cartItems.length}</span>
+        <span className="badge rounded-pill bg-danger">{cartItems.length}</span>
       )}
     </>
   );
