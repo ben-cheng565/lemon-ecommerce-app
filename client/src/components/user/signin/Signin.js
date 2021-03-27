@@ -33,47 +33,57 @@ function Signin(props) {
   }, [props.history, redirect, userInfo]);
 
   return (
-    <div>
-      <form className="form" onSubmit={submitHandler}>
-        <div>
-          <h1>Sign In</h1>
+    <div className="container my-5" style={{ width: "40%" }}>
+      <div className="card">
+        <div className="card-header">
+          <span className="fs-4">Sign In</span>
         </div>
-        {loading && <LoadingBox />}
-        {error && <MessageBox variant="danger">{error}</MessageBox>}
-        <div>
-          <label htmlFor="email">Email Address</label>
-          <input
-            type="email"
-            id="email"
-            placeholder="Enter email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></input>
+        <div className="card-body">
+          {loading && <LoadingBox />}
+          {error && <MessageBox variant="danger">{error}</MessageBox>}
+          <form className="mx-5" onSubmit={submitHandler}>
+            <div className="mb-3">
+              <label className="form-label" htmlFor="email">
+                Email Address
+              </label>
+              <input
+                className="form-control"
+                type="email"
+                id="email"
+                placeholder="Enter email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              ></input>
+            </div>
+            <div className="mb-3">
+              <label className="form-label" htmlFor="password">
+                Password
+              </label>
+              <input
+                className="form-control"
+                type="password"
+                id="password"
+                placeholder="Enter password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              ></input>
+            </div>
+            <div className="d-flex justify-content-end">
+              <button className="btn btn-primary" type="submit">
+                Sign In
+              </button>
+            </div>
+          </form>
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="Enter password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          ></input>
-        </div>
-        <div>
-          <label />
-          <button type="submit">Sign In</button>
-        </div>
-        <div>
-          <label />
+        <div className="card-footer">
           <div>
             New customer?{" "}
             <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
