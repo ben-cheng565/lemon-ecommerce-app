@@ -34,13 +34,11 @@ function Signin(props) {
 
   return (
     <div className="container my-5" style={{ width: "40%" }}>
-      <div className="card">
+      <div className="card shadow">
         <div className="card-header">
           <span className="fs-4">Sign In</span>
         </div>
         <div className="card-body">
-          {loading && <LoadingBox />}
-          {error && <MessageBox variant="danger">{error}</MessageBox>}
           <form className="mx-5" onSubmit={submitHandler}>
             <div className="mb-3">
               <label className="form-label" htmlFor="email">
@@ -69,6 +67,10 @@ function Signin(props) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               ></input>
+            </div>
+            <div className="mt-3">
+              {loading && <LoadingBox />}
+              {error && <MessageBox variant="danger">{error}</MessageBox>}
             </div>
             <div className="d-flex justify-content-end">
               <button className="btn btn-primary" type="submit">
