@@ -85,7 +85,7 @@ function OrderDetails(props) {
     <MessageBox variant="danger" />
   ) : (
     <div className="container mt-3">
-      <span className="fs-3">Order: {order._id}</span>
+      <span className="fs-4">Order: {order._id}</span>
       <div className="row">
         <div className="col-8">
           <ShippingCard

@@ -26,10 +26,12 @@ function PaymentMethod(props) {
     <div>
       <CheckOutSteps step1 step2 step3 />
       <div className="m-auto mt-5" style={{ width: "50%" }}>
-        <div className="card card-body shadow p-3">
-          <div className="fs-4 mb-3 text-center">Payment Method</div>
-          <form className="px-5" onSubmit={submitHandler}>
-            <div className="border border-dark p-3">
+        <div className="card shadow">
+          <div className="card-header">
+            <div className="fs-4 text-center">Payment Method</div>
+          </div>
+          <div className="card-body">
+            <form className="px-5" onSubmit={submitHandler}>
               <div className="form-check pt-3">
                 <input
                   className="form-check-input"
@@ -69,13 +71,14 @@ function PaymentMethod(props) {
                   ></img>
                 </label>
               </div>
-            </div>
-            <div className="my-3 d-flex justify-content-end">
-              <button className="btn btn-primary" type="submit">
-                Continue
-              </button>
-            </div>
-          </form>
+
+              <div className="my-3 d-flex justify-content-end">
+                <button className="btn btn-primary" type="submit">
+                  Continue
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
