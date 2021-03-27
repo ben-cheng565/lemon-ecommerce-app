@@ -5,7 +5,7 @@ import LoadingBox from "../components/common/LoadingBox";
 import MessageBox from "../components/common/MessageBox";
 import { USER_UPDATE_RESET } from "../redux/actionTypes";
 
-function Profile() {
+function Profile(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,72 +43,102 @@ function Profile() {
     }
   };
 
+  const handleClose = () => {
+    props.history.push("/");
+  };
+
   return (
-    <div>
-      <form className="form" onSubmit={submitHandler}>
-        <div>
-          <h1>User Profile</h1>
+    <div className="container my-5" style={{ width: "40%" }}>
+      <div className="card shadow">
+        <div className="card-header">
+          <span className="fs-4">User Profile</span>
         </div>
-        {loading ? (
-          <LoadingBox />
-        ) : error ? (
-          <MessageBox variant="danger">{error}</MessageBox>
-        ) : (
-          <>
-            {loadingUpdate && <LoadingBox />}
-            {errorUpdate && (
-              <MessageBox variant="danger">{errorUpdate}</MessageBox>
+        <div className="card-body">
+          <form className="mx-5" onSubmit={submitHandler}>
+            {loading ? (
+              <LoadingBox />
+            ) : error ? (
+              <MessageBox variant="danger">{error}</MessageBox>
+            ) : (
+              <>
+                <div className="mb-3">
+                  <label className="form-label" htmlFor="name">
+                    Name
+                  </label>
+                  <input
+                    className="form-control"
+                    id="name"
+                    type="text"
+                    placeholder="Enter name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  ></input>
+                </div>
+                <div className="mb-3">
+                  <label className="form-label" htmlFor="email">
+                    Email
+                  </label>
+                  <input
+                    className="form-control"
+                    id="email"
+                    type="text"
+                    placeholder="Enter email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  ></input>
+                </div>
+                <div className="mb-3">
+                  <label className="form-label" htmlFor="password">
+                    Password
+                  </label>
+                  <input
+                    className="form-control"
+                    id="password"
+                    type="password"
+                    placeholder="Enter password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  ></input>
+                </div>
+                <div className="mb-3">
+                  <label className="form-label" htmlFor="confirmPassword">
+                    Confirm Password
+                  </label>
+                  <input
+                    className="form-control"
+                    id="confirmPassword"
+                    type="password"
+                    placeholder="Enter confirm password"
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  ></input>
+                </div>
+                <div className="mt-3">
+                  {loadingUpdate && <LoadingBox />}
+                  {errorUpdate && (
+                    <MessageBox variant="danger">{errorUpdate}</MessageBox>
+                  )}
+                  {successUpdate && (
+                    <MessageBox variant="success">
+                      Profile updated successfully.
+                    </MessageBox>
+                  )}
+                </div>
+                <div className="d-flex justify-content-end my-3">
+                  <button className="btn btn-primary me-2" type="submit">
+                    Update
+                  </button>
+                  <button
+                    className="btn btn-secondary"
+                    type="button"
+                    onClick={handleClose}
+                  >
+                    Close
+                  </button>
+                </div>
+              </>
             )}
-            {successUpdate && (
-              <MessageBox variant="success">
-                Profile updated successfully.
-              </MessageBox>
-            )}
-            <div>
-              <label htmlFor="name">Name</label>
-              <input
-                id="name"
-                type="text"
-                placeholder="Enter name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              ></input>
-            </div>
-            <div>
-              <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                type="text"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              ></input>
-            </div>
-            <div>
-              <label htmlFor="password">Password</label>
-              <input
-                id="password"
-                type="password"
-                placeholder="Enter password"
-                onChange={(e) => setPassword(e.target.value)}
-              ></input>
-            </div>
-            <div>
-              <label htmlFor="confirmPassword">Confirm Password</label>
-              <input
-                id="confirmPassword"
-                type="password"
-                placeholder="Enter confirm password"
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              ></input>
-            </div>
-            <div>
-              <label />
-              <button type="submit">Update</button>
-            </div>
-          </>
-        )}
-      </form>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
