@@ -44,64 +44,97 @@ function UserEdit(props) {
   };
 
   return (
-    <div>
-      <form className="form" onSubmit={submitHandler}>
-        <div>
-          <h1>Edit User {name}</h1>
-          {loading && <LoadingBox />}
-          {errorEdit && <MessageBox variant="danger">{errorEdit}</MessageBox>}
+    <div className="container my-5" style={{ width: "50%" }}>
+      <div className="card shadow">
+        <div className="card-header">
+          <span className="fs-4">Edit User{/*  {name} */}</span>
         </div>
+        <div className="card-body">
+          <form className="mx-5" onSubmit={submitHandler}>
+            <div>
+              {loading && <LoadingBox />}
+              {errorEdit && (
+                <MessageBox variant="danger">{errorEdit}</MessageBox>
+              )}
+            </div>
 
-        {loading ? (
-          <LoadingBox />
-        ) : error ? (
-          <MessageBox variant="danger">{error}</MessageBox>
-        ) : (
-          <>
-            <div>
-              <label htmlFor="name">Name</label>
-              <input
-                id="name"
-                type="text"
-                placeholder="Enter name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              ></input>
-            </div>
-            <div>
-              <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                type="text"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              ></input>
-            </div>
-            <div>
-              <label htmlFor="isSeller">Is Seller</label>
-              <input
-                id="isSeller"
-                type="checkbox"
-                checked={isSeller}
-                onChange={(e) => setIsSeller(e.target.value)}
-              ></input>
-            </div>
-            <div>
-              <label htmlFor="isAdmin">Is Admin</label>
-              <input
-                id="isAdmin"
-                type="checkbox"
-                checked={isAdmin}
-                onChange={(e) => setIsAdmin(e.target.value)}
-              ></input>
-            </div>
-            <div>
-              <button type="submit">Confirm</button>
-            </div>
-          </>
-        )}
-      </form>
+            {loading ? (
+              <LoadingBox />
+            ) : error ? (
+              <MessageBox variant="danger">{error}</MessageBox>
+            ) : (
+              <>
+                <div className="mb-3">
+                  <label className="form-label" htmlFor="name">
+                    User Name
+                  </label>
+                  <input
+                    className="form-control"
+                    id="name"
+                    type="text"
+                    placeholder="Enter name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  ></input>
+                </div>
+                <div className="mb-3">
+                  <label className="form-label" htmlFor="email">
+                    Email Address
+                  </label>
+                  <input
+                    className="form-control"
+                    id="email"
+                    type="text"
+                    placeholder="Enter email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  ></input>
+                </div>
+
+                <div className="row">
+                  <div className="col-6 mb-3">
+                    <div className="form-check form-switch">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id="isAdmin"
+                        checked={isAdmin}
+                        onChange={(e) => setIsAdmin(!isAdmin)}
+                      ></input>
+                      <label className="form-check-label" htmlFor="isAdmin">
+                        Is Admin
+                      </label>
+                    </div>
+                  </div>
+                  <div className="col-6 mb-3">
+                    <div className="form-check form-switch">
+                      <label className="form-check-label" htmlFor="isSeller">
+                        Is Seller
+                      </label>
+                      <input
+                        className="form-check-input"
+                        id="isSeller"
+                        type="checkbox"
+                        checked={isSeller}
+                        onChange={(e) => setIsSeller(isSeller)}
+                      ></input>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="my-3 d-flex justify-content-end">
+                  <button className="btn btn-primary me-2" type="submit">
+                    Confirm
+                  </button>
+                  <button className="btn btn-secondary" type="button">
+                    Close
+                  </button>
+                </div>
+              </>
+            )}
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
