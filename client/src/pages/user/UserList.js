@@ -30,58 +30,68 @@ function UserList(props) {
   };
 
   return (
-    <div>
-      <h1>Users</h1>
-      {loadingDelete && <LoadingBox />}
-      {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
-      {successDelete && (
-        <MessageBox variant="success">User deleted successfully</MessageBox>
-      )}
-      {loading ? (
-        <LoadingBox />
-      ) : error ? (
-        <MessageBox variant="danger">{error}</MessageBox>
-      ) : (
-        <table className="table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Admin?</th>
-              <th>Seller?</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((u) => (
-              <tr key={u._id}>
-                <td>{u._id}</td>
-                <td>{u.name}</td>
-                <td>{u.email}</td>
-                <td>{u.isAdmin ? "Yes" : "No"}</td>
-                <td>{u.isSeller ? "Yes" : "No"}</td>
-                <td>
-                  <button
-                    type="button"
-                    className="small"
-                    onClick={() => editHandler(u._id)}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    type="button"
-                    className="small"
-                    onClick={() => deleteHandler(u._id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+    <div className="container m-5">
+      <div className="card">
+        <div className="card-header">
+          <div className="fs-4">Users</div>
+        </div>
+        <div className="card-body">
+          {loadingDelete && <LoadingBox />}
+          {errorDelete && (
+            <MessageBox variant="danger">{errorDelete}</MessageBox>
+          )}
+          {successDelete && (
+            <MessageBox variant="success">User deleted successfully</MessageBox>
+          )}
+          {loading ? (
+            <LoadingBox />
+          ) : error ? (
+            <MessageBox variant="danger">{error}</MessageBox>
+          ) : (
+            <table className="table table-hover">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Admin?</th>
+                  <th>Seller?</th>
+                  <th className="text-center">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {users.map((u) => (
+                  <tr key={u._id}>
+                    <td>{u._id}</td>
+                    <td>{u.name}</td>
+                    <td>{u.email}</td>
+                    <td>{u.isAdmin ? "Yes" : "No"}</td>
+                    <td>{u.isSeller ? "Yes" : "No"}</td>
+                    <td className="d-flex justify-content-center">
+                      <button
+                        type="button"
+                        className="btn btn-outline-primary btn-sm me-2"
+                        style={{ width: "4rem" }}
+                        onClick={() => editHandler(u._id)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-outline-danger btn-sm"
+                        style={{ width: "4rem" }}
+                        onClick={() => deleteHandler(u._id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
