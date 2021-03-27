@@ -51,11 +51,11 @@ function ShippingAddress(props) {
     }
 
     let moveOn = true;
-    if (!newLat || !newLng) {
+    /* if (!newLat || !newLng) {
       moveOn = window.confirm(
         "You did not set your location on map. Continue?"
       );
-    }
+    } */
 
     if (moveOn) {
       dispatch(

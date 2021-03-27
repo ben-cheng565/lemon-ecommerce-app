@@ -6,7 +6,7 @@ function AddToCart(props) {
   const { product, qty, setQty, addToCartHandler } = props;
 
   return (
-    <div className="card card-body shadow-sm" style={{ width: "90%" }}>
+    <div className="card card-body shadow-sm px-4" style={{ width: "90%" }}>
       <div className="row px-1 mb-2">
         <div className="col-6">Price</div>
         <div className="col-6 text-end" style={{ color: "#b22b09" }}>
