@@ -88,40 +88,106 @@ function ProductEdit(props) {
   };
 
   return (
-    <div>
-      <form className="form" onSubmit={submitHandler}>
-        <div>
-          <h1>Edit Product - {productId}</h1>
+    <div className="container my-5" style={{ width: "50%" }}>
+      <div className="card shadow">
+        <div className="card-header">
+          <span className="fs-4">Edit Product</span>
         </div>
-        {loadingUpdate && <LoadingBox />}
-        {errorUpdate && <MessageBox variant="danger">{errorUpdate}</MessageBox>}
-        {loading ? (
-          <LoadingBox />
-        ) : error ? (
-          <MessageBox variant="danger">{error}</MessageBox>
-        ) : (
-          <>
-            <div>
-              <label htmlFor="name">Name</label>
-              <input
-                id="name"
-                type="text"
-                placeholder="Enter name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              ></input>
-            </div>
-            <div>
-              <label htmlFor="price">Price</label>
-              <input
-                id="price"
-                type="text"
-                placeholder="Enter price"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-              ></input>
-            </div>
-            {/* <div>
+        <div className="card-body">
+          <form className="mx-5" onSubmit={submitHandler}>
+            {loadingUpdate && <LoadingBox />}
+            {errorUpdate && (
+              <MessageBox variant="danger">{errorUpdate}</MessageBox>
+            )}
+            {loading ? (
+              <LoadingBox />
+            ) : error ? (
+              <MessageBox variant="danger">{error}</MessageBox>
+            ) : (
+              <>
+                <div className="mb-3">
+                  <label className="form-label" htmlFor="id">
+                    ID
+                  </label>
+                  <input
+                    className="form-control"
+                    id="id"
+                    type="text"
+                    disabled
+                    value={productId}
+                  ></input>
+                </div>
+                <div className="mb-3">
+                  <label className="form-label" htmlFor="name">
+                    Name
+                  </label>
+                  <input
+                    className="form-control"
+                    id="name"
+                    type="text"
+                    placeholder="Enter name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  ></input>
+                </div>
+                <div className="row mb-3">
+                  <div className="col">
+                    <label className="form-label" htmlFor="price">
+                      Price
+                    </label>
+                    <input
+                      className="form-control"
+                      id="price"
+                      type="text"
+                      placeholder="Enter price"
+                      value={price}
+                      onChange={(e) => setPrice(e.target.value)}
+                    ></input>
+                  </div>
+                  <div className="col">
+                    <label className="form-label" htmlFor="countInStock">
+                      Stock
+                    </label>
+                    <input
+                      className="form-control"
+                      id="countInStock"
+                      type="text"
+                      placeholder="Enter countInStock"
+                      value={countInStock}
+                      onChange={(e) => setCountInStock(e.target.value)}
+                    ></input>
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col">
+                    <label className="form-label" htmlFor="category">
+                      Category
+                    </label>
+                    <input
+                      className="form-control"
+                      id="category"
+                      type="text"
+                      placeholder="Enter category"
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
+                    ></input>
+                  </div>
+                  <div className="col">
+                    <label className="form-label" htmlFor="brand">
+                      Brand
+                    </label>
+                    <input
+                      className="form-control"
+                      id="brand"
+                      type="text"
+                      placeholder="Enter brand"
+                      value={brand}
+                      onChange={(e) => setBrand(e.target.value)}
+                    ></input>
+                  </div>
+                </div>
+
+                {/* <div>
               <label htmlFor="image">Image</label>
               <input
                 id="image"
@@ -131,68 +197,50 @@ function ProductEdit(props) {
                 onChange={(e) => setImage(e.target.value)}
               ></input>
             </div> */}
-            <div>
-              <label htmlFor="imageFile">Image File</label>
-              <input
-                id="imageFile"
-                type="file"
-                accept="image/jpeg"
-                label="Choose image"
-                onChange={uploadFileHandler}
-              ></input>
-              {loadingUpload && <LoadingBox />}
-              {errorUpload && (
-                <MessageBox variant="danger">{errorUpload}</MessageBox>
-              )}
-            </div>
-            <div>
-              <label htmlFor="category">Category</label>
-              <input
-                id="category"
-                type="text"
-                placeholder="Enter category"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-              ></input>
-            </div>
-            <div>
-              <label htmlFor="brand">Brand</label>
-              <input
-                id="brand"
-                type="text"
-                placeholder="Enter brand"
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}
-              ></input>
-            </div>
-            <div>
-              <label htmlFor="countInStock">CountInStock</label>
-              <input
-                id="countInStock"
-                type="text"
-                placeholder="Enter countInStock"
-                value={countInStock}
-                onChange={(e) => setCountInStock(e.target.value)}
-              ></input>
-            </div>
-            <div>
-              <label htmlFor="description">Description</label>
-              <textarea
-                id="description"
-                rows="3"
-                type="text"
-                placeholder="Enter description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              ></textarea>
-            </div>
-            <div>
-              <label></label>
-              <button type="submit">Update</button>
-            </div>
-          </>
-        )}
-      </form>
+                <div className="mb-3">
+                  <label className="form-label" htmlFor="imageFile">
+                    Image File
+                  </label>
+                  <input
+                    className="form-control"
+                    id="imageFile"
+                    type="file"
+                    accept="image/jpeg"
+                    label="Choose image"
+                    onChange={uploadFileHandler}
+                  ></input>
+                  {loadingUpload && <LoadingBox />}
+                  {errorUpload && (
+                    <MessageBox variant="danger">{errorUpload}</MessageBox>
+                  )}
+                </div>
+                <div className="mb-3">
+                  <label className="form-label" htmlFor="description">
+                    Description
+                  </label>
+                  <textarea
+                    className="form-control"
+                    id="description"
+                    rows="4"
+                    type="text"
+                    placeholder="Enter description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  ></textarea>
+                </div>
+                <div className="mb-3 d-flex justify-content-end">
+                  <button className="btn btn-primary me-2" type="submit">
+                    Update
+                  </button>
+                  <button className="btn btn-secondary" type="button">
+                    Close
+                  </button>
+                </div>
+              </>
+            )}
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
