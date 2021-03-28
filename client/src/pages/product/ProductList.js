@@ -6,6 +6,7 @@ import MessageBox from "../../components/common/MessageBox";
 import {
   createProduct,
   deleteProduct,
+  fetchProductList,
   fetchProducts,
 } from "../../redux/actions/product";
 import {
@@ -18,8 +19,8 @@ function ProductList(props) {
   let search = props.location.search;
   const currPage = getKeyWord(search, "currPage");
   const dispatch = useDispatch();
-  const productData = useSelector((state) => state.products);
-  const { products, loading, error, page, pages } = productData;
+  const productData = useSelector((state) => state.productList);
+  const { productList, loading, error, page, pages } = productData;
   const productCreate = useSelector((state) => state.productCreate);
   const {
     loading: loadingCreate,
@@ -39,7 +40,7 @@ function ProductList(props) {
       props.history.push(`/product/edit/${createdProduct._id}`);
     }
 
-    dispatch(fetchProducts({ currPage }));
+    dispatch(fetchProductList({ currPage }));
 
     if (successDelete) {
       dispatch({ type: PRODUCT_DELETE_RESET });
@@ -118,7 +119,7 @@ function ProductList(props) {
                   </tr>
                 </thead>
                 <tbody>
-                  {products.map((p) => (
+                  {productList.map((p) => (
                     <tr key={p._id}>
                       <td>{p._id}</td>
                       <td>{p.name}</td>
@@ -152,17 +153,21 @@ function ProductList(props) {
               </table>
               <div className="row mt-3 justify-content-end pe-3">
                 <div className="col-auto">
-                  <ul class="pagination">
+                  <ul class="pagination pagination-sm">
                     <li class="page-item">
                       <a class="page-link" href="#">
                         <span>&laquo;</span>
                       </a>
                     </li>
                     {[...Array(pages).keys()].map((p) => (
-                      <li class="page-item">
+                      <li
+                        class={
+                          p + 1 === page ? "page-item active" : "page-item"
+                        }
+                      >
                         <Link
                           className="page-link"
-                          to={`/home?currPage=${p + 1}`}
+                          to={`/productlist?currPage=${p + 1}`}
                         >
                           {p + 1}
                         </Link>

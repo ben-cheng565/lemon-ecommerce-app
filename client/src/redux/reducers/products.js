@@ -24,6 +24,9 @@ import {
   REVIEW_CREATE_SUCCESS,
   REVIEW_CREATE_FAIL,
   REVIEW_CREATE_RESET,
+  PRODUCTS_LIST_REQUEST,
+  PRODUCTS_LIST_SUCCESS,
+  PRODUCTS_LIST_FAIL,
 } from "../actionTypes";
 
 // reducer for getting all products
@@ -40,6 +43,26 @@ const products = (state = { products: [] }, action) => {
         count: action.payload.count,
       };
     case PRODUCTS_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+// reducer for getting product list for admin
+export const productList = (state = { productList: [] }, action) => {
+  switch (action.type) {
+    case PRODUCTS_LIST_REQUEST:
+      return { loading: true };
+    case PRODUCTS_LIST_SUCCESS:
+      return {
+        loading: false,
+        productList: action.payload.productList,
+        page: action.payload.page,
+        pages: action.payload.pages,
+        count: action.payload.count,
+      };
+    case PRODUCTS_LIST_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

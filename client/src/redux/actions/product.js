@@ -21,6 +21,9 @@ import {
   REVIEW_CREATE_FAIL,
   REVIEW_CREATE_SUCCESS,
   REVIEW_CREATE_REQUEST,
+  PRODUCTS_LIST_REQUEST,
+  PRODUCTS_LIST_SUCCESS,
+  PRODUCTS_LIST_FAIL,
 } from "../actionTypes";
 
 // action for getting all products
@@ -40,6 +43,26 @@ export const fetchProducts = ({
     dispatch({ type: PRODUCTS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCTS_FAIL, payload: error.message });
+  }
+};
+
+// action for getting all product list for admin
+export const fetchProductList = ({
+  currPage = 1,
+  name = "",
+  category = "",
+  sort = "",
+}) => async (dispatch) => {
+  dispatch({ type: PRODUCTS_LIST_REQUEST });
+
+  try {
+    // fetch api with search filters
+    const { data } = await axios.get(
+      `/products/list?name=${name}&category=${category}&sort=${sort}&currPage=${currPage}`
+    );
+    dispatch({ type: PRODUCTS_LIST_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: PRODUCTS_LIST_FAIL, payload: error.message });
   }
 };
 

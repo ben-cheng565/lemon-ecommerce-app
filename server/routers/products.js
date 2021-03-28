@@ -64,24 +64,6 @@ router.get("/init", async (req, res) => {
   res.send({ createdProducts });
 });
 
-//fetch product categories
-router.get("/categories", async (req, res) => {
-  const categories = await Product.find().distinct("category");
-  res.send(categories);
-});
-
-// fetch the specific product detail
-router.get("/:id", async (req, res) => {
-  const id = req.params.id;
-  const product = await Product.findById(id);
-
-  if (product) {
-    res.send(product);
-  } else {
-    res.status(404).send({ message: "Product not Found" });
-  }
-});
-
 //fetch all products
 router.get("/", async (req, res) => {
   const pageSize = 4; // Number of products each page
@@ -113,6 +95,66 @@ router.get("/", async (req, res) => {
     .limit(pageSize);
 
   res.send({ products, count, page, pages: Math.ceil(count / pageSize) });
+});
+
+//fetch all product list for admin
+router.get("/list", async (req, res) => {
+  const pageSize = 10; // Number of products each page
+  const page = Number(req.query.currPage) || 1;
+
+  const name = req.query.name || "";
+  const category = req.query.category || "";
+  const sort = req.query.sort || "";
+  const nameFilter = name ? { name: { $regex: name, $options: "i" } } : {};
+  const categoryFilter = category ? { category } : {};
+  const sortOrder =
+    sort === "priceAsc"
+      ? { price: 1 }
+      : sort === "priceDesc"
+      ? { price: -1 }
+      : { _id: -1 };
+
+  const count = await Product.count({
+    ...nameFilter,
+    ...categoryFilter,
+  });
+
+  const productList = await Product.find({
+    ...nameFilter,
+    ...categoryFilter,
+  })
+    .sort(sortOrder)
+    .skip(pageSize * (page - 1))
+    .limit(pageSize);
+
+  res.send({ productList, count, page, pages: Math.ceil(count / pageSize) });
+});
+
+//fetch product categories
+router.get("/categories", async (req, res) => {
+  const categories = await Product.find().distinct("category");
+  res.send(categories);
+});
+
+// fetch the specific product detail
+router.get("/:id", async (req, res) => {
+  const id = req.params.id;
+  const product = await Product.findById(id);
+
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({ message: "Product not Found" });
+  }
+});
+
+router.get("/:id", async (req, res) => {
+  const product = await Product.findById(req.params.id);
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({ message: "Product not Found." });
+  }
 });
 
 // Create product api

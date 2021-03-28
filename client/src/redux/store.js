@@ -1,6 +1,7 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunk from "redux-thunk";
 import products, {
+  productList,
   productDetail,
   productCreate,
   productEdit,
@@ -50,6 +51,7 @@ const initState = {
 //  Combine all reducers to a root reducers
 const reducer = combineReducers({
   products,
+  productList,
   productDetail,
   productCreate,
   productEdit,
