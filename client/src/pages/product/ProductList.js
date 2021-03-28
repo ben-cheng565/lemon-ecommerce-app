@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import LoadingBox from "../../components/common/LoadingBox";
@@ -61,11 +61,26 @@ function ProductList(props) {
   };
 
   const createHandler = () => {
-    dispatch(createProduct());
+    // dispatch(createProduct());
+    document.getElementsByClassName("toast").show();
   };
 
   return (
     <div className="container m-5">
+      <div
+        class="toast align-items-center text-white bg-primary border-0"
+        role="alert"
+      >
+        <div class="d-flex">
+          <div class="toast-body">Hello, world! This is a toast message.</div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            data-bs-dismiss="toast"
+          ></button>
+        </div>
+      </div>
+
       <div className="card">
         <div className="card-header">
           <div className="row">
