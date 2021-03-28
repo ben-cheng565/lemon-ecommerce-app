@@ -61,7 +61,8 @@ router.post("/signin", async (req, res) => {
 
 // Sign up api
 router.post("/signup", async (req, res) => {
-  const existingUser = await User.find({ email: req.body.email });
+  const existingUser = await User.findOne({ email: req.body.email });
+
   if (existingUser) {
     res.status(400).json({ message: "Email address already exist." });
     return;
