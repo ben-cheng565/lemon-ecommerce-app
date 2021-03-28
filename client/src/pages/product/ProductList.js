@@ -69,7 +69,7 @@ function ProductList(props) {
       <div className="card">
         <div className="card-header">
           <div className="row">
-            <div className="col-6 fs-4">Products</div>
+            <div className="col-6 fs-4">Product List</div>
 
             <div className="col-6 d-flex justify-content-end">
               <button
@@ -151,9 +151,9 @@ function ProductList(props) {
                   ))}
                 </tbody>
               </table>
-              <div className="row mt-3 justify-content-end pe-3">
+              <div className="row mt-3 justify-content-end">
                 <div className="col-auto">
-                  <ul class="pagination pagination-sm">
+                  <ul class="pagination">
                     <li class="page-item">
                       <a class="page-link" href="#">
                         <span>&laquo;</span>

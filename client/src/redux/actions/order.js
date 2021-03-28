@@ -136,14 +136,17 @@ export const getOrderHistory = () => async (dispatch, getState) => {
 };
 
 // action for getting all users' orders list
-export const getOrderList = () => async (dispatch, getState) => {
+export const getOrderList = ({ currPage = 1 }) => async (
+  dispatch,
+  getState
+) => {
   dispatch({ type: ORDER_LIST_REQUEST });
   const {
     user: { userInfo },
   } = getState();
 
   try {
-    const { data } = await axios.get("/orders/list", {
+    const { data } = await axios.get(`/orders/list?currPage=${currPage}`, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
 

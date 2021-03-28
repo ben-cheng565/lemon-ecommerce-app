@@ -91,12 +91,18 @@ export const orderHistory = (state = { orders: [] }, action) => {
 };
 
 // reducer for getting all users' orders list
-export const orderList = (state = { orders: [] }, action) => {
+export const orderList = (state = { orderList: [] }, action) => {
   switch (action.type) {
     case ORDER_LIST_REQUEST:
       return { loading: true };
     case ORDER_LIST_SUCCESS:
-      return { loading: false, orders: action.payload };
+      return {
+        loading: false,
+        orderList: action.payload.orderList,
+        page: action.payload.page,
+        pages: action.payload.pages,
+        count: action.payload.count,
+      };
     case ORDER_LIST_FAIL:
       return { loading: false, error: action.payload };
 

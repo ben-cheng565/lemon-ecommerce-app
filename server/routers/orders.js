@@ -6,8 +6,20 @@ const router = express.Router();
 
 // fetch all orders
 router.get("/list", isAuth, isAdmin, async (req, res) => {
-  const orderList = await Order.find({}).populate("userId", "name");
-  res.send(orderList);
+  const pageSize = 10; // Number of products each page
+  const page = Number(req.query.currPage) || 1;
+
+  const sortOrder = { createdAt: -1 };
+
+  const count = await Order.count({});
+
+  const orderList = await Order.find({})
+    .populate("userId", "name")
+    .sort(sortOrder)
+    .skip(pageSize * (page - 1))
+    .limit(pageSize);
+
+  res.send({ orderList, count, page, pages: Math.ceil(count / pageSize) });
 });
 
 // fetch all orders of an user

@@ -33,7 +33,7 @@ function UserList(props) {
     <div className="container m-5">
       <div className="card">
         <div className="card-header">
-          <div className="fs-4">Users</div>
+          <div className="fs-4">User List</div>
         </div>
         <div className="card-body">
           {loadingDelete && <LoadingBox />}
