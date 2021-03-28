@@ -48,7 +48,7 @@ function SummaryCard(props) {
                 {props.errorPay && (
                   <MessageBox variant="danger">{props.errorPay}</MessageBox>
                 )}
-                {props.loadingPay && <LoadingBox />}
+
                 <PayPalButton
                   amount={props.order.totalPrice}
                   onSuccess={props.successPaymentHandler}
@@ -83,9 +83,6 @@ function SummaryCard(props) {
               </button>
             </div>
           )}
-
-        {props.loading && <LoadingBox />}
-        {props.error && <MessageBox variant="danger" />}
       </div>
     </div>
   );

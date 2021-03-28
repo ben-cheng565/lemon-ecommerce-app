@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import CheckOutSteps from "../../components/cart/checkout/CheckOutSteps";
-import LoadingBox from "../../components/common/LoadingBox";
-import MessageBox from "../../components/common/MessageBox";
 import { createOrder } from "../../redux/actions/order";
 import { ORDER_CREATE_RESET } from "../../redux/actionTypes";
 import SummaryCard from "../../components/order/SummaryCard";
 import ShippingCard from "../../components/order/ShippingCard";
 import ItemsCard from "../../components/order/ItemsCard";
 import PaymentCard from "../../components/order/PaymentCard";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function PlaceOrder(props) {
   const dispatch = useDispatch();
@@ -39,36 +38,46 @@ function PlaceOrder(props) {
 
   useEffect(() => {
     if (success) {
+      toast.success("Order created successfully.");
+
       props.history.push(`/order/${order._id}`);
       // dispatch({ type: ORDER_CREATE_RESET });
     }
-  }, [dispatch, order, props.history, success]);
+    if (error) {
+      toast.success("Order created failed.");
+    }
+  }, [dispatch, order, props.history, success, error]);
 
   return (
-    <div>
-      <CheckOutSteps step1 step2 step3 step4></CheckOutSteps>
-      <div className="container">
-        <div className="row">
-          <div className="col-8 ">
-            <ShippingCard shippingAddress={shippingAddress} />
+    <>
+      <div>
+        <ToastContainer position="bottom-right" />
+      </div>
+      <div>
+        <CheckOutSteps step1 step2 step3 step4></CheckOutSteps>
+        <div className="container">
+          <div className="row">
+            <div className="col-8 ">
+              <ShippingCard shippingAddress={shippingAddress} />
 
-            <PaymentCard paymentMethod={paymentMethod} />
+              <PaymentCard paymentMethod={paymentMethod} />
 
-            <ItemsCard orderItems={cartItems} />
-          </div>
-          <div className="col-4 mt-3">
-            <SummaryCard
-              order={cart}
-              orderItems={cartItems}
-              loading={loading}
-              error={error}
-              isPlace="true"
-              placeOrderHandler={placeOrderHandler}
-            />
+              <ItemsCard orderItems={cartItems} />
+            </div>
+            <div className="col-4 mt-3">
+              <SummaryCard
+                order={cart}
+                orderItems={cartItems}
+                loading={loading}
+                error={error}
+                isPlace="true"
+                placeOrderHandler={placeOrderHandler}
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

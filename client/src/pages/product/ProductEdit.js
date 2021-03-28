@@ -5,6 +5,8 @@ import LoadingBox from "../../components/common/LoadingBox";
 import MessageBox from "../../components/common/MessageBox";
 import { editProduct, fetchProductDetail } from "../../redux/actions/product";
 import { PRODUCT_UPDATE_RESET } from "../../redux/actionTypes";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ProductEdit(props) {
   const productId = props.match.params.id;
@@ -26,24 +28,6 @@ function ProductEdit(props) {
   } = useSelector((state) => state.productEdit);
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (successUpdate) {
-      props.history.push("/productlist");
-    }
-
-    if (!product || product._id !== productId || successUpdate) {
-      dispatch({ type: PRODUCT_UPDATE_RESET });
-      dispatch(fetchProductDetail(productId));
-    } else {
-      setName(product.name);
-      setPrice(product.price);
-      setImage(product.image);
-      setCategory(product.category);
-      setCountInStock(product.countInStock);
-      setBrand(product.brand);
-      setDescription(product.description);
-    }
-  }, [dispatch, productId, product, props.history, successUpdate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -87,107 +71,142 @@ function ProductEdit(props) {
     }
   };
 
-  return (
-    <div className="container my-5" style={{ width: "50%" }}>
-      <div className="card shadow">
-        <div className="card-header">
-          <span className="fs-4">Edit Product</span>
-        </div>
-        <div className="card-body">
-          <form className="mx-5" onSubmit={submitHandler}>
-            {loadingUpdate && <LoadingBox />}
-            {errorUpdate && (
-              <MessageBox variant="danger">{errorUpdate}</MessageBox>
-            )}
-            {loading ? (
-              <LoadingBox />
-            ) : error ? (
-              <MessageBox variant="danger">{error}</MessageBox>
-            ) : (
-              <>
-                <div className="mb-3">
-                  <label className="form-label" htmlFor="id">
-                    ID
-                  </label>
-                  <input
-                    className="form-control"
-                    id="id"
-                    type="text"
-                    disabled
-                    value={productId}
-                  ></input>
-                </div>
-                <div className="mb-3">
-                  <label className="form-label" htmlFor="name">
-                    Name
-                  </label>
-                  <input
-                    className="form-control"
-                    id="name"
-                    type="text"
-                    placeholder="Enter name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  ></input>
-                </div>
-                <div className="row mb-3">
-                  <div className="col">
-                    <label className="form-label" htmlFor="price">
-                      Price
-                    </label>
-                    <input
-                      className="form-control"
-                      id="price"
-                      type="text"
-                      placeholder="Enter price"
-                      value={price}
-                      onChange={(e) => setPrice(e.target.value)}
-                    ></input>
-                  </div>
-                  <div className="col">
-                    <label className="form-label" htmlFor="countInStock">
-                      Stock
-                    </label>
-                    <input
-                      className="form-control"
-                      id="countInStock"
-                      type="text"
-                      placeholder="Enter countInStock"
-                      value={countInStock}
-                      onChange={(e) => setCountInStock(e.target.value)}
-                    ></input>
-                  </div>
-                </div>
-                <div className="row mb-3">
-                  <div className="col">
-                    <label className="form-label" htmlFor="category">
-                      Category
-                    </label>
-                    <input
-                      className="form-control"
-                      id="category"
-                      type="text"
-                      placeholder="Enter category"
-                      value={category}
-                      onChange={(e) => setCategory(e.target.value)}
-                    ></input>
-                  </div>
-                  <div className="col">
-                    <label className="form-label" htmlFor="brand">
-                      Brand
-                    </label>
-                    <input
-                      className="form-control"
-                      id="brand"
-                      type="text"
-                      placeholder="Enter brand"
-                      value={brand}
-                      onChange={(e) => setBrand(e.target.value)}
-                    ></input>
-                  </div>
-                </div>
+  useEffect(() => {
+    if (successUpdate) {
+      toast.success("Product updated successfully.");
+      props.history.push("/productlist");
+    }
 
-                {/* <div>
+    if (!product || product._id !== productId || successUpdate) {
+      dispatch({ type: PRODUCT_UPDATE_RESET });
+      dispatch(fetchProductDetail(productId));
+    } else {
+      setName(product.name);
+      setPrice(product.price);
+      setImage(product.image);
+      setCategory(product.category);
+      setCountInStock(product.countInStock);
+      setBrand(product.brand);
+      setDescription(product.description);
+    }
+
+    if (errorUpdate) {
+      toast.error(errorUpdate);
+    }
+    if (errorUpload) {
+      toast.error(errorUpload);
+    }
+  }, [
+    dispatch,
+    productId,
+    product,
+    props.history,
+    successUpdate,
+    errorUpdate,
+    errorUpload,
+  ]);
+
+  return (
+    <>
+      <div>
+        <ToastContainer position="bottom-right" />
+      </div>
+      <div className="container my-5" style={{ width: "50%" }}>
+        <div className="card shadow">
+          <div className="card-header">
+            <span className="fs-4">Edit Product</span>
+          </div>
+          <div className="card-body">
+            <form className="mx-5" onSubmit={submitHandler}>
+              {loading ? (
+                <LoadingBox />
+              ) : error ? (
+                <MessageBox variant="danger">{error}</MessageBox>
+              ) : (
+                <>
+                  <div className="mb-3">
+                    <label className="form-label" htmlFor="id">
+                      ID
+                    </label>
+                    <input
+                      className="form-control"
+                      id="id"
+                      type="text"
+                      disabled
+                      value={productId}
+                    ></input>
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label" htmlFor="name">
+                      Name
+                    </label>
+                    <input
+                      className="form-control"
+                      id="name"
+                      type="text"
+                      placeholder="Enter name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    ></input>
+                  </div>
+                  <div className="row mb-3">
+                    <div className="col">
+                      <label className="form-label" htmlFor="price">
+                        Price
+                      </label>
+                      <input
+                        className="form-control"
+                        id="price"
+                        type="text"
+                        placeholder="Enter price"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                      ></input>
+                    </div>
+                    <div className="col">
+                      <label className="form-label" htmlFor="countInStock">
+                        Stock
+                      </label>
+                      <input
+                        className="form-control"
+                        id="countInStock"
+                        type="text"
+                        placeholder="Enter countInStock"
+                        value={countInStock}
+                        onChange={(e) => setCountInStock(e.target.value)}
+                      ></input>
+                    </div>
+                  </div>
+                  <div className="row mb-3">
+                    <div className="col">
+                      <label className="form-label" htmlFor="category">
+                        Category
+                      </label>
+                      <input
+                        className="form-control"
+                        id="category"
+                        type="text"
+                        placeholder="Enter category"
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                      ></input>
+                    </div>
+                    <div className="col">
+                      <label className="form-label" htmlFor="brand">
+                        Brand
+                      </label>
+                      <input
+                        className="form-control"
+                        id="brand"
+                        type="text"
+                        placeholder="Enter brand"
+                        value={brand}
+                        onChange={(e) => setBrand(e.target.value)}
+                      ></input>
+                    </div>
+                  </div>
+
+                  {/* <div>
               <label htmlFor="image">Image</label>
               <input
                 id="image"
@@ -197,51 +216,49 @@ function ProductEdit(props) {
                 onChange={(e) => setImage(e.target.value)}
               ></input>
             </div> */}
-                <div className="mb-3">
-                  <label className="form-label" htmlFor="imageFile">
-                    Image File
-                  </label>
-                  <input
-                    className="form-control"
-                    id="imageFile"
-                    type="file"
-                    accept="image/jpeg"
-                    label="Choose image"
-                    onChange={uploadFileHandler}
-                  ></input>
-                  {loadingUpload && <LoadingBox />}
-                  {errorUpload && (
-                    <MessageBox variant="danger">{errorUpload}</MessageBox>
-                  )}
-                </div>
-                <div className="mb-3">
-                  <label className="form-label" htmlFor="description">
-                    Description
-                  </label>
-                  <textarea
-                    className="form-control"
-                    id="description"
-                    rows="4"
-                    type="text"
-                    placeholder="Enter description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                  ></textarea>
-                </div>
-                <div className="mb-3 d-flex justify-content-end">
-                  <button className="btn btn-primary me-2" type="submit">
-                    Update
-                  </button>
-                  <button className="btn btn-secondary" type="button">
-                    Close
-                  </button>
-                </div>
-              </>
-            )}
-          </form>
+                  <div className="mb-3">
+                    <label className="form-label" htmlFor="imageFile">
+                      Image File
+                    </label>
+                    <input
+                      className="form-control"
+                      id="imageFile"
+                      type="file"
+                      accept="image/jpeg"
+                      label="Choose image"
+                      onChange={uploadFileHandler}
+                    ></input>
+                    {loadingUpload && <LoadingBox />}
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label" htmlFor="description">
+                      Description
+                    </label>
+                    <textarea
+                      className="form-control"
+                      id="description"
+                      rows="4"
+                      type="text"
+                      placeholder="Enter description"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                    ></textarea>
+                  </div>
+                  <div className="mb-3 d-flex justify-content-end">
+                    <button className="btn btn-primary me-2" type="submit">
+                      Update
+                    </button>
+                    <button className="btn btn-secondary" type="button">
+                      Close
+                    </button>
+                  </div>
+                </>
+              )}
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

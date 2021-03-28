@@ -6,6 +6,8 @@ import { PayPalButton } from "react-paypal-button-v2";
 import LoadingBox from "../../components/common/LoadingBox";
 import MessageBox from "../../components/common/MessageBox";
 import SummaryCard from "../../components/order/SummaryCard";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   deliverOrder,
@@ -69,7 +71,28 @@ function OrderDetails(props) {
         }
       }
     }
-  }, [dispatch, order, orderId, successPay, successDeliver]);
+
+    if (errorDeliver) {
+      toast.error(errorDeliver);
+    }
+    if (errorPay) {
+      toast.error(errorPay);
+    }
+    if (successDeliver) {
+      toast.success("Order delivered successfully.");
+    }
+    if (successPay) {
+      toast.success("Order paid successfully.");
+    }
+  }, [
+    dispatch,
+    order,
+    orderId,
+    successPay,
+    successDeliver,
+    errorPay,
+    errorDeliver,
+  ]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(order, paymentResult));
@@ -79,44 +102,52 @@ function OrderDetails(props) {
     dispatch(deliverOrder(orderId));
   };
 
-  return loading ? (
-    <LoadingBox />
-  ) : error ? (
-    <MessageBox variant="danger" />
-  ) : (
-    <div className="container mt-3">
-      <span className="fs-4">Order: {order._id}</span>
-      <div className="row">
-        <div className="col-8">
-          <ShippingCard
-            shippingAddress={order.shippingAddress}
-            order={order}
-            isDeliver="true"
-          />
-
-          <PaymentCard
-            paymentMethod={order.paymentMethod}
-            order={order}
-            isDeliver="true"
-          />
-
-          <ItemsCard orderItems={order.orderItems} />
-        </div>
-
-        <div className="col-4 mt-3">
-          <SummaryCard
-            order={order}
-            userInfo={userInfo}
-            sdkLoaded={sdkLoaded}
-            errorPay={errorPay}
-            loadingPay={loadingPay}
-            isDeliver="true"
-            deliverHandler={deliverHandler}
-            successPaymentHandler={successPaymentHandler}
-          />
-        </div>
+  return (
+    <>
+      <div>
+        <ToastContainer position="bottom-right" />
       </div>
-    </div>
+
+      {loading ? (
+        <LoadingBox />
+      ) : error ? (
+        <MessageBox variant="danger" />
+      ) : (
+        <div className="container mt-3">
+          <span className="fs-4">Order: {order._id}</span>
+          <div className="row">
+            <div className="col-8">
+              <ShippingCard
+                shippingAddress={order.shippingAddress}
+                order={order}
+                isDeliver="true"
+              />
+
+              <PaymentCard
+                paymentMethod={order.paymentMethod}
+                order={order}
+                isDeliver="true"
+              />
+
+              <ItemsCard orderItems={order.orderItems} />
+            </div>
+
+            <div className="col-4 mt-3">
+              <SummaryCard
+                order={order}
+                userInfo={userInfo}
+                sdkLoaded={sdkLoaded}
+                errorPay={errorPay}
+                loadingPay={loadingPay}
+                isDeliver="true"
+                deliverHandler={deliverHandler}
+                successPaymentHandler={successPaymentHandler}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
