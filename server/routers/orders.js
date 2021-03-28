@@ -24,8 +24,19 @@ router.get("/list", isAuth, isAdmin, async (req, res) => {
 
 // fetch all orders of an user
 router.get("/history", isAuth, async (req, res) => {
-  const orders = await Order.find({ userId: req.userInfo._id });
-  res.send(orders);
+  const pageSize = 10; // Number of products each page
+  const page = Number(req.query.currPage) || 1;
+
+  const sortOrder = { createdAt: -1 };
+
+  const count = await Order.count({});
+
+  const orders = await Order.find({ userId: req.userInfo._id })
+    .sort(sortOrder)
+    .skip(pageSize * (page - 1))
+    .limit(pageSize);
+
+  res.send({ orders, count, page, pages: Math.ceil(count / pageSize) });
 });
 
 // Create order api

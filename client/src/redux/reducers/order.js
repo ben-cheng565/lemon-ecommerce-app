@@ -81,7 +81,13 @@ export const orderHistory = (state = { orders: [] }, action) => {
     case ORDER_HISTORY_REQUEST:
       return { loading: true };
     case ORDER_HISTORY_SUCCESS:
-      return { loading: false, orders: action.payload };
+      return {
+        loading: false,
+        orders: action.payload.orders,
+        page: action.payload.page,
+        pages: action.payload.pages,
+        count: action.payload.count,
+      };
     case ORDER_HISTORY_FAIL:
       return { loading: false, error: action.payload };
 

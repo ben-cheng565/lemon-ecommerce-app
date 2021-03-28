@@ -110,19 +110,23 @@ export const payOrder = (order, paymentResult) => async (
 };
 
 // action for getting history orders of a user
-export const getOrderHistory = () => async (dispatch, getState) => {
+export const getOrderHistory = ({ currPage = 1 }) => async (
+  dispatch,
+  getState
+) => {
   dispatch({ type: ORDER_HISTORY_REQUEST });
   const {
     user: { userInfo },
   } = getState();
 
   try {
-    const { data } = await axios.get("/orders/history", {
+    const { data } = await axios.get(`/orders/history?currPage=${currPage}`, {
       headers: {
         Authorization: `Bearer ${userInfo.token}`,
       },
     });
 
+    console.log(data);
     dispatch({ type: ORDER_HISTORY_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
