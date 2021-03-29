@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import LoadingBox from "../../components/common/LoadingBox";
 import MessageBox from "../../components/common/MessageBox";
-import Product from "../../components/product/Product";
+import ProductCard from "../../components/product/ProductCard";
+import Product from "../../components/product/ProductCard";
 import { fetchProducts } from "../../redux/actions/product";
 import { getKeyWord } from "../../util";
 import CategoryList from "./CategoryList";
@@ -66,33 +67,51 @@ function Search(props) {
           </select>
         </div>
       </div>
-      <div className="row top">
-        <div className="col-1">
+      <div className="row">
+        <div className="col-2 ms-5 mt-2">
           <CategoryList category={category} getFilterUrl={getFilterUrl} />
         </div>
-        <div className="col-3">
+        <div className="col-9">
           {loading ? (
             <LoadingBox />
           ) : error ? (
             <MessageBox variant="danger">{error}</MessageBox>
           ) : (
-            <>
-              <div className="row center">
+            <div className="container">
+              <div className="row d-flex justify-content-start">
                 {products.map((product) => (
-                  <Product key={product._id} product={product} />
+                  <ProductCard key={product._id} product={product} />
                 ))}
               </div>
-              <div className="row center pagination">
-                {[...Array(pages).keys()].map((p) => (
-                  <Link
-                    className={p + 1 === page ? "active" : ""}
-                    to={getFilterUrl({ page: p + 1 })}
-                  >
-                    {p + 1}
-                  </Link>
-                ))}
+
+              <div className="row mt-3 justify-content-end pe-3">
+                <div className="col-auto">
+                  <ul class="pagination">
+                    <li class="page-item">
+                      <a class="page-link" href="#">
+                        <span>&laquo;</span>
+                      </a>
+                    </li>
+                    {[...Array(pages).keys()].map((p) => (
+                      <li class="page-item">
+                        <Link
+                          className="page-link"
+                          to={getFilterUrl({ page: p + 1 })}
+                        >
+                          {p + 1}
+                        </Link>
+                      </li>
+                    ))}
+
+                    <li class="page-item">
+                      <a class="page-link" href="#">
+                        <span>&raquo;</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
-            </>
+            </div>
           )}
         </div>
       </div>

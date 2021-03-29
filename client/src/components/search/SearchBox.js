@@ -6,26 +6,30 @@ function SearchBox(props) {
   // the default keyword is "all"
   const [name, setName] = useState("all");
 
-  const submitHandler = (e) => {
+  const handleSearch = (e) => {
     e.preventDefault();
 
-    props.history.push(`/search?name=${name}`);
+    // props.history.push(`/home?name=${name}`);
   };
 
   return (
-    <div>
-      <form className="search" onSubmit={submitHandler}>
-        <div className="row">
-          <input
-            type="text"
-            name="keyWords"
-            id="keyWords"
-            onChange={(e) => setName(e.target.value)}
-          ></input>
-          <button>
-            <i className="fa fa-search"></i>
-          </button>
-        </div>
+    <div className="row my-5 m-auto" style={{ width: "50%" }}>
+      {/* It is more reasonable to move the search box from navbar to home page */}
+      <form
+        className="d-flex justify-content-center"
+        onSubmit={props.handleSearch}
+      >
+        <input
+          className="form-control me-2 col-9"
+          type="search"
+          value={props.name === "all" ? "" : props.name}
+          placeholder="Search"
+          style={{ cursor: "text" }}
+          onChange={(e) => props.setName(e.target.value)}
+        />
+        <button className="btn btn-outline-success col-3 ms-2" type="submit">
+          Search
+        </button>
       </form>
     </div>
   );

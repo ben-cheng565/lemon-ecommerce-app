@@ -1,22 +1,61 @@
-import React, { useEffect } from "react";
-import Product from "../components/product/Product";
+import React, { useEffect, useState } from "react";
+import Product from "../components/product/ProductCard";
 import LoadingBox from "../components/common/LoadingBox";
 import MessageBox from "../components/common/MessageBox";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../redux/actions/product";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import { getKeyWord } from "../util";
+import CategoryList from "./search/CategoryList";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Signin from "../components/user/signin/Signin";
+import ProductCard from "../components/product/ProductCard";
+import Products from "../components/product/Products";
+import SearchBox from "../components/search/SearchBox";
 
 function Home(props) {
   const dispatch = useDispatch();
   let search = props.location.search;
+  const searchName = getKeyWord(search, "name");
+  const category = getKeyWord(search, "category");
+  const sort = getKeyWord(search, "sort");
   const currPage = getKeyWord(search, "currPage");
   const productData = useSelector((state) => state.products);
   const { products, loading, error, page, pages } = productData;
 
+  // the default keyword is "all"
+  const [name, setName] = useState("all");
+
   useEffect(() => {
-    dispatch(fetchProducts({ currPage }));
-  }, [dispatch, currPage]);
+    if (searchName === "all") {
+      setName("all");
+    }
+
+    dispatch(
+      fetchProducts({
+        category: category !== "all" ? category : "",
+        currPage,
+        name: searchName !== "all" ? searchName : "",
+        sort,
+      })
+    );
+  }, [dispatch, currPage, category, sort, searchName]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    props.history.push(`/home?name=${name}`);
+  };
+
+  // generate url according to filter params
+  const getFilterUrl = (filter) => {
+    const filterPage = filter.page || currPage;
+    const filterCategory = filter.category || category;
+    const filterName = filter.name || name;
+    const sortOrder = filter.sort || sort;
+
+    return `/home?name=${filterName}&category=${filterCategory}&sort=${sortOrder}&currPage=${filterPage}`;
+  };
 
   return (
     <div>
@@ -26,58 +65,39 @@ function Home(props) {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          <div className="row py-5 m-auto" style={{ width: "50%" }}>
-            {/* It is more reasonable to move the search box from navbar to home page */}
-            <form className="d-flex justify-content-center">
-              <input
-                className="form-control me-2 col-9"
-                type="search"
-                placeholder="Search"
-                style={{ cursor: "text" }}
-              />
-              <button
-                className="btn btn-outline-success col-3 ms-2"
-                type="submit"
-              >
-                Search
-              </button>
-            </form>
-          </div>
-          {/* Display products list */}
-          <div className="container">
-            <div className="row justify-content-around px-3">
-              {products.map((product) => (
-                <Product key={product._id} product={product} />
-              ))}
+          <div className="row">
+            <div className="col-2 ms-5 mt-5">
+              <CategoryList category={category} getFilterUrl={getFilterUrl} />
             </div>
 
-            {/* pagination for products list */}
-            <div className="row mt-3 justify-content-end pe-3">
-              <div className="col-auto">
-                <ul class="pagination">
-                  <li class="page-item">
-                    <a class="page-link" href="#">
-                      <span>&laquo;</span>
-                    </a>
-                  </li>
-                  {[...Array(pages).keys()].map((p) => (
-                    <li class="page-item">
-                      <Link
-                        className="page-link"
-                        to={`/home?currPage=${p + 1}`}
-                      >
-                        {p + 1}
-                      </Link>
-                    </li>
-                  ))}
-
-                  <li class="page-item">
-                    <a class="page-link" href="#">
-                      <span>&raquo;</span>
-                    </a>
-                  </li>
-                </ul>
+            <div className="col-9 container ">
+              <SearchBox
+                name={name}
+                setName={setName}
+                handleSearch={handleSearch}
+              />
+              <div className="row">
+                <div className="col-10 d-flex justify-content-start">
+                  <div>
+                    {/* Sort by{" "} */}
+                    <select
+                      className="form-select"
+                      value={sort}
+                      onChange={(e) =>
+                        props.history.push(
+                          getFilterUrl({ sort: e.target.value })
+                        )
+                      }
+                    >
+                      <option value="none">Sort By</option>
+                      <option value="priceAsc">Price: Low to High</option>
+                      <option value="priceDesc">Price: High to Low</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="col-2"></div>
               </div>
+              <Products products={products} pages={pages} />
             </div>
           </div>
         </>

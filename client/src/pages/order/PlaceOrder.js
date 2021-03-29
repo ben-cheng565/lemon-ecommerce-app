@@ -44,7 +44,7 @@ function PlaceOrder(props) {
       // dispatch({ type: ORDER_CREATE_RESET });
     }
     if (error) {
-      toast.success("Order created failed.");
+      toast.error("Order created failed.");
     }
   }, [dispatch, order, props.history, success, error]);
 
