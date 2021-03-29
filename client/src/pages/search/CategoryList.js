@@ -16,26 +16,38 @@ function CategoryList(props) {
   }, [dispatch]);
 
   return (
-    <div className="col-1" style={{ backgroundColor: "#f4f4f4" }}>
-      <h4>Category</h4>
-      {loading ? (
-        <LoadingBox />
-      ) : error ? (
-        <MessageBox variant="danger">{error}</MessageBox>
-      ) : (
-        <ul>
-          {categories.map((c) => (
-            <li key={c}>
+    <div className="card" /* style={{ backgroundColor: "#f4f4f4" }} */>
+      <div className="card-header">
+        <span className="fs-5">Categories</span>
+      </div>
+      <div className="card-body">
+        {loading ? (
+          <LoadingBox />
+        ) : error ? (
+          <MessageBox variant="danger">{error}</MessageBox>
+        ) : (
+          <ul class="list-group list-group-flush">
+            <li key="all" class="list-group-item">
               <Link
-                className={c === props.category ? "active" : ""}
-                to={props.getFilterUrl({ category: c })}
+                className={"All" === props.category ? "active" : ""}
+                to={props.getFilterUrl({ category: "all" })}
               >
-                {c}
+                All
               </Link>
             </li>
-          ))}
-        </ul>
-      )}
+            {categories.map((c) => (
+              <li key={c} className="list-group-item ms-2">
+                <Link
+                  className={c === props.category ? "active" : ""}
+                  to={props.getFilterUrl({ category: c })}
+                >
+                  {c}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 }
