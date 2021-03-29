@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Rating from "../common/Rating";
 
-function Product(props) {
+function ProductCard(props) {
   const { product } = props;
 
   return (
-    <div className="card p-0 m-2" key={product._id} style={{ width: "18rem" }}>
+    <div className="card p-0 m-2" key={product._id} style={{ width: "15rem" }}>
       <Link to={`/product/${product._id}`}>
         <img src={product.image} alt={product.name} className="card-img-top" />
       </Link>
@@ -34,4 +34,4 @@ function Product(props) {
   );
 }
 
-export default Product;
+export default ProductCard;
