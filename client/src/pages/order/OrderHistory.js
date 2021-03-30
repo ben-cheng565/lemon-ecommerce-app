@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import LoadingBox from "../../components/common/LoadingBox";
 import MessageBox from "../../components/common/MessageBox";
+import Pagination from "../../components/common/Pagination";
 import { getOrderHistory } from "../../redux/actions/order";
 import { getKeyWord } from "../../util";
 
@@ -74,37 +75,7 @@ function OrderHistory(props) {
                   ))}
                 </tbody>
               </table>
-              <div className="row mt-3 justify-content-end">
-                <div className="col-auto">
-                  <ul class="pagination">
-                    <li class="page-item">
-                      <a class="page-link" href="#">
-                        <span>&laquo;</span>
-                      </a>
-                    </li>
-                    {[...Array(pages).keys()].map((p) => (
-                      <li
-                        class={
-                          p + 1 === page ? "page-item active" : "page-item"
-                        }
-                      >
-                        <Link
-                          className="page-link"
-                          to={`/orderhistory?currPage=${p + 1}`}
-                        >
-                          {p + 1}
-                        </Link>
-                      </li>
-                    ))}
-
-                    <li class="page-item">
-                      <a class="page-link" href="#">
-                        <span>&raquo;</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+              <Pagination pages={pages} page={page} baseUrl="/orderhistory" />
             </>
           )}
         </div>

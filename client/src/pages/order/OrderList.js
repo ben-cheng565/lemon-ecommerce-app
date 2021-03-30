@@ -8,6 +8,7 @@ import { ORDER_DELETE_RESET } from "../../redux/actionTypes";
 import { getKeyWord } from "../../util";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Pagination from "../../components/common/Pagination";
 
 function OrderList(props) {
   let search = props.location.search;
@@ -109,37 +110,7 @@ function OrderList(props) {
                     ))}
                   </tbody>
                 </table>
-                <div className="row mt-3 justify-content-end">
-                  <div className="col-auto">
-                    <ul class="pagination">
-                      <li class="page-item">
-                        <a class="page-link" href="#">
-                          <span>&laquo;</span>
-                        </a>
-                      </li>
-                      {[...Array(pages).keys()].map((p) => (
-                        <li
-                          class={
-                            p + 1 === page ? "page-item active" : "page-item"
-                          }
-                        >
-                          <Link
-                            className="page-link"
-                            to={`/orderlist?currPage=${p + 1}`}
-                          >
-                            {p + 1}
-                          </Link>
-                        </li>
-                      ))}
-
-                      <li class="page-item">
-                        <a class="page-link" href="#">
-                          <span>&raquo;</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+                <Pagination pages={pages} page={page} baseUrl="/orderlist" />
               </>
             )}
           </div>

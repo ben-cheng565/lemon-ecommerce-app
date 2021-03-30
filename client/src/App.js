@@ -16,7 +16,6 @@ import ProductEdit from "./pages/product/ProductEdit";
 import OrderList from "./pages/order/OrderList";
 import UserList from "./pages/user/UserList";
 import UserEdit from "./pages/user/UserEdit";
-import Search from "./pages/search/Search";
 import MapTool from "./pages/shipping/MapTool";
 
 function App() {
@@ -43,7 +42,6 @@ function App() {
             <Route path="/userlist" component={UserList} />
             <Route path="/user/edit/:id" component={UserEdit} />
             <Route path="/productlist" component={ProductList} />
-            <Route path="/search" component={Search} />
             <Route path="/map" component={MapTool} />
             <Route path="/home" component={Home} />
             <Route path="/" exact component={Home} />

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import LoadingBox from "../../components/common/LoadingBox";
 import MessageBox from "../../components/common/MessageBox";
 import {
@@ -16,6 +15,7 @@ import {
 import { getKeyWord } from "../../util";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Pagination from "../../components/common/Pagination";
 
 function ProductList(props) {
   let search = props.location.search;
@@ -83,20 +83,6 @@ function ProductList(props) {
         <ToastContainer position="bottom-right" />
       </div>
       <div className="container m-5">
-        <div
-          class="toast align-items-center text-white bg-primary border-0"
-          role="alert"
-        >
-          <div class="d-flex">
-            <div class="toast-body">Hello, world! This is a toast message.</div>
-            <button
-              type="button"
-              class="btn-close btn-close-white me-2 m-auto"
-              data-bs-dismiss="toast"
-            ></button>
-          </div>
-        </div>
-
         <div className="card">
           <div className="card-header">
             <div className="row">
@@ -164,37 +150,7 @@ function ProductList(props) {
                     ))}
                   </tbody>
                 </table>
-                <div className="row mt-3 justify-content-end">
-                  <div className="col-auto">
-                    <ul class="pagination">
-                      <li class="page-item">
-                        <a class="page-link" href="#">
-                          <span>&laquo;</span>
-                        </a>
-                      </li>
-                      {[...Array(pages).keys()].map((p) => (
-                        <li
-                          class={
-                            p + 1 === page ? "page-item active" : "page-item"
-                          }
-                        >
-                          <Link
-                            className="page-link"
-                            to={`/productlist?currPage=${p + 1}`}
-                          >
-                            {p + 1}
-                          </Link>
-                        </li>
-                      ))}
-
-                      <li class="page-item">
-                        <a class="page-link" href="#">
-                          <span>&raquo;</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+                <Pagination pages={pages} page={page} baseUrl="/productlist" />
               </>
             )}
           </div>

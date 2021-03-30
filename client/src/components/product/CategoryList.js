@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import LoadingBox from "../../components/common/LoadingBox";
-import MessageBox from "../../components/common/MessageBox";
+import LoadingBox from "../common/LoadingBox";
+import MessageBox from "../common/MessageBox";
 import { getProductCategories } from "../../redux/actions/product";
 
 function CategoryList(props) {

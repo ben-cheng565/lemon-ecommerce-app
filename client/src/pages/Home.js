@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Product from "../components/product/ProductCard";
 import LoadingBox from "../components/common/LoadingBox";
 import MessageBox from "../components/common/MessageBox";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../redux/actions/product";
-import { Link, useRouteMatch } from "react-router-dom";
 import { getKeyWord } from "../util";
-import CategoryList from "./search/CategoryList";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Signin from "../components/user/signin/Signin";
-import ProductCard from "../components/product/ProductCard";
+import CategoryList from "../components/product/CategoryList";
 import Products from "../components/product/Products";
 import SearchBox from "../components/search/SearchBox";
 import SortBy from "../components/common/SortBy";
@@ -86,7 +81,7 @@ function Home(props) {
 
               <SortBy sort={sort} handleSortChange={handleSortChange} />
 
-              <Products products={products} pages={pages} />
+              <Products products={products} pages={pages} page={page} />
             </div>
           </div>
         </>
