@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import CheckOutSteps from "../../components/cart/checkout/CheckOutSteps";
-import { savePaymentMethod } from "../../redux/actions/cart";
+import CheckOutSteps from "../../../../components/cart/checkout/CheckOutSteps";
+import { savePaymentMethod } from "../../../../redux/actions/cart";
 
 // import "./PaymentMethod.css";
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import CheckOutSteps from "../../components/cart/checkout/CheckOutSteps";
-import { saveShippingAddress } from "../../redux/actions/cart";
+import CheckOutSteps from "../../../../components/cart/checkout/CheckOutSteps";
+import { saveShippingAddress } from "../../../../redux/actions/cart";
 
 function ShippingAddress(props) {
   // if have not signed in, go to signin page

@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { PayPalButton } from "react-paypal-button-v2";
-import LoadingBox from "../../components/common/LoadingBox";
-import MessageBox from "../../components/common/MessageBox";
-import SummaryCard from "../../components/order/SummaryCard";
+import LoadingBox from "../../../../components/common/LoadingBox";
+import MessageBox from "../../../../components/common/MessageBox";
+import SummaryCard from "../../../../components/order/SummaryCard";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -13,15 +13,15 @@ import {
   deliverOrder,
   getOrderDetails,
   payOrder,
-} from "../../redux/actions/order";
+} from "../../../../redux/actions/order";
 import {
   ORDER_DELIVER_REQUEST,
   ORDER_DELIVER_RESET,
   ORDER_PAY_RESET,
-} from "../../redux/actionTypes";
-import ShippingCard from "../../components/order/ShippingCard";
-import ItemsCard from "../../components/order/ItemsCard";
-import PaymentCard from "../../components/order/PaymentCard";
+} from "../../../../redux/actionTypes";
+import ShippingCard from "../../../../components/order/ShippingCard";
+import ItemsCard from "../../../../components/order/ItemsCard";
+import PaymentCard from "../../../../components/order/PaymentCard";
 
 function OrderDetails(props) {
   const orderId = props.match.params.id;

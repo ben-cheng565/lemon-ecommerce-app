@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import CheckOutSteps from "../../components/cart/checkout/CheckOutSteps";
-import { createOrder } from "../../redux/actions/order";
-import { ORDER_CREATE_RESET } from "../../redux/actionTypes";
-import SummaryCard from "../../components/order/SummaryCard";
-import ShippingCard from "../../components/order/ShippingCard";
-import ItemsCard from "../../components/order/ItemsCard";
-import PaymentCard from "../../components/order/PaymentCard";
+import CheckOutSteps from "../../../../components/cart/checkout/CheckOutSteps";
+import { createOrder } from "../../../../redux/actions/order";
+import { ORDER_CREATE_RESET } from "../../../../redux/actionTypes";
+import SummaryCard from "../../../../components/order/SummaryCard";
+import ShippingCard from "../../../../components/order/ShippingCard";
+import ItemsCard from "../../../../components/order/ItemsCard";
+import PaymentCard from "../../../../components/order/PaymentCard";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

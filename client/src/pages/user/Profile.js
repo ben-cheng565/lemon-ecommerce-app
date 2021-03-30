@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserDetail, updateUserProfile } from "../redux/actions/user";
-import LoadingBox from "../components/common/LoadingBox";
-import MessageBox from "../components/common/MessageBox";
-import { USER_UPDATE_RESET } from "../redux/actionTypes";
+import { getUserDetail, updateUserProfile } from "../../redux/actions/user";
+import LoadingBox from "../../components/common/LoadingBox";
+import MessageBox from "../../components/common/MessageBox";
+import { USER_UPDATE_RESET } from "../../redux/actionTypes";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

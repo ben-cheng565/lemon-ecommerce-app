@@ -5,18 +5,18 @@ import ProductDetail from "./components/product/detail/ProductDetail";
 import Signin from "./components/user/signin/Signin";
 import Signup from "./components/user/signup/Signup";
 import NavBar from "./components/navBar/NavBar";
-import ShippingAddress from "./pages/shipping/ShippingAddress";
-import PaymentMethod from "./pages/payment/PaymentMethod";
-import PlaceOrder from "./pages/order/PlaceOrder";
-import OrderDetails from "./pages/order/OrderDetails";
+import ShippingAddress from "./pages/order/orderSteps/shipping/ShippingAddress";
+import PaymentMethod from "./pages/order/orderSteps/payment/PaymentMethod";
+import PlaceOrder from "./pages/order/orderSteps/placeOrder/PlaceOrder";
+import OrderDetails from "./pages/order/orderSteps/orderDetails/OrderDetails";
 import OrderHistory from "./pages/order/OrderHistory";
-import Profile from "./pages/Profile";
+import Profile from "./pages/user/Profile";
 import ProductList from "./pages/product/ProductList";
 import ProductEdit from "./pages/product/ProductEdit";
 import OrderList from "./pages/order/OrderList";
 import UserList from "./pages/user/UserList";
 import UserEdit from "./pages/user/UserEdit";
-import MapTool from "./pages/shipping/MapTool";
+import MapTool from "./pages/order/orderSteps/shipping/MapTool";
 
 function App() {
   return (
