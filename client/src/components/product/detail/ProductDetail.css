@@ -1,9 +1,0 @@
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; /* horizontally */
-  align-items: center; /* vertically */
-}
-.row.top {
-  align-items: flex-start;
-}
