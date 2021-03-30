@@ -26,10 +26,10 @@ function CategoryList(props) {
         ) : error ? (
           <MessageBox variant="danger">{error}</MessageBox>
         ) : (
-          <ul class="list-group list-group-flush">
-            <li key="all" class="list-group-item">
+          <ul className="list-group list-group-flush">
+            <li key="all" className="list-group-item">
               <Link
-                className={"All" === props.category ? "active" : ""}
+                className={"all" === props.category ? "fw-bolder" : ""}
                 to={props.getFilterUrl({ category: "all" })}
               >
                 All
@@ -38,7 +38,7 @@ function CategoryList(props) {
             {categories.map((c) => (
               <li key={c} className="list-group-item ms-2">
                 <Link
-                  className={c === props.category ? "active" : ""}
+                  className={c === props.category ? "fw-bolder" : ""}
                   to={props.getFilterUrl({ category: c })}
                 >
                   {c}
