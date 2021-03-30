@@ -12,6 +12,7 @@ import Signin from "../components/user/signin/Signin";
 import ProductCard from "../components/product/ProductCard";
 import Products from "../components/product/Products";
 import SearchBox from "../components/search/SearchBox";
+import SortBy from "../components/common/SortBy";
 
 function Home(props) {
   const dispatch = useDispatch();
@@ -47,6 +48,12 @@ function Home(props) {
     props.history.push(`/home?name=${name}`);
   };
 
+  const handleSortChange = (e) => {
+    e.preventDefault();
+
+    props.history.push(getFilterUrl({ sort: e.target.value }));
+  };
+
   // generate url according to filter params
   const getFilterUrl = (filter) => {
     const filterPage = filter.page || currPage;
@@ -76,27 +83,9 @@ function Home(props) {
                 setName={setName}
                 handleSearch={handleSearch}
               />
-              <div className="row">
-                <div className="col-10 d-flex justify-content-start">
-                  <div>
-                    {/* Sort by{" "} */}
-                    <select
-                      className="form-select"
-                      value={sort}
-                      onChange={(e) =>
-                        props.history.push(
-                          getFilterUrl({ sort: e.target.value })
-                        )
-                      }
-                    >
-                      <option value="none">Sort By</option>
-                      <option value="priceAsc">Price: Low to High</option>
-                      <option value="priceDesc">Price: High to Low</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="col-2"></div>
-              </div>
+
+              <SortBy sort={sort} handleSortChange={handleSortChange} />
+
               <Products products={products} pages={pages} />
             </div>
           </div>
