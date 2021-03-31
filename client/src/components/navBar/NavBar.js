@@ -65,9 +65,9 @@ function NavBar() {
           <div className="collapse navbar-collapse" id="navbarScroll">
             <ul className="navbar-nav navbar-nav-scroll ms-auto">
               {userInfo ? (
-                <li class="nav-item dropdown">
+                <li className="nav-item dropdown">
                   <Link
-                    class="nav-link dropdown-toggle active"
+                    className="nav-link dropdown-toggle active"
                     to="#"
                     id="navbarDropdown"
                     role="button"
@@ -89,7 +89,7 @@ function NavBar() {
               )}
               <li className="nav-item">
                 <Link to="/cart" className="nav-link active">
-                  <i class="fas fa-shopping-cart"></i> Cart
+                  <i className="fas fa-shopping-cart"></i> Cart
                   <CartBadge cartItems={cartItems} />
                 </Link>
               </li>

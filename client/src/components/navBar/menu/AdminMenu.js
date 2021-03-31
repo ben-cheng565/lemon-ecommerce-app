@@ -3,28 +3,28 @@ import { Link } from "react-router-dom";
 
 function AdminMenu(props) {
   return (
-    <ul class="dropdown-menu me-auto mb-2 dropdown-menu-dark">
+    <ul className="dropdown-menu me-auto mb-2 dropdown-menu-dark">
       <li>
         <Link className="dropdown-item" to="/productlist">
-          <i class="fas fa-boxes"></i> Products
+          <i className="fas fa-boxes"></i> Products
         </Link>
       </li>
       <li>
         <Link className="dropdown-item" to="/orderlist">
-          <i class="fas fa-history"></i> Orders
+          <i className="fas fa-history"></i> Orders
         </Link>
       </li>
       <li>
         <Link className="dropdown-item" to="/userlist">
-          <i class="fas fa-users-cog"></i> Users
+          <i className="fas fa-users-cog"></i> Users
         </Link>
       </li>
       <li>
-        <hr class="dropdown-divider" />
+        <hr className="dropdown-divider" />
       </li>
       <li>
         <Link className="dropdown-item" to="/" onClick={props.signoutHandler}>
-          <i class="fas fa-sign-out-alt"></i> Sign Out
+          <i className="fas fa-sign-out-alt"></i> Sign Out
         </Link>
       </li>
     </ul>

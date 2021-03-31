@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingBox from "../../components/common/LoadingBox";
 import MessageBox from "../../components/common/MessageBox";
@@ -19,6 +19,7 @@ import Pagination from "../../components/common/Pagination";
 
 function ProductList(props) {
   let search = props.location.search;
+
   const currPage = getKeyWord(search, "currPage");
   const dispatch = useDispatch();
   const productData = useSelector((state) => state.productList);

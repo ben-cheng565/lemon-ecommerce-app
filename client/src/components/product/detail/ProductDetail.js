@@ -79,7 +79,7 @@ function ProductDetail(props) {
           <div>
             <div className="ps-4 my-3">
               <Link to="/">
-                <i class="fas fa-chevron-circle-left"></i> Go Back
+                <i className="fas fa-chevron-circle-left"></i> Go Back
               </Link>
             </div>
             <div className="row">
@@ -141,7 +141,7 @@ function ProductDetail(props) {
                           <option value="5">5 - Excenllent</option>
                         </select>
                       </div>
-                      <div class="form-group mt-3">
+                      <div className="form-group mt-3">
                         <label for="comment">Comment</label>
                         <textarea
                           className="form-control mt-2"

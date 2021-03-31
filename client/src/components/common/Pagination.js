@@ -5,14 +5,23 @@ function Pagination(props) {
   return (
     <div className="row mt-3 justify-content-end">
       <div className="col-auto">
-        <ul class="pagination">
-          <li class="page-item">
-            <a class="page-link" href="#">
+        <ul className="pagination">
+          {/* check if current page is the first one */}
+          <li
+            className={props.page === 1 ? "page-item disabled" : "page-item"}
+            key="0"
+          >
+            <Link className="page-link" to={`${props.baseUrl}?currPage=1`}>
               <span>&laquo;</span>
-            </a>
+            </Link>
           </li>
           {[...Array(props.pages).keys()].map((p) => (
-            <li class={p + 1 === props.page ? "page-item active" : "page-item"}>
+            <li
+              className={
+                p + 1 === props.page ? "page-item active" : "page-item"
+              }
+              key={`${p + 1}`}
+            >
               <Link
                 className="page-link"
                 to={`${props.baseUrl}?currPage=${p + 1}`}
@@ -22,10 +31,19 @@ function Pagination(props) {
             </li>
           ))}
 
-          <li class="page-item">
-            <a class="page-link" href="#">
+          {/* chech if current page is the last one */}
+          <li
+            className={
+              props.page === props.pages ? "page-item disabled" : "page-item"
+            }
+            key={`${props.pages + 1}`}
+          >
+            <Link
+              className="page-link"
+              to={`${props.baseUrl}?currPage=${props.pages}`}
+            >
               <span>&raquo;</span>
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
