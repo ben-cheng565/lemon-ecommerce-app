@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addToCart, removeFromCart } from "../../redux/actions/cart";
 import MessageBox from "../common/MessageBox";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // import "./Cart.css";
 import CartItem from "./cartItem/CartItem";
@@ -24,7 +26,13 @@ function Cart(props) {
   }, [dispatch, productId, qty]);
 
   const removeFromCartHandler = (id) => {
-    dispatch(removeFromCart(id));
+    try {
+      dispatch(removeFromCart(id));
+
+      toast.success("Remove from cart successfully.");
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   const checkoutHandler = () => {
@@ -32,31 +40,39 @@ function Cart(props) {
   };
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-8 m-3">
-          <p className="fs-4">Shopping Cart</p>
-          {cartItems.length === 0 ? (
-            <MessageBox>
-              Cart is empty. <Link to="/">Go Shopping</Link>
-            </MessageBox>
-          ) : (
-            <ul className="list-group list-group-flush">
-              {cartItems.map((item) => (
-                <CartItem
-                  key={item.productId}
-                  item={item}
-                  removeFromCartHandler={removeFromCartHandler}
-                />
-              ))}
-            </ul>
-          )}
-        </div>
-        <div className="col-3 mt-5">
-          <CartTotal cartItems={cartItems} checkoutHandler={checkoutHandler} />
+    <>
+      <div>
+        <ToastContainer position="bottom-right" />
+      </div>
+      <div className="container">
+        <div className="row">
+          <div className="col-8 m-3">
+            <p className="fs-4">Shopping Cart</p>
+            {cartItems.length === 0 ? (
+              <MessageBox>
+                Cart is empty. <Link to="/">Go Shopping</Link>
+              </MessageBox>
+            ) : (
+              <ul className="list-group list-group-flush">
+                {cartItems.map((item) => (
+                  <CartItem
+                    key={item.productId}
+                    item={item}
+                    removeFromCartHandler={removeFromCartHandler}
+                  />
+                ))}
+              </ul>
+            )}
+          </div>
+          <div className="col-3 mt-5">
+            <CartTotal
+              cartItems={cartItems}
+              checkoutHandler={checkoutHandler}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
