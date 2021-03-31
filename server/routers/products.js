@@ -68,7 +68,7 @@ router.get("/init", async (req, res) => {
 router.get("/", async (req, res) => {
   const pageSize = 4; // Number of products each page
   const page = Number(req.query.currPage) || 1;
-  console.log(req.query.name);
+
   const name = req.query.name || "";
   const category = req.query.category || "";
   const sort = req.query.sort || "";

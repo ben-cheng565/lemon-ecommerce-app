@@ -20,18 +20,18 @@ function Home(props) {
   const { products, loading, error, page, pages } = productData;
 
   // the default keyword is "all"
-  const [name, setName] = useState("all");
-  console.log(sort);
+  const [name, setName] = useState("");
+
   useEffect(() => {
-    if (searchName === "all") {
-      setName("all");
+    if (searchName === "") {
+      setName("");
     }
 
     dispatch(
       fetchProducts({
-        category: category !== "all" ? category : "",
+        category: category === "all" ? "" : category,
         currPage,
-        name: searchName !== "all" ? searchName : "",
+        name,
         sort,
       })
     );
@@ -56,7 +56,23 @@ function Home(props) {
     const filterName = filter.name || name;
     const sortOrder = filter.sort || sort;
 
-    return `/home?name=${filterName}&category=${filterCategory}&sort=${sortOrder}&currPage=${filterPage}`;
+    let urlParams = "";
+
+    if (filterName) {
+      urlParams += `name=${filterName}&`;
+    }
+    if (filterCategory) {
+      urlParams += `category=${filterCategory}&`;
+    }
+    if (sortOrder) {
+      urlParams += `sort=${sortOrder}&`;
+    }
+
+    urlParams += `currPage=${filterPage}`;
+
+    let url = `/home?${urlParams}`;
+
+    return url;
   };
 
   return (
