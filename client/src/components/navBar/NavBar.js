@@ -33,9 +33,27 @@ function NavBar() {
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
-            Dandelion e-shop
+          <Link className="navbar-brand my-0 py-0 ms-4" to="/">
+            <span className="fs-2" style={{ color: "lightgreen" }}>
+              L{" "}
+            </span>
+            <span className="fs-3" style={{ color: "lightgreen" }}>
+              E M{" "}
+            </span>
+
+            <img
+              src="/images/lemon.svg"
+              alt=""
+              // width="25"
+              height="35"
+              className="mb-3"
+            />
+            <span className="fs-3" style={{ color: "lightgreen" }}>
+              {" "}
+              N
+            </span>
           </Link>
+
           <button
             className="navbar-toggler"
             type="button"
