@@ -14,7 +14,12 @@ function Products(props) {
 
       {/* pagination for products list */}
       <div className="me-5">
-        <Pagination pages={props.pages} page={props.page} baseUrl="/home" />
+        <Pagination
+          pages={props.pages}
+          page={props.page}
+          isHome={true}
+          getFilterUrl={props.getFilterUrl}
+        />
       </div>
     </>
   );

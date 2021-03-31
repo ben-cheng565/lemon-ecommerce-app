@@ -21,7 +21,7 @@ function Home(props) {
 
   // the default keyword is "all"
   const [name, setName] = useState("all");
-
+  console.log(sort);
   useEffect(() => {
     if (searchName === "all") {
       setName("all");
@@ -81,7 +81,12 @@ function Home(props) {
 
               <SortBy sort={sort} handleSortChange={handleSortChange} />
 
-              <Products products={products} pages={pages} page={page} />
+              <Products
+                products={products}
+                pages={pages}
+                page={page}
+                getFilterUrl={getFilterUrl}
+              />
             </div>
           </div>
         </>

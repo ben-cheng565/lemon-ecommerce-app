@@ -11,7 +11,14 @@ function Pagination(props) {
             className={props.page === 1 ? "page-item disabled" : "page-item"}
             key="0"
           >
-            <Link className="page-link" to={`${props.baseUrl}?currPage=1`}>
+            <Link
+              className="page-link"
+              to={
+                props.isHome
+                  ? props.getFilterUrl({ page: 1 })
+                  : `${props.baseUrl}?currPage=1`
+              }
+            >
               <span>&laquo;</span>
             </Link>
           </li>
@@ -24,7 +31,11 @@ function Pagination(props) {
             >
               <Link
                 className="page-link"
-                to={`${props.baseUrl}?currPage=${p + 1}`}
+                to={
+                  props.isHome
+                    ? props.getFilterUrl({ page: p + 1 })
+                    : `${props.baseUrl}?currPage=${p + 1}`
+                }
               >
                 {p + 1}
               </Link>
@@ -40,7 +51,11 @@ function Pagination(props) {
           >
             <Link
               className="page-link"
-              to={`${props.baseUrl}?currPage=${props.pages}`}
+              to={
+                props.isHome
+                  ? props.getFilterUrl({ page: props.pages })
+                  : `${props.baseUrl}?currPage=${props.pages}`
+              }
             >
               <span>&raquo;</span>
             </Link>
