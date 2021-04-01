@@ -142,7 +142,7 @@ function ProductDetail(props) {
                         </select>
                       </div>
                       <div className="form-group mt-3">
-                        <label for="comment">Comment</label>
+                        <label htmlFor="comment">Comment</label>
                         <textarea
                           className="form-control mt-2"
                           id="comment"

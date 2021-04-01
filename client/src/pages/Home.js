@@ -23,18 +23,21 @@ function Home(props) {
   const [name, setName] = useState("");
 
   useEffect(() => {
-    if (searchName === "") {
-      setName("");
-    }
+    setName(searchName);
 
     dispatch(
       fetchProducts({
         category: category === "all" ? "" : category,
         currPage,
-        name: name,
+        name: searchName,
         sort,
       })
     );
+
+    // clear name when unmounting this component
+    // return () => {
+    //     setName("");
+    // };
   }, [dispatch, currPage, category, sort, searchName]);
 
   const handleSearch = (e) => {
