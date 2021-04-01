@@ -1,10 +1,8 @@
-# Dandelion e-Commerce App
+# Lemon e-Commerce App
 
-This full-stack JavaScript project implements a functional e-commerce application. The front end is based on the React, Redux and CSS technologies, the back end uses the Node.js, Express and MongoDB service. It also utilizes the PayPal api as a payment method.
+This full-stack JavaScript project implements a functional e-commerce application. The front end is based on the React, Redux and Bootstrap technologies, the back end uses the Node.js, Express and MongoDB service. It also utilizes the PayPal api as a payment method.
 
-<em>Using Bootstrap to replace CSS is still in progress.</em>
-
-Demo URL: https://dandelion-ecommerce-app.herokuapp.com/
+Demo URL: https://lemon-ecommerce-app.herokuapp.com/
 
 ## What is it built on
 
@@ -37,6 +35,6 @@ Afrer that, open a new browser to run
 
 When complete, the app will look similar to that shown in the following screenshots:
 
-![](./spec/Search-result.png)
+![](./spec/Screenshot1.png)
 
-![](./spec/Order-summary.png)
+![](./spec/Screenshot2.png)

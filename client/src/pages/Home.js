@@ -31,7 +31,7 @@ function Home(props) {
       fetchProducts({
         category: category === "all" ? "" : category,
         currPage,
-        name,
+        name: name,
         sort,
       })
     );
@@ -40,7 +40,11 @@ function Home(props) {
   const handleSearch = (e) => {
     e.preventDefault();
 
-    props.history.push(`/home?name=${name}`);
+    if (name === "") {
+      props.history.push(`/home`);
+    } else {
+      props.history.push(`/home?name=${name}`);
+    }
   };
 
   const handleSortChange = (e) => {

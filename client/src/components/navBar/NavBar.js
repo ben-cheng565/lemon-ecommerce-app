@@ -33,7 +33,7 @@ function NavBar() {
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          <Link className="navbar-brand my-0 py-0 ms-4" to="/">
+          <Link className="navbar-brand my-0 py-0 ms-4" to="/home">
             <span className="fs-2" style={{ color: "lightgreen" }}>
               L{" "}
             </span>

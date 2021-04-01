@@ -125,7 +125,7 @@ function ProductDetail(props) {
                     <form onSubmit={submitHandler}>
                       <div className="fs-4">Write a product review</div>
                       <div className="form-group mt-3">
-                        <label for="rating">Rating</label>
+                        <label htmlFor="rating">Rating</label>
                         <select
                           className="form-control mt-2"
                           id="rating"

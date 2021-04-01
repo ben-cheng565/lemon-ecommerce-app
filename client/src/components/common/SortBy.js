@@ -3,7 +3,7 @@ import React from "react";
 function SortBy(props) {
   return (
     <div className="row">
-      <div className="col-10 d-flex justify-content-start">
+      <div className="col-3 d-flex justify-content-start">
         <div>
           {/* Sort by{" "} */}
           <select
@@ -17,7 +17,7 @@ function SortBy(props) {
           </select>
         </div>
       </div>
-      <div className="col-2"></div>
+      <div className="col-8"></div>
     </div>
   );
 }
