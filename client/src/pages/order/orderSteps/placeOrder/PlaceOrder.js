@@ -57,14 +57,14 @@ function PlaceOrder(props) {
         <CheckOutSteps step1 step2 step3 step4></CheckOutSteps>
         <div className="container">
           <div className="row">
-            <div className="col-8 ">
+            <div className="col-md-8 ">
               <ShippingCard shippingAddress={shippingAddress} />
 
               <PaymentCard paymentMethod={paymentMethod} />
 
               <ItemsCard orderItems={cartItems} />
             </div>
-            <div className="col-4 mt-3">
+            <div className="col-md-4 mt-3">
               <SummaryCard
                 order={cart}
                 orderItems={cartItems}

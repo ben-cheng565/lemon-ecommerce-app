@@ -116,7 +116,7 @@ function OrderDetails(props) {
         <div className="container mt-3">
           <span className="fs-4">Order: {order._id}</span>
           <div className="row">
-            <div className="col-8">
+            <div className="col-md-8">
               <ShippingCard
                 shippingAddress={order.shippingAddress}
                 order={order}
@@ -132,7 +132,7 @@ function OrderDetails(props) {
               <ItemsCard orderItems={order.orderItems} />
             </div>
 
-            <div className="col-4 mt-3">
+            <div className="col-md-4 mt-3">
               <SummaryCard
                 order={order}
                 userInfo={userInfo}

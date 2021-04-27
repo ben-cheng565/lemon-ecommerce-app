@@ -93,7 +93,8 @@ function ShippingAddress(props) {
   return (
     <div>
       <CheckOutSteps step1 step2></CheckOutSteps>
-      <div className="m-auto mt-5" style={{ width: "50%" }}>
+      <div className="col-md-2"></div>
+      <div className="col-md-6 mx-5 m-md-auto">
         <div className="card shadow">
           <div className="card-header">
             <div className="fs-4 text-center">Shipping Address</div>
@@ -180,6 +181,7 @@ function ShippingAddress(props) {
           </div>
         </div>
       </div>
+      <div className="col-md-2"></div>
     </div>
   );
 }

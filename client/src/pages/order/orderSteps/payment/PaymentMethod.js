@@ -25,7 +25,10 @@ function PaymentMethod(props) {
   return (
     <div>
       <CheckOutSteps step1 step2 step3 />
-      <div className="m-auto mt-5" style={{ width: "50%" }}>
+      <div className="col-sm-2"></div>
+      <div
+        className="col-xs-6 col-md-6 mx-5 m-md-auto mt-5" /*  style={{ width: "50%" }} */
+      >
         <div className="card shadow">
           <div className="card-header">
             <div className="fs-4 text-center">Payment Method</div>
@@ -81,6 +84,7 @@ function PaymentMethod(props) {
           </div>
         </div>
       </div>
+      <div className="col-sm-2"></div>
     </div>
   );
 }

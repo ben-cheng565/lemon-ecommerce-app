@@ -45,8 +45,8 @@ function Cart(props) {
         <ToastContainer position="bottom-right" />
       </div>
       <div className="container">
-        <div className="row">
-          <div className="col-8 m-3">
+        <div className="row d-flex justify-content-center">
+          <div className="col-md-8 m-3">
             <p className="fs-4">Shopping Cart</p>
             {cartItems.length === 0 ? (
               <MessageBox>
@@ -64,7 +64,7 @@ function Cart(props) {
               </ul>
             )}
           </div>
-          <div className="col-3 mt-5">
+          <div className="col-9 col-md-3 mt-5 ">
             <CartTotal
               cartItems={cartItems}
               checkoutHandler={checkoutHandler}
