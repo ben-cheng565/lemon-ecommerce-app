@@ -82,11 +82,11 @@ function ProductDetail(props) {
                 <i className="fas fa-chevron-circle-left"></i> Go Back
               </Link>
             </div>
-            <div className="row">
-              <div className="col-9">
+            <div className="row d-flex justify-content-center">
+              <div className="col-md-9">
                 <ProductContent product={product} />
               </div>
-              <div className="col-3 mb-auto">
+              <div className="col-10 col-sm-9 col-md-3 mb-auto mx-sm-5 mx-md-0 mt-sm-3">
                 <AddToCart
                   product={product}
                   qty={qty}
@@ -102,7 +102,7 @@ function ProductDetail(props) {
 
             <div className="container">
               <div className="row">
-                <div className="col-7 mb-auto">
+                <div className="col-md-7 mb-auto">
                   <div className="fs-4 mb-3">Reviews</div>
                   {product.reviews.length === 0 && (
                     <MessageBox>There is no review.</MessageBox>
@@ -120,7 +120,7 @@ function ProductDetail(props) {
                   </ul>
                 </div>
 
-                <div className="col-4 mb-auto">
+                <div className="col-md-4 mb-auto">
                   {userInfo ? (
                     <form onSubmit={submitHandler}>
                       <div className="fs-4">Write a product review</div>

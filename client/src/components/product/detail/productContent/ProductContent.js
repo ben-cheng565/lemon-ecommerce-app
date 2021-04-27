@@ -12,14 +12,14 @@ function ProductContent(props) {
     <>
       <div className="container">
         <div className="row">
-          <div className="col-6">
+          <div className="col-md-6 mb-2">
             <img
               className="img-thumbnail"
               src={imgUrl}
               alt={product.name}
             ></img>
           </div>
-          <div className="col-6 mb-auto">
+          <div className="col-md-6 mb-auto">
             <ul className="list-group list-group-flush">
               <li className="list-group-item fs-4">{product.name}</li>
               <li className="list-group-item">
