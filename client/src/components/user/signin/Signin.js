@@ -49,7 +49,10 @@ function Signin(props) {
       <div>
         <ToastContainer position="bottom-right" />
       </div>
-      <div className="container my-5" style={{ width: "40%" }}>
+      <div className="col-md-2"></div>
+      <div
+        className="container col-md-6 px-5 my-5" /*  style={{ width: "40%" }} */
+      >
         <div className="card shadow">
           <div className="card-header">
             <span className="fs-4">Sign In</span>
@@ -101,6 +104,7 @@ function Signin(props) {
             </div>
           </div>
         </div>
+        <div className="col-md-2"></div>
       </div>
     </>
   );
