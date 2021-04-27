@@ -90,12 +90,12 @@ function Home(props) {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          <div className="row">
-            <div className="col-2 ms-5 mt-5">
+          <div className="row d-flex">
+            <div className="col-md-2 col-sm-4 ms-md-5 ms-sm-2 mt-sm-5">
               <CategoryList category={category} getFilterUrl={getFilterUrl} />
             </div>
 
-            <div className="col-9 container ">
+            <div className="col-md-9 col-sm-7 container">
               <SearchBox
                 name={name}
                 setName={setName}
