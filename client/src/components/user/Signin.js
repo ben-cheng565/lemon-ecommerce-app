@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { signIn } from "../../../redux/actions/user";
-import LoadingBox from "../../common/LoadingBox";
-import MessageBox from "../../common/MessageBox";
+import { signIn } from "../../redux/actions/user";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-// import "./Signin.css";
 
 function Signin(props) {
   const dispatch = useDispatch();
@@ -15,7 +11,7 @@ function Signin(props) {
   const [email, setEmail] = useState("user@gmail.com");
   const [password, setPassword] = useState("123");
 
-  //   extract redirect page from url
+  // extract redirect page from url
   const redirect = props.location.search
     ? props.location.search.split("=")[1]
     : "/";
@@ -49,9 +45,10 @@ function Signin(props) {
       <div>
         <ToastContainer position="bottom-right" />
       </div>
+
       <div className="col-md-2"></div>
       <div
-        className="container col-md-6 px-5 my-5" /*  style={{ width: "40%" }} */
+        className="container col-md-6 px-5 my-5"
       >
         <div className="card shadow">
           <div className="card-header">
@@ -73,6 +70,7 @@ function Signin(props) {
                   onChange={(e) => setEmail(e.target.value)}
                 ></input>
               </div>
+
               <div className="mb-3">
                 <label className="form-label" htmlFor="password">
                   Password
@@ -95,6 +93,7 @@ function Signin(props) {
               </div>
             </form>
           </div>
+          
           <div className="card-footer">
             <div>
               New customer?{" "}

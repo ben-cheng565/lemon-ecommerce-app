@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { signIn, signUp } from "../../../redux/actions/user";
-import LoadingBox from "../../common/LoadingBox";
-import MessageBox from "../../common/MessageBox";
+import { signIn, signUp } from "../../redux/actions/user";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-// import "./Signup.css";
 
 function Signin(props) {
   const dispatch = useDispatch();
@@ -54,9 +50,10 @@ function Signin(props) {
       <div>
         <ToastContainer position="bottom-right" />
       </div>
+
       <div className="col-md-2"></div>
       <div
-        className="container col-md-6 px-5 my-5" /*  style={{ width: "40%" }} */
+        className="container col-md-6 px-5 my-5"
       >
         <div className="card shadow">
           <div className="card-header">
@@ -78,6 +75,7 @@ function Signin(props) {
                   onChange={(e) => setName(e.target.value)}
                 ></input>
               </div>
+
               <div className="mb-3">
                 <label className="form-label" htmlFor="email">
                   Email Adress
@@ -91,6 +89,7 @@ function Signin(props) {
                   onChange={(e) => setEmail(e.target.value)}
                 ></input>
               </div>
+
               <div className="mb-3">
                 <label className="form-label" htmlFor="password">
                   Password
@@ -104,6 +103,7 @@ function Signin(props) {
                   onChange={(e) => setPassword(e.target.value)}
                 ></input>
               </div>
+              
               <div className="mb-3">
                 <label className="form-label" htmlFor="confirmPassword">
                   Confirm Password
@@ -117,10 +117,7 @@ function Signin(props) {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 ></input>
               </div>
-              {/* <div className="mt-3">
-                {loading && <LoadingBox />}
-                {error && <MessageBox variant="danger">{error}</MessageBox>}
-              </div> */}
+              
               <div className="d-flex justify-content-end">
                 <button className="btn btn-primary" type="submit">
                   Sign Up
