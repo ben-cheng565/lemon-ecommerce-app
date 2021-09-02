@@ -25,46 +25,41 @@ import {
   PRODUCTS_LIST_SUCCESS,
   PRODUCTS_LIST_FAIL,
 } from "../actionTypes";
+import { errorMessage } from "../helpers/actionError";
 
 // action for getting all products
-export const fetchProducts = ({
-  currPage = 1,
-  name = "",
-  category = "",
-  sort = "",
-}) => async (dispatch) => {
-  dispatch({ type: PRODUCTS_REQUEST });
+export const fetchProducts =
+  ({ currPage = 1, name = "", category = "", sort = "" }) =>
+  async (dispatch) => {
+    dispatch({ type: PRODUCTS_REQUEST });
 
-  try {
-    // fetch api with search filters
-    const { data } = await axios.get(
-      `/products?name=${name}&category=${category}&sort=${sort}&currPage=${currPage}`
-    );
-    dispatch({ type: PRODUCTS_SUCCESS, payload: data });
-  } catch (error) {
-    dispatch({ type: PRODUCTS_FAIL, payload: error.message });
-  }
-};
+    try {
+      // fetch api with search filters
+      const { data } = await axios.get(
+        `/products?name=${name}&category=${category}&sort=${sort}&currPage=${currPage}`
+      );
+      dispatch({ type: PRODUCTS_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({ type: PRODUCTS_FAIL, payload: error.message });
+    }
+  };
 
 // action for getting all product list for admin
-export const fetchProductList = ({
-  currPage = 1,
-  name = "",
-  category = "",
-  sort = "",
-}) => async (dispatch) => {
-  dispatch({ type: PRODUCTS_LIST_REQUEST });
+export const fetchProductList =
+  ({ currPage = 1, name = "", category = "", sort = "" }) =>
+  async (dispatch) => {
+    dispatch({ type: PRODUCTS_LIST_REQUEST });
 
-  try {
-    // fetch api with search filters
-    const { data } = await axios.get(
-      `/products/list?name=${name}&category=${category}&sort=${sort}&currPage=${currPage}`
-    );
-    dispatch({ type: PRODUCTS_LIST_SUCCESS, payload: data });
-  } catch (error) {
-    dispatch({ type: PRODUCTS_LIST_FAIL, payload: error.message });
-  }
-};
+    try {
+      // fetch api with search filters
+      const { data } = await axios.get(
+        `/products/list?name=${name}&category=${category}&sort=${sort}&currPage=${currPage}`
+      );
+      dispatch({ type: PRODUCTS_LIST_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({ type: PRODUCTS_LIST_FAIL, payload: error.message });
+    }
+  };
 
 // action for getting categories list
 export const getProductCategories = () => async (dispatch) => {
@@ -90,10 +85,7 @@ export const fetchProductDetail = (productId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_DETAIL_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: errorMessage(error),
     });
   }
 };
@@ -118,10 +110,7 @@ export const createProduct = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_CREATE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: errorMessage(error),
     });
   }
 };
@@ -142,10 +131,7 @@ export const editProduct = (product) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_UPDATE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: errorMessage(error),
     });
   }
 };
@@ -166,41 +152,33 @@ export const deleteProduct = (productId) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_DELETE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: errorMessage(error),
     });
   }
 };
 
 // action for creating review of a product
-export const createReview = (productId, review) => async (
-  dispatch,
-  getState
-) => {
-  dispatch({ type: REVIEW_CREATE_REQUEST });
+export const createReview =
+  (productId, review) => async (dispatch, getState) => {
+    dispatch({ type: REVIEW_CREATE_REQUEST });
 
-  const {
-    user: { userInfo },
-  } = getState();
+    const {
+      user: { userInfo },
+    } = getState();
 
-  try {
-    const { data } = await axios.post(
-      `/products/reviews/${productId}`,
-      review,
-      {
-        headers: { Authorization: `Bearer ${userInfo.token}` },
-      }
-    );
-    dispatch({ type: REVIEW_CREATE_SUCCESS, payload: data.review });
-  } catch (error) {
-    dispatch({
-      type: REVIEW_CREATE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
+    try {
+      const { data } = await axios.post(
+        `/products/reviews/${productId}`,
+        review,
+        {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        }
+      );
+      dispatch({ type: REVIEW_CREATE_SUCCESS, payload: data.review });
+    } catch (error) {
+      dispatch({
+        type: REVIEW_CREATE_FAIL,
+        payload: errorMessage(error),
+      });
+    }
+  };

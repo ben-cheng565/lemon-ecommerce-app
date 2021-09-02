@@ -23,6 +23,7 @@ import {
   USER_EDIT_SUCCESS,
   USER_EDIT_FAIL,
 } from "../actionTypes";
+import { errorMessage } from "../helpers/actionError";
 
 // action for user sign in
 export const signIn = (email, password) => async (dispatch) => {
@@ -37,10 +38,7 @@ export const signIn = (email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_SIGNIN_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: errorMessage(error),
     });
   }
 };
@@ -63,10 +61,7 @@ export const signUp = (name, email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_SIGNUP_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: errorMessage(error),
     });
   }
 };
@@ -98,10 +93,7 @@ export const getUserDetail = (userId) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_DETAIL_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: errorMessage(error),
     });
   }
 };
@@ -126,10 +118,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_UPDATE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: errorMessage(error),
     });
   }
 };
@@ -150,10 +139,7 @@ export const getUserList = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_LIST_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: errorMessage(error),
     });
   }
 };
@@ -174,10 +160,7 @@ export const deleteUser = (userId) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_DELETE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: errorMessage(error),
     });
   }
 };
@@ -198,10 +181,7 @@ export const editUser = (user) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_EDIT_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: errorMessage(error),
     });
   }
 };
