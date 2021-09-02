@@ -37,7 +37,6 @@ export const orderCreate = (state = {}, action) => {
       return { loading: false, error: action.payload };
     case ORDER_CREATE_RESET:
       return {};
-
     default:
       return state;
   }
@@ -52,7 +51,6 @@ export const orderDetails = (state = { loading: true }, action) => {
       return { loading: false, order: action.payload };
     case ORDER_DETAILS_FAIL:
       return { loading: false, error: action.payload };
-
     default:
       return state;
   }
@@ -69,7 +67,6 @@ export const orderPay = (state = {}, action) => {
       return { loading: false, error: action.payload };
     case ORDER_PAY_RESET:
       return {};
-
     default:
       return state;
   }
@@ -90,7 +87,6 @@ export const orderHistory = (state = { orders: [] }, action) => {
       };
     case ORDER_HISTORY_FAIL:
       return { loading: false, error: action.payload };
-
     default:
       return state;
   }
@@ -111,7 +107,6 @@ export const orderList = (state = { orderList: [] }, action) => {
       };
     case ORDER_LIST_FAIL:
       return { loading: false, error: action.payload };
-
     default:
       return state;
   }
@@ -144,9 +139,7 @@ export const orderDeliver = (state = {}, action) => {
       return { loading: false, error: action.payload };
     case ORDER_DELIVER_RESET:
       return {};
-
     default:
       return state;
   }
 };
-// export default order;

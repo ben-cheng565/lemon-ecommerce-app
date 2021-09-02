@@ -25,7 +25,6 @@ const cart = (state = { cartItems: [] }, action) => {
       } else {
         return { ...state, cartItems: [...state.cartItems, item] };
       }
-
     case CART_REMOVE_ITEM:
       return {
         ...state,
@@ -43,10 +42,8 @@ const cart = (state = { cartItems: [] }, action) => {
         ...state,
         paymentMethod: action.payload,
       };
-
     case CART_EMPTY:
       return { ...state, cartItems: [] };
-
     default:
       return state;
   }

@@ -33,11 +33,6 @@ function Home(props) {
         sort,
       })
     );
-
-    // clear name when unmounting this component
-    // return () => {
-    //     setName("");
-    // };
   }, [dispatch, currPage, category, sort, searchName]);
 
   const handleSearch = (e) => {
